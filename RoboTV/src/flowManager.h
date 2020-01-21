@@ -1,8 +1,11 @@
 #ifndef FLOWMANAGER_H
 #define FLOWMANAGER_H
 
+#include "screen.h"
+
 namespace flowspace
 {
+
 	class flowManager
 	{
 	public:
@@ -13,6 +16,7 @@ namespace flowspace
 
 	private:
 		void GameLoop();
+		gamespace::screen* activeScreen;
 	};
 }
 #endif // !FLOWMANAGER_H
