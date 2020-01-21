@@ -23,6 +23,7 @@ namespace flowspace {
 		SetTargetFPS(60);
 		gamespace::screen* gameScreenInstance = new gamespace::gameScreen;
 		activeScreen = gameScreenInstance;
+		activeScreen->Init();
 		GameLoop();
 	}
 
@@ -36,13 +37,10 @@ namespace flowspace {
 		while (!WindowShouldClose())
 		{
 			// Update
-
+			activeScreen->Update();
 			// Draw
 			BeginDrawing();
-
-			ClearBackground(RAYWHITE);
-			DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
-
+			activeScreen->Draw();
 			EndDrawing();
 		}
 
