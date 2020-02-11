@@ -18,12 +18,12 @@ namespace gamespace
 
 	void gameScreen::Update()
 	{
-	
+		
 	}
 
 	void gameScreen::Draw()
 	{
-		ClearBackground(RAYWHITE);
+		ClearBackground(BLACK);
 		DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
 	}
 }

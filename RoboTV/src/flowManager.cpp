@@ -29,6 +29,7 @@ namespace flowspace {
 
 	void flowManager::EndGame() 
 	{
+		delete activeScreen;
 		CloseWindow();
 	}
 
