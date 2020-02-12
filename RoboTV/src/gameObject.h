@@ -10,7 +10,7 @@ namespace gamespace
 	public:
 		gameObject();
 		virtual ~gameObject();
-		virtual void Draw() = 0;
+		virtual void Draw();
 		bool active;
 		float x, y;
 	};
