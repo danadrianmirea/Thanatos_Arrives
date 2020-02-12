@@ -14,6 +14,8 @@ namespace gamespace
 		virtual void Init() = 0;
 		virtual void Update() = 0;
 		virtual void Draw() = 0;
+	protected:
+		float elapsedScreenTime;
 	};
 }
 #endif // !SCREEN_H

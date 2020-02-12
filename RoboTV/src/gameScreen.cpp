@@ -1,4 +1,5 @@
 #include "gameScreen.h"
+#include <math.h>
 
 namespace gamespace
 {
@@ -13,17 +14,17 @@ namespace gamespace
 
 	void gameScreen::Init()
 	{
-	
+		elapsedScreenTime = 0.f;
 	}
 
 	void gameScreen::Update()
 	{
-		
+		elapsedScreenTime += GetFrameTime();
 	}
 
 	void gameScreen::Draw()
 	{
 		ClearBackground(BLACK);
-		DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+		DrawText(TextFormat("%1.1f", elapsedScreenTime), 190, 200, 20, LIGHTGRAY);
 	}
 }
