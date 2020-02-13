@@ -25,6 +25,15 @@ namespace gamespace
 	void gameScreen::Draw()
 	{
 		ClearBackground(BLACK);
+<<<<<<< Updated upstream
+=======
+		std::list<gameObject*> ::iterator it;
+		for (it = gameObjectList.begin(); it != gameObjectList.end(); ++it)
+		{
+			(*it)->Draw();
+		}
+		
+>>>>>>> Stashed changes
 		DrawText(TextFormat("%1.1f", elapsedScreenTime), 190, 200, 20, LIGHTGRAY);
 	}
 }

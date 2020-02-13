@@ -4,8 +4,8 @@ namespace gamespace
 {
 	rectangle::rectangle()
 	{
-		width = 10.f;
-		height = 5.f;
+		width = 100.f;
+		height = 50.f;
 		color = RED;
 	}
 
