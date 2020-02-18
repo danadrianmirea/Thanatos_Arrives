@@ -18,7 +18,7 @@ namespace gamespace
 	void gameScreen::Init()
 	{
 		elapsedScreenTime = 0.f;
-		gameObject* testRec = new rectangle();
+		gameObject* testRec = new rectangle(500.f, 250.f ,200.f ,200.f, RED);
 		gameObjectList.push_front(testRec);
 	}
 
