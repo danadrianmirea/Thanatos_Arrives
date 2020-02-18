@@ -27,7 +27,7 @@ x86/
 [Aa][Rr][Mm]64/
 bld/
 [Bb]in/
-!raylib.dll
+!RoboTV/lib/raylib/bin/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
