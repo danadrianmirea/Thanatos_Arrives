@@ -1,7 +1,11 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
+#include <list>
+
 #include "raylib.h"
+
+#include "gameObject.h"
 
 namespace gamespace
 {
@@ -16,6 +20,7 @@ namespace gamespace
 		virtual void Draw() = 0;
 	protected:
 		float elapsedScreenTime;
+		std::list<gameObject*> gameObjectList;
 	};
 }
 #endif // !SCREEN_H
