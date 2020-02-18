@@ -13,6 +13,9 @@ namespace gamespace
 		void Init();
 		void Update();
 		void Draw();
+
+	private:
+		gameObject* testRectangle;
 	};
 }
 #endif
