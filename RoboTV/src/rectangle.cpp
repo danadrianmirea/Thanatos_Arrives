@@ -9,6 +9,13 @@ namespace gamespace
 		color = RED;
 	}
 
+	rectangle::rectangle(float xPosition, float yPosition, float recWidth, float recHeight, Color recColor) :gameObject(xPosition, yPosition)
+	{
+		width = recWidth;
+		height = recHeight;
+		color = recColor;
+	}
+
 
 	rectangle::~rectangle()
 	{

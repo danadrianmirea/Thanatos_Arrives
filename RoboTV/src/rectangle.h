@@ -8,6 +8,7 @@ namespace gamespace {
 	{
 	public:
 		rectangle();
+		rectangle(float xPosition, float yPosition, float recWidth, float recHeight, Color recColor);
 		~rectangle();
 		void Draw();
 		float width, height;

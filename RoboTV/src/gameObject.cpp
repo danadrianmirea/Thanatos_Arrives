@@ -8,6 +8,12 @@ namespace gamespace
 		y = 0.f;
 	}
 
+	gameObject::gameObject(float xPosition, float yPosition)
+	{
+		x = xPosition;
+		y = yPosition;
+	}
+
 	gameObject::~gameObject()
 	{
 	}
