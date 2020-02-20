@@ -27,14 +27,14 @@
     <ClCompile Include="..\src\screen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\rectangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\gameScreen.cpp">
       <Filter>Gameplay Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gameObject.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -44,14 +44,14 @@
     <ClInclude Include="..\src\screen.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gameObject.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\rectangle.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\src\gameScreen.h">
       <Filter>Gameplay Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gameObject.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

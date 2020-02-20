@@ -18,18 +18,27 @@ namespace gamespace
 	void gameScreen::Init()
 	{
 		elapsedScreenTime = 0.f;
-		gameObject* testRec = new rectangle(500.f, 250.f ,200.f ,200.f, RED);
-		testRectangle = testRec;
+		testRec = new rectangle(500.f, 250.f, 200.f, 200.f, RED);
 		gameObjectList.push_front(testRec);
+
 	}
 
 	void gameScreen::Update()
 	{
 		elapsedScreenTime += GetFrameTime();
-		if (IsKeyDown(KEY_RIGHT)) testRectangle->x += GetFrameTime() * 200.0f;
-		if (IsKeyDown(KEY_LEFT)) testRectangle->x -= GetFrameTime() *200.0f;
-		if (IsKeyDown(KEY_UP)) testRectangle->y -= GetFrameTime() *200.0f;
-		if (IsKeyDown(KEY_DOWN)) testRectangle->y += GetFrameTime() *200.0f;
+
+		if (IsKeyDown(KEY_RIGHT)) {
+			testRec->Move(GetFrameTime() * 200.f, 0.f);
+		}
+		if (IsKeyDown(KEY_LEFT)) {
+			testRec->Move(-GetFrameTime() * 200.f, 0.f);
+		}
+		if (IsKeyDown(KEY_UP)) {
+			testRec->Move(0.f, -GetFrameTime() * 200.f);
+		}
+		if (IsKeyDown(KEY_DOWN)) {
+			testRec->Move(0.f, GetFrameTime() * 200.f);
+		}
 	}
 
 	void gameScreen::Draw()
@@ -40,7 +49,7 @@ namespace gamespace
 		{
 			gameObjectList.front()->Draw();
 		}
-		
+
 		DrawText(TextFormat("%1.1f", elapsedScreenTime), 190, 200, 20, LIGHTGRAY);
 	}
 }

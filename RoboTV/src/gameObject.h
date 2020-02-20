@@ -9,11 +9,9 @@ namespace gamespace
 	{
 	public:
 		gameObject();
-		gameObject(float xPosition, float yPosition);
 		virtual ~gameObject();
 		virtual void Draw();
 		bool active;
-		float x, y;
 	};
 }
 #endif

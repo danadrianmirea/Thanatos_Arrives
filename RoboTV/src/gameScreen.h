@@ -2,6 +2,7 @@
 #define GAMESCREEN_H
 
 #include "screen.h"
+#include "rectangle.h"
 
 namespace gamespace
 {
@@ -15,7 +16,7 @@ namespace gamespace
 		void Draw();
 
 	private:
-		gameObject* testRectangle;
+		rectangle* testRec;
 	};
 }
 #endif

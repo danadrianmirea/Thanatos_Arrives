@@ -4,15 +4,19 @@ namespace gamespace
 {
 	rectangle::rectangle()
 	{
-		width = 10.f;
-		height = 5.f;
+		actualRectangle.x = 0.f;
+		actualRectangle.y = 0.f;
+		actualRectangle.width = 10.f;
+		actualRectangle.height = 5.f;
 		color = RED;
 	}
 
-	rectangle::rectangle(float xPosition, float yPosition, float recWidth, float recHeight, Color recColor) :gameObject(xPosition, yPosition)
+	rectangle::rectangle(float xPosition, float yPosition, float recWidth, float recHeight, Color recColor)
 	{
-		width = recWidth;
-		height = recHeight;
+		actualRectangle.x = xPosition;
+		actualRectangle.y = yPosition;
+		actualRectangle.width = recWidth;
+		actualRectangle.height = recHeight;
 		color = recColor;
 	}
 
@@ -21,8 +25,14 @@ namespace gamespace
 	{
 	}
 
+	void rectangle::Move(float x, float y)
+	{
+		actualRectangle.x += x;
+		actualRectangle.y += y;
+	}
+
 	void rectangle::Draw() 
 	{
-		DrawRectangle(static_cast<int>(x), static_cast<int>(y), static_cast<int>(width), static_cast<int>(height), color);
+		DrawRectangleRec(actualRectangle, color);
 	}
 }
