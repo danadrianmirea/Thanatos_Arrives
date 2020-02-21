@@ -10,6 +10,8 @@ namespace gamespace
 	{
 	public:
 		animatedSprite();
+		animatedSprite(float xPosition, float yPosition, float recWidth, float recHeight,
+			const char* textureFile, int columns, int rows, int frameWidth, int frameHeight);
 		~animatedSprite();
 		void Draw();
 
@@ -21,6 +23,8 @@ namespace gamespace
 	private:
 		int spriteRows;
 		int spriteColumns;
+		int spriteWidth;
+		int spriteHeight;
 	};
 }
 #endif
