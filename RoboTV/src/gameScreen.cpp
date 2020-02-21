@@ -20,7 +20,8 @@ namespace gamespace
 		elapsedScreenTime = 0.f;
 		testRec = new rectangle(500.f, 250.f, 200.f, 200.f, RED);
 		gameObjectList.push_front(testRec);
-
+		testSprite = new animatedSprite();
+		testSprite->spritesheet = LoadTexture("../res/assets/thanatos_spritesheet.png");
 	}
 
 	void gameScreen::Update()

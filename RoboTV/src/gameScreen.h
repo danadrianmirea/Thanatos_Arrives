@@ -2,7 +2,7 @@
 #define GAMESCREEN_H
 
 #include "screen.h"
-#include "rectangle.h"
+#include "animatedSprite.h"
 
 namespace gamespace
 {
@@ -17,6 +17,7 @@ namespace gamespace
 
 	private:
 		rectangle* testRec;
+		animatedSprite* testSprite;
 	};
 }
 #endif

@@ -36,6 +36,9 @@
     <ClCompile Include="..\src\gameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\animatedSprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\flowManager.h">
@@ -51,6 +54,9 @@
       <Filter>Gameplay Screens</Filter>
     </ClInclude>
     <ClInclude Include="..\src\gameObject.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\animatedSprite.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
