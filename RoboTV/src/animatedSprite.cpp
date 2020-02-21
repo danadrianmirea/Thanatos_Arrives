@@ -16,9 +16,11 @@ namespace gamespace
 		spriteWidth = frameWidth;
 		spriteHeight = frameHeight;
 
-		sourceRec = { 0.f,0.f,static_cast<float>(spriteWidth), static_cast<float>(spriteHeight)};
+		sourceRec = { 0.f,0.f,static_cast<float>(spriteWidth), static_cast<float>(spriteHeight) };
 		origin = { actualRectangle.width / 2.f, actualRectangle.height / 2.f };
 		rotation = 0.f;
+		currentAnimTime = 0.f;
+		animate = false;
 	}
 
 
@@ -30,5 +32,27 @@ namespace gamespace
 	void animatedSprite::Draw()
 	{
 		DrawTexturePro(spritesheet, sourceRec, actualRectangle, origin, rotation, WHITE);
+	}
+
+	void animatedSprite::NewAnimation(animationData animData) 
+	{
+		currentAnimation = animData;
+		animate = true;
+	}
+
+	void animatedSprite::UpdateAnimation(float elapsedTime)
+	{
+		if (animate)
+		{
+			currentAnimTime += elapsedTime;
+			if (currentAnimTime > currentAnimation.animationTime)
+				currentAnimTime = currentAnimTime - currentAnimation.animationTime;
+
+			int frameIndex = static_cast<int>(currentAnimation.frameList.size() * currentAnimTime / currentAnimation.animationTime);
+			
+
+			sourceRec.x = (float)currentAnimation.frameList[frameIndex].x * spriteWidth;
+			sourceRec.y = (float)currentAnimation.frameList[frameIndex].y * spriteHeight;
+		}
 	}
 }
