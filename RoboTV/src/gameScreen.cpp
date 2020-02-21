@@ -47,9 +47,9 @@ namespace gamespace
 	{
 		ClearBackground(BLACK);
 		std::list<gameObject*> ::iterator it;
-		for (it = gameObjectList.begin(); it != gameObjectList.end(); ++it)
+		for (it = gameObjectList.begin(); it != gameObjectList.end(); it++)
 		{
-			gameObjectList.front()->Draw();
+			(*it)->Draw();
 		}
 
 		DrawText(TextFormat("%1.1f", elapsedScreenTime), 190, 200, 20, LIGHTGRAY);
