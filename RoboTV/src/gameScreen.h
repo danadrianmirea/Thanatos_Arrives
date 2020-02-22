@@ -16,8 +16,8 @@ namespace gamespace
 		void Draw();
 
 	private:
-		rectangle* testRec;
 		animatedSprite* testSprite;
+		sprite* background;
 	};
 }
 #endif
