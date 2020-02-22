@@ -8,17 +8,10 @@ namespace gamespace
 	}
 
 	animatedSprite::animatedSprite(float xPosition, float yPosition, float recWidth, float recHeight,
-		const char* textureFile, int columns, int rows, int frameWidth, int frameHeight) : rectangle(xPosition, yPosition, recWidth, recHeight, WHITE)
+		const char* textureFile, int columns, int rows, int frameWidth, int frameHeight) : sprite (xPosition, yPosition, recWidth, recHeight, textureFile, frameWidth, frameHeight)
 	{
-		spritesheet = LoadTexture(textureFile);
 		spriteColumns = columns;
 		spriteRows = rows;
-		spriteWidth = frameWidth;
-		spriteHeight = frameHeight;
-
-		sourceRec = { 0.f,0.f,static_cast<float>(spriteWidth), static_cast<float>(spriteHeight) };
-		origin = { actualRectangle.width / 2.f, actualRectangle.height / 2.f };
-		rotation = 0.f;
 		currentAnimTime = 0.f;
 		animate = false;
 	}
@@ -31,7 +24,7 @@ namespace gamespace
 
 	void animatedSprite::Draw()
 	{
-		DrawTexturePro(spritesheet, sourceRec, actualRectangle, origin, rotation, WHITE);
+		DrawTexturePro(spriteTexture, sourceRec, actualRectangle, origin, rotation, WHITE);
 	}
 
 	void animatedSprite::NewAnimation(animationData animData) 

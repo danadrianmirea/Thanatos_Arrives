@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "rectangle.h"
+#include "sprite.h"
 
 namespace gamespace
 {
@@ -19,7 +19,7 @@ namespace gamespace
 		float animationTime;
 	};
 	
-	class animatedSprite :public rectangle
+	class animatedSprite :public sprite
 	{
 	public:
 		animatedSprite();
@@ -30,19 +30,14 @@ namespace gamespace
 		void NewAnimation(animationData animData);
 		void UpdateAnimation(float elapsedTime);
 
-		Texture2D spritesheet;
-		Rectangle sourceRec;
-		Vector2 origin;
-		float rotation;
 		animationData currentAnimation;
 		float currentAnimTime;
 		bool animate;
 
-	private:
+	protected:
 		int spriteRows;
 		int spriteColumns;
-		int spriteWidth;
-		int spriteHeight;
+
 	};
 }
 #endif

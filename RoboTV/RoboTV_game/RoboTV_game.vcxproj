@@ -26,6 +26,7 @@
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\rectangle.cpp" />
     <ClCompile Include="..\src\screen.cpp" />
+    <ClCompile Include="..\src\sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\animatedSprite.h" />
@@ -34,6 +35,7 @@
     <ClInclude Include="..\src\gameScreen.h" />
     <ClInclude Include="..\src\rectangle.h" />
     <ClInclude Include="..\src\screen.h" />
+    <ClInclude Include="..\src\sprite.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
