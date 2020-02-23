@@ -13,6 +13,7 @@ namespace gamespace
 		virtual void Draw();
 		virtual void Update(float frameTime);
 		bool active;
+		bool visible;
 	};
 }
 #endif

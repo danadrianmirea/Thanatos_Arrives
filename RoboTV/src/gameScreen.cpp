@@ -30,19 +30,7 @@ namespace gamespace
 	void gameScreen::Update()
 	{
 		elapsedScreenTime += GetFrameTime();
-
-		if (IsKeyDown(KEY_RIGHT))
-			player->Move(GetFrameTime() * 200.f, 0.f);
-
-		if (IsKeyDown(KEY_LEFT))
-			player->Move(-GetFrameTime() * 200.f, 0.f);
-
-		if (IsKeyDown(KEY_UP))
-			player->Move(0.f, -GetFrameTime() * 200.f);
-
-		if (IsKeyDown(KEY_DOWN))
-			player->Move(0.f, GetFrameTime() * 200.f);
-
+		
 		for (std::list<gameObject*> ::iterator it = gameObjectList.begin(); it != gameObjectList.end(); it++)
 		{
 			if((*it)->active)
@@ -56,6 +44,7 @@ namespace gamespace
 		std::list<gameObject*> ::iterator it;
 		for (it = gameObjectList.begin(); it != gameObjectList.end(); it++)
 		{
+			if((*it)->visible)
 			(*it)->Draw();
 		}
 	}

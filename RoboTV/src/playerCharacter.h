@@ -11,6 +11,7 @@ namespace gamespace
 		playerCharacter();
 		playerCharacter(float xPosition, float yPosition);
 		~playerCharacter();
+		void Update(float frameTime);
 
 	private:
 		animationData idleAnim;

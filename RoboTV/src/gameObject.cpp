@@ -5,6 +5,7 @@ namespace gamespace
 	gameObject::gameObject()
 	{
 		active = true;
+		visible = true;
 	}
 
 	gameObject::~gameObject()

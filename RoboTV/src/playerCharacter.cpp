@@ -35,4 +35,20 @@ namespace gamespace
 	playerCharacter::~playerCharacter()
 	{
 	}
+
+	void playerCharacter::Update(float frameTime)
+	{
+		animatedSprite::Update(frameTime);
+		if (IsKeyDown(KEY_RIGHT))
+			Move(frameTime * 200.f, 0.f);
+
+		if (IsKeyDown(KEY_LEFT))
+			Move(-frameTime * 200.f, 0.f);
+
+		if (IsKeyDown(KEY_UP))
+			Move(0.f, -frameTime * 200.f);
+
+		if (IsKeyDown(KEY_DOWN))
+			Move(0.f, frameTime * 200.f);
+	}
 }
