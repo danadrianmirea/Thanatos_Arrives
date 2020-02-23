@@ -2,7 +2,7 @@
 #define GAMESCREEN_H
 
 #include "screen.h"
-#include "animatedSprite.h"
+#include "playerCharacter.h"
 
 namespace gamespace
 {
@@ -17,6 +17,7 @@ namespace gamespace
 
 	private:
 		animatedSprite* testSprite;
+		playerCharacter* player;
 		sprite* background;
 		std::list<gameObject*> enemyLayer;
 		std::list<gameObject*> wallLayer;

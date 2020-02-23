@@ -20,13 +20,8 @@ namespace gamespace
 	{
 		elapsedScreenTime = 0.f;
 
-		testSprite = new animatedSprite(500.f, 250.f, 24.f, 24.f, "../res/assets/thanatos_spritesheet.png", 2 , 3, 8, 8);
-		gameObjectList.push_front(testSprite);
-		animationData newAnimation;
-		newAnimation.animationTime = 3.f;
-		newAnimation.frameList.insert(newAnimation.frameList.end(), { 0,1 });
-		newAnimation.frameList.insert(newAnimation.frameList.end(), { 1,1 });
-		testSprite->NewAnimation(newAnimation);
+		player= new playerCharacter(500.f, 250.f);
+		gameObjectList.push_front(player);
 
 		background = new sprite(500.f, 250.f, 720.f, 480.f, "../res/assets/jail.png", 240, 160);
 		gameObjectList.push_front(background);
@@ -37,16 +32,16 @@ namespace gamespace
 		elapsedScreenTime += GetFrameTime();
 
 		if (IsKeyDown(KEY_RIGHT))
-			testSprite->Move(GetFrameTime() * 200.f, 0.f);
+			player->Move(GetFrameTime() * 200.f, 0.f);
 
 		if (IsKeyDown(KEY_LEFT))
-			testSprite->Move(-GetFrameTime() * 200.f, 0.f);
+			player->Move(-GetFrameTime() * 200.f, 0.f);
 
 		if (IsKeyDown(KEY_UP))
-			testSprite->Move(0.f, -GetFrameTime() * 200.f);
+			player->Move(0.f, -GetFrameTime() * 200.f);
 
 		if (IsKeyDown(KEY_DOWN))
-			testSprite->Move(0.f, GetFrameTime() * 200.f);
+			player->Move(0.f, GetFrameTime() * 200.f);
 
 		for (std::list<gameObject*> ::iterator it = gameObjectList.begin(); it != gameObjectList.end(); it++)
 		{
