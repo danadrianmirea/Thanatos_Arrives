@@ -10,6 +10,11 @@ namespace gamespace
 	playerCharacter::playerCharacter(float xPosition, float yPosition)
 		:animatedSprite(xPosition, yPosition, 24.f, 24.f, "../res/assets/thanatos_spritesheet.png", 2, 3, 8, 8)
 	{
+		AABB.x = actualRectangle.x + AABBxOffset;
+		AABB.y = actualRectangle.y + AABByOffset;
+		AABB.width = actualRectangle.width +AABBWidthOffset;
+		AABB.height = actualRectangle.height + AABBHeightOffset;
+
 		idleAnim.animationTime = 1.f;
 		idleAnim.addFrame({ 0,0 });
 		idleAnim.addFrame({ 1,0 });
@@ -34,6 +39,14 @@ namespace gamespace
 
 	playerCharacter::~playerCharacter()
 	{
+
+	}
+
+	void playerCharacter::Draw()
+	{
+		DrawRectangleRec(AABB, RED);
+		animatedSprite::Draw();
+		
 	}
 
 	void playerCharacter::Update(float frameTime)
@@ -50,5 +63,42 @@ namespace gamespace
 
 		if (IsKeyDown(KEY_DOWN))
 			Move(0.f, frameTime * 200.f);
+
+		AABB.x = actualRectangle.x + AABBxOffset;
+		AABB.y = actualRectangle.y + AABByOffset;
+	}
+
+	void playerCharacter::UpdateSafePosition()
+	{
+		safePosition = { AABB.x, AABB.y };
+	}
+
+	bool playerCharacter::CoolideWithWall(const Rectangle*& wall)
+	{
+		if (CheckCollisionRecs(AABB, *wall))
+		{
+			if (safePosition.x + AABB.width <= wall->x)
+			{
+
+			}
+			if (safePosition.x >= wall->x + wall->width)
+			{
+
+			}
+			if (safePosition.y + AABB.height <= wall->y)
+			{
+
+			}
+			if (safePosition.y >= wall->y + wall->height)
+			{
+
+			}
+
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
