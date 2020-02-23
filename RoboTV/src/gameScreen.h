@@ -18,6 +18,9 @@ namespace gamespace
 	private:
 		animatedSprite* testSprite;
 		sprite* background;
+		std::list<gameObject*> enemyLayer;
+		std::list<gameObject*> wallLayer;
+
 	};
 }
 #endif

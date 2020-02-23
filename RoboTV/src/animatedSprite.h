@@ -27,6 +27,7 @@ namespace gamespace
 			const char* textureFile, int columns, int rows, int frameWidth, int frameHeight);
 		~animatedSprite();
 		void Draw();
+		void Update(float frameTime);
 		void NewAnimation(animationData animData);
 		void UpdateAnimation(float elapsedTime);
 

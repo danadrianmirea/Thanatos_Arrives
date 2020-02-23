@@ -11,6 +11,7 @@ namespace gamespace
 		gameObject();
 		virtual ~gameObject();
 		virtual void Draw();
+		virtual void Update(float frameTime);
 		bool active;
 	};
 }

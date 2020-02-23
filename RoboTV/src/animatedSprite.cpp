@@ -27,6 +27,11 @@ namespace gamespace
 		DrawTexturePro(spriteTexture, sourceRec, actualRectangle, origin, rotation, WHITE);
 	}
 
+	void animatedSprite::Update(float frameTime) 
+	{
+		UpdateAnimation(frameTime);
+	}
+
 	void animatedSprite::NewAnimation(animationData animData) 
 	{
 		currentAnimation = animData;

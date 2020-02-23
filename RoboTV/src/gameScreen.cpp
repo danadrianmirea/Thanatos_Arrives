@@ -48,7 +48,10 @@ namespace gamespace
 		if (IsKeyDown(KEY_DOWN))
 			testSprite->Move(0.f, GetFrameTime() * 200.f);
 
-		testSprite->UpdateAnimation(GetFrameTime());
+		for (std::list<gameObject*> ::iterator it = gameObjectList.begin(); it != gameObjectList.end(); it++)
+		{
+			(*it)->Update(GetFrameTime());
+		}
 	}
 
 	void gameScreen::Draw()

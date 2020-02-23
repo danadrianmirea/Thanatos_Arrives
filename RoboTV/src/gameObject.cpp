@@ -10,6 +10,11 @@ namespace gamespace
 	{
 	}
 
+	void gameObject::Update(float frameTime)
+	{
+	
+	}
+
 	void gameObject::Draw() 
 	{
 	}
