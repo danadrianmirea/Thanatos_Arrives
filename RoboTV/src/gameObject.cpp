@@ -4,6 +4,7 @@ namespace gamespace
 {
 	gameObject::gameObject()
 	{
+		active = true;
 	}
 
 	gameObject::~gameObject()

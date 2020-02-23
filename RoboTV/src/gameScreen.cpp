@@ -24,8 +24,8 @@ namespace gamespace
 		gameObjectList.push_front(testSprite);
 		animationData newAnimation;
 		newAnimation.animationTime = 3.f;
-		newAnimation.frameList.push_back({ 0,0 });
-		newAnimation.frameList.push_back({ 1,0 });
+		newAnimation.frameList.insert(newAnimation.frameList.end(), { 0,1 });
+		newAnimation.frameList.insert(newAnimation.frameList.end(), { 1,1 });
 		testSprite->NewAnimation(newAnimation);
 
 		background = new sprite(500.f, 250.f, 720.f, 480.f, "../res/assets/jail.png", 240, 160);
@@ -50,6 +50,7 @@ namespace gamespace
 
 		for (std::list<gameObject*> ::iterator it = gameObjectList.begin(); it != gameObjectList.end(); it++)
 		{
+			if((*it)->active)
 			(*it)->Update(GetFrameTime());
 		}
 	}
