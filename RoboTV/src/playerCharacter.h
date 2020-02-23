@@ -20,7 +20,7 @@ namespace gamespace
 		void Draw();
 		void Update(float frameTime);
 		void UpdateSafePosition();
-		bool CoolideWithWall(const Rectangle*& wall);
+		bool CoolideWithWall(const rectangle* wall);
 
 	private:
 		animationData idleAnim;

@@ -16,9 +16,9 @@ namespace gamespace
 		void Draw();
 
 	private:
-		animatedSprite* testSprite;
 		playerCharacter* player;
 		sprite* background;
+		rectangle* testWall;
 		std::list<gameObject*> enemyLayer;
 		std::list<gameObject*> wallLayer;
 

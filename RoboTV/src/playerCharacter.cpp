@@ -44,9 +44,8 @@ namespace gamespace
 
 	void playerCharacter::Draw()
 	{
-		DrawRectangleRec(AABB, RED);
+		//DrawRectangleRec(AABB, RED);  //see hitbox compared to the character
 		animatedSprite::Draw();
-		
 	}
 
 	void playerCharacter::Update(float frameTime)
@@ -73,25 +72,25 @@ namespace gamespace
 		safePosition = { AABB.x, AABB.y };
 	}
 
-	bool playerCharacter::CoolideWithWall(const Rectangle*& wall)
+	bool playerCharacter::CoolideWithWall(const rectangle* wall)
 	{
-		if (CheckCollisionRecs(AABB, *wall))
+		if (CheckCollisionRecs(AABB, wall->actualRectangle))
 		{
-			if (safePosition.x + AABB.width <= wall->x)
+			if (safePosition.x + AABB.width <= wall->actualRectangle.x)
 			{
-
+				actualRectangle.x = safePosition.x - AABBxOffset;
 			}
-			if (safePosition.x >= wall->x + wall->width)
+			if (safePosition.x >= wall->actualRectangle.x + wall->actualRectangle.width)
 			{
-
+				actualRectangle.x = safePosition.x - AABBxOffset;
 			}
-			if (safePosition.y + AABB.height <= wall->y)
+			if (safePosition.y + AABB.height <= wall->actualRectangle.y)
 			{
-
+				actualRectangle.y = safePosition.y - AABByOffset;
 			}
-			if (safePosition.y >= wall->y + wall->height)
+			if (safePosition.y >= wall->actualRectangle.y + wall->actualRectangle.height)
 			{
-
+				actualRectangle.y = safePosition.y - AABByOffset;
 			}
 
 			return true;
