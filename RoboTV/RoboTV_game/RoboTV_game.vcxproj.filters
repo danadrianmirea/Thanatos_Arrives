@@ -45,6 +45,9 @@
     <ClCompile Include="..\src\thanatos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\cursor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\flowManager.h">
@@ -69,6 +72,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\src\thanatos.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\cursor.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

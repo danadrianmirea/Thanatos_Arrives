@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\animatedSprite.cpp" />
+    <ClCompile Include="..\src\cursor.cpp" />
     <ClCompile Include="..\src\flowManager.cpp" />
     <ClCompile Include="..\src\gameObject.cpp" />
     <ClCompile Include="..\src\gameScreen.cpp" />
@@ -31,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\animatedSprite.h" />
+    <ClInclude Include="..\src\cursor.h" />
     <ClInclude Include="..\src\flowManager.h" />
     <ClInclude Include="..\src\gameObject.h" />
     <ClInclude Include="..\src\gameScreen.h" />

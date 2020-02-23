@@ -3,6 +3,7 @@
 
 #include "screen.h"
 #include "thanatos.h"
+#include "cursor.h"
 
 namespace gamespace
 {
@@ -19,6 +20,8 @@ namespace gamespace
 		thanatos* player;
 		sprite* background;
 		rectangle* testWall;
+		cursor* gameCursor;
+
 		std::list<gameObject*> enemyLayer;
 		std::list<gameObject*> wallLayer;
 

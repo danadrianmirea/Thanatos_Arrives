@@ -20,6 +20,9 @@ namespace gamespace
 	{
 		elapsedScreenTime = 0.f;
 
+		gameCursor = new cursor();
+		gameObjectList.push_front(gameCursor);
+
 		player= new thanatos(500.f, 250.f);
 		gameObjectList.push_front(player);
 
@@ -28,12 +31,15 @@ namespace gamespace
 
 		background = new sprite(500.f, 250.f, 720.f, 480.f, "../res/assets/jail.png", 240, 160);
 		gameObjectList.push_front(background);
+
+		HideCursor();
 	}
 
 	void gameScreen::Update()
 	{
 		elapsedScreenTime += GetFrameTime();
 		
+		gameCursor->UpdateCursor(GetMousePosition().x, GetMousePosition().y);
 		for (std::list<gameObject*> ::iterator it = gameObjectList.begin(); it != gameObjectList.end(); it++)
 		{
 			if((*it)->active)
