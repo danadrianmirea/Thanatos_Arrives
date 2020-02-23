@@ -49,6 +49,8 @@ namespace gamespace
 			(*it)->Update(GetFrameTime());
 		}
 
+		thanatosDrone->UpdateDrone(gameCursor);
+
 		if (!player->CoolideWithWall(testWall)) 
 		{
 			player->UpdateSafePosition();

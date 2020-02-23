@@ -3,6 +3,8 @@
 
 #include "thanatos.h"
 
+#include "cursor.h"
+
 namespace gamespace
 {
 	const float droneOffset = 18.f;
@@ -14,6 +16,7 @@ namespace gamespace
 		drone(thanatos* thanatosInstance);
 		~drone();
 		void Update(float frameTime);
+		void UpdateDrone(cursor* cursorInstance);
 
 	private:
 		thanatos* parentThanatos;

@@ -51,16 +51,16 @@ namespace gamespace
 	void thanatos::Update(float frameTime)
 	{
 		animatedSprite::Update(frameTime);
-		if (IsKeyDown(KEY_RIGHT))
+		if (IsKeyDown(KEY_D))
 			Move(frameTime * 200.f, 0.f);
 
-		if (IsKeyDown(KEY_LEFT))
+		if (IsKeyDown(KEY_A))
 			Move(-frameTime * 200.f, 0.f);
 
-		if (IsKeyDown(KEY_UP))
+		if (IsKeyDown(KEY_W))
 			Move(0.f, -frameTime * 200.f);
 
-		if (IsKeyDown(KEY_DOWN))
+		if (IsKeyDown(KEY_S))
 			Move(0.f, frameTime * 200.f);
 
 		AABB.x = actualRectangle.x + AABBxOffset;

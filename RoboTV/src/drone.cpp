@@ -31,4 +31,16 @@ namespace gamespace
 		actualRectangle.y = parentThanatos->actualRectangle.y;
 		actualRectangle.x = parentThanatos->actualRectangle.x + droneOffset;
 	}
+
+	void drone::UpdateDrone(cursor* cursorInstance) 
+	{
+		float resultantX = cursorInstance->actualRectangle.x - parentThanatos->actualRectangle.x;
+		float resultantY = cursorInstance->actualRectangle.y - parentThanatos->actualRectangle.y;
+
+		float magnitude = sqrtf(resultantX * resultantX + resultantY * resultantY);
+
+		actualRectangle.x = parentThanatos->actualRectangle.x + (resultantX / magnitude * droneOffset);
+		actualRectangle.y = parentThanatos->actualRectangle.y + (resultantY / magnitude * droneOffset);
+	}
+
 }
