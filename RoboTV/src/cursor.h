@@ -5,8 +5,7 @@
 
 namespace gamespace
 {
-	class cursor :
-		public sprite
+	class cursor : public sprite
 	{
 	public:
 		cursor();

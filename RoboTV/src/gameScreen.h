@@ -2,8 +2,10 @@
 #define GAMESCREEN_H
 
 #include "screen.h"
+
 #include "thanatos.h"
 #include "cursor.h"
+#include "drone.h"
 
 namespace gamespace
 {
@@ -21,6 +23,7 @@ namespace gamespace
 		sprite* background;
 		rectangle* testWall;
 		cursor* gameCursor;
+		drone* thanatosDrone;
 
 		std::list<gameObject*> enemyLayer;
 		std::list<gameObject*> wallLayer;

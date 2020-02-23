@@ -26,6 +26,9 @@ namespace gamespace
 		player= new thanatos(500.f, 250.f);
 		gameObjectList.push_front(player);
 
+		thanatosDrone = new drone(player);
+		gameObjectList.push_front(thanatosDrone);
+
 		testWall = new rectangle(300.f, 200.f, 30.f, 30.f, RED);
 		gameObjectList.push_front(testWall);
 

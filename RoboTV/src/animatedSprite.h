@@ -34,7 +34,7 @@ namespace gamespace
 		}
 	};
 
-	class animatedSprite :public sprite
+	class animatedSprite : public sprite
 	{
 	public:
 		animatedSprite();

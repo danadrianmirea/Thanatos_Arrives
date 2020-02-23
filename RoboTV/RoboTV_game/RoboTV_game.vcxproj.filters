@@ -16,6 +16,9 @@
     <Filter Include="Gameplay Screens">
       <UniqueIdentifier>{bc8d7ad4-fed8-4126-83c4-e551849dd51d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Gameplay Objects">
+      <UniqueIdentifier>{efa3cdb9-0ffb-4513-b591-8e68bcdc4265}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -42,11 +45,14 @@
     <ClCompile Include="..\src\sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\thanatos.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\cursor.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Gameplay Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\thanatos.cpp">
+      <Filter>Gameplay Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\drone.cpp">
+      <Filter>Gameplay Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,17 +71,17 @@
     <ClInclude Include="..\src\gameObject.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\animatedSprite.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\sprite.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\thanatos.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\cursor.h">
-      <Filter>Headers</Filter>
+      <Filter>Gameplay Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thanatos.h">
+      <Filter>Gameplay Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\drone.h">
+      <Filter>Gameplay Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
