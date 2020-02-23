@@ -1,13 +1,13 @@
-#include "playerCharacter.h"
+#include "thanatos.h"
 
 namespace gamespace
 {
 
-	playerCharacter::playerCharacter()
+	thanatos::thanatos()
 	{
 	}
 
-	playerCharacter::playerCharacter(float xPosition, float yPosition)
+	thanatos::thanatos(float xPosition, float yPosition)
 		:animatedSprite(xPosition, yPosition, 24.f, 24.f, "../res/assets/thanatos_spritesheet.png", 2, 3, 8, 8)
 	{
 		AABB.x = actualRectangle.x + AABBxOffset;
@@ -37,18 +37,18 @@ namespace gamespace
 
 
 
-	playerCharacter::~playerCharacter()
+	thanatos::~thanatos()
 	{
 
 	}
 
-	void playerCharacter::Draw()
+	void thanatos::Draw()
 	{
 		//DrawRectangleRec(AABB, RED);  //see hitbox compared to the character
 		animatedSprite::Draw();
 	}
 
-	void playerCharacter::Update(float frameTime)
+	void thanatos::Update(float frameTime)
 	{
 		animatedSprite::Update(frameTime);
 		if (IsKeyDown(KEY_RIGHT))
@@ -67,12 +67,12 @@ namespace gamespace
 		AABB.y = actualRectangle.y + AABByOffset;
 	}
 
-	void playerCharacter::UpdateSafePosition()
+	void thanatos::UpdateSafePosition()
 	{
 		safePosition = { AABB.x, AABB.y };
 	}
 
-	bool playerCharacter::CoolideWithWall(const rectangle* wall)
+	bool thanatos::CoolideWithWall(const rectangle* wall)
 	{
 		if (CheckCollisionRecs(AABB, wall->actualRectangle))
 		{

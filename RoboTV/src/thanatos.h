@@ -1,5 +1,5 @@
-#ifndef PLAYERCHARACTER_H
-#define PLAYERCHARACTER_H
+#ifndef THANATOS_H
+#define THANATOS_H
 
 #include "animatedSprite.h"
 
@@ -11,12 +11,12 @@ namespace gamespace
 	const float AABBHeightOffset= -8.f;
 
 
-	class playerCharacter : public animatedSprite
+	class thanatos : public animatedSprite
 	{
 	public:
-		playerCharacter();
-		playerCharacter(float xPosition, float yPosition);
-		~playerCharacter();
+		thanatos();
+		thanatos(float xPosition, float yPosition);
+		~thanatos();
 		void Draw();
 		void Update(float frameTime);
 		void UpdateSafePosition();

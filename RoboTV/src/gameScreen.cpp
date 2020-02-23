@@ -20,7 +20,7 @@ namespace gamespace
 	{
 		elapsedScreenTime = 0.f;
 
-		player= new playerCharacter(500.f, 250.f);
+		player= new thanatos(500.f, 250.f);
 		gameObjectList.push_front(player);
 
 		testWall = new rectangle(300.f, 200.f, 30.f, 30.f, RED);

@@ -2,7 +2,7 @@
 #define GAMESCREEN_H
 
 #include "screen.h"
-#include "playerCharacter.h"
+#include "thanatos.h"
 
 namespace gamespace
 {
@@ -16,7 +16,7 @@ namespace gamespace
 		void Draw();
 
 	private:
-		playerCharacter* player;
+		thanatos* player;
 		sprite* background;
 		rectangle* testWall;
 		std::list<gameObject*> enemyLayer;

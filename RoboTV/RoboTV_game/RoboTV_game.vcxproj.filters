@@ -42,7 +42,7 @@
     <ClCompile Include="..\src\sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\playerCharacter.cpp">
+    <ClCompile Include="..\src\thanatos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,7 +68,7 @@
     <ClInclude Include="..\src\sprite.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\playerCharacter.h">
+    <ClInclude Include="..\src\thanatos.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
