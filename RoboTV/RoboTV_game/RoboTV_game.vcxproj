@@ -24,6 +24,7 @@
     <ClCompile Include="..\src\gameObject.cpp" />
     <ClCompile Include="..\src\gameScreen.cpp" />
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\playerCharacter.cpp" />
     <ClCompile Include="..\src\rectangle.cpp" />
     <ClCompile Include="..\src\screen.cpp" />
     <ClCompile Include="..\src\sprite.cpp" />
@@ -33,6 +34,7 @@
     <ClInclude Include="..\src\flowManager.h" />
     <ClInclude Include="..\src\gameObject.h" />
     <ClInclude Include="..\src\gameScreen.h" />
+    <ClInclude Include="..\src\playerCharacter.h" />
     <ClInclude Include="..\src\rectangle.h" />
     <ClInclude Include="..\src\screen.h" />
     <ClInclude Include="..\src\sprite.h" />

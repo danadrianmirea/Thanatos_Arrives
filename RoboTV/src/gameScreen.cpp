@@ -20,7 +20,7 @@ namespace gamespace
 	{
 		elapsedScreenTime = 0.f;
 
-		testSprite = new animatedSprite(500.f, 250.f, 24.f, 24.f, "../res/assets/thanatos_spritesheet.png", 2, 3, 8, 8);
+		testSprite = new animatedSprite(500.f, 250.f, 24.f, 24.f, "../res/assets/thanatos_spritesheet.png", 2 , 3, 8, 8);
 		gameObjectList.push_front(testSprite);
 		animationData newAnimation;
 		newAnimation.animationTime = 3.f;

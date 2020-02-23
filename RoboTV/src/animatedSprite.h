@@ -13,12 +13,27 @@ namespace gamespace
 		int y;
 	};
 
-	struct animationData 
+	class animationData
 	{
+	public:
+		animationData() {}
+		animationData(float animTime) 
+		{
+			animationTime = animTime;
+		}
+		~animationData() 
+		{
+			std::vector<vector2Int>().swap(frameList); //swaps the vector for an empty one, freeing memory
+		}
+
 		std::vector<vector2Int> frameList;
 		float animationTime;
+		void addFrame(vector2Int newFrame) 
+		{
+			frameList.insert(frameList.end(), newFrame);
+		}
 	};
-	
+
 	class animatedSprite :public sprite
 	{
 	public:
