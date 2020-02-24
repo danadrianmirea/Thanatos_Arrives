@@ -11,8 +11,16 @@ namespace gamespace
 	const float AABBHeightOffset= -8.f;
 	const float wallCollisionOffset = 3.f;
 	
-
 	const float moveSpeed = 150.f;
+
+	const float attackTime = 0.3f;
+	const float dashTime = 0.2f;
+	const float damageTime = 0.5f;
+
+	enum thanatosStates
+	{
+		idle, walking, attacking, dashing, damaged
+	};
 
 	class thanatos : public animatedSprite
 	{
@@ -26,13 +34,18 @@ namespace gamespace
 		bool CoolideWithWall(const rectangle* wall);
 
 	private:
+		void ChangeState(thanatosStates newState);
+
+		float stateTimer;
 		animationData idleAnim;
 		animationData walkAnim;
 		animationData attackAnim;
+		animationData dashAnim;
 		animationData damageAnim;
 		Rectangle AABB;
 		Vector2 safePosition;
 		Vector2 moveDirection;
+		thanatosStates state;
 	};
 }
 #endif

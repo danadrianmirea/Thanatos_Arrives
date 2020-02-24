@@ -8,7 +8,7 @@ namespace gamespace
 	}
 
 	animatedSprite::animatedSprite(float xPosition, float yPosition, float recWidth, float recHeight,
-		const char* textureFile, int columns, int rows, int frameWidth, int frameHeight) : sprite (xPosition, yPosition, recWidth, recHeight, textureFile, frameWidth, frameHeight)
+		const char* textureFile, int columns, int rows, int frameWidth, int frameHeight) : sprite(xPosition, yPosition, recWidth, recHeight, textureFile, frameWidth, frameHeight)
 	{
 		spriteColumns = columns;
 		spriteRows = rows;
@@ -27,13 +27,14 @@ namespace gamespace
 		DrawTexturePro(spriteTexture, sourceRec, actualRectangle, origin, rotation, WHITE);
 	}
 
-	void animatedSprite::Update(float frameTime) 
+	void animatedSprite::Update(float frameTime)
 	{
 		UpdateAnimation(frameTime);
 	}
 
-	void animatedSprite::NewAnimation(animationData animData) 
+	void animatedSprite::NewAnimation(animationData animData)
 	{
+		currentAnimation.clearData();
 		currentAnimation = animData;
 		animate = true;
 	}
@@ -48,8 +49,11 @@ namespace gamespace
 
 			int frameIndex = static_cast<int>(currentAnimation.frameList.size() * currentAnimTime / currentAnimation.animationTime);
 
-			sourceRec.x = (float)currentAnimation.frameList[frameIndex].x * spriteWidth;
-			sourceRec.y = (float)currentAnimation.frameList[frameIndex].y * spriteHeight;
+			if (currentAnimation.frameList.size() > frameIndex)
+			{
+				sourceRec.x = (float)currentAnimation.frameList[frameIndex].x * spriteWidth;
+				sourceRec.y = (float)currentAnimation.frameList[frameIndex].y * spriteHeight;
+			}
 		}
 	}
 }

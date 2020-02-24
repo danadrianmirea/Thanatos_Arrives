@@ -23,6 +23,11 @@ namespace gamespace
 		}
 		~animationData() 
 		{
+			clearData();
+		}
+
+		void clearData() 
+		{
 			std::vector<vector2Int>().swap(frameList); //swaps the vector for an empty one, freeing memory
 		}
 

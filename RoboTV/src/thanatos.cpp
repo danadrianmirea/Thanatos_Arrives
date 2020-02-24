@@ -32,10 +32,17 @@ namespace gamespace
 		attackAnim.addFrame({ 0,2 });
 		attackAnim.addFrame({ 0,0 });
 
+		dashAnim.animationTime = 0.2f;
+		dashAnim.addFrame({ 0,2 });
+		dashAnim.addFrame({ 0,0 });
+
 		damageAnim.animationTime = 0.5f;
 		damageAnim.addFrame({ 1,2 });
 
 		NewAnimation(idleAnim);
+
+		state = idle;
+		stateTimer = 0.f;
 	}
 
 
@@ -57,7 +64,6 @@ namespace gamespace
 		moveDirection.x = 0.f;
 		moveDirection.y = 0.f;
 
-		animatedSprite::Update(frameTime);
 		if (IsKeyDown(KEY_D))
 			moveDirection.x += 1;
 		if (IsKeyDown(KEY_A))
@@ -69,17 +75,62 @@ namespace gamespace
 		if (IsKeyDown(KEY_S))
 			moveDirection.y += 1;
 
-		if (moveDirection.x != 0.f)
+		switch (state)
 		{
-			moveDirection.x = moveDirection.x / sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
-			AABB.x += moveDirection.x * moveSpeed * frameTime;
+		case gamespace::idle:
+			if (IsKeyDown(KEY_SPACE))
+				ChangeState(dashing);
+			else
+				if (IsMouseButtonPressed(0))
+					ChangeState(attacking);
+				else
+					if (moveDirection.x != 0.f || moveDirection.y != 0.f)
+						ChangeState(walking);
 
+			break;
+		case gamespace::walking:
+
+			if (moveDirection.x != 0.f)
+			{
+				moveDirection.x = moveDirection.x / sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
+				AABB.x += moveDirection.x * moveSpeed * frameTime;
+
+			}
+			if (moveDirection.y != 0.f)
+			{
+				moveDirection.y = moveDirection.y / sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
+				AABB.y += moveDirection.y * moveSpeed * frameTime;
+			}
+
+			if (IsKeyDown(KEY_SPACE))
+				ChangeState(dashing);
+			else
+				if (IsMouseButtonPressed(0))
+					ChangeState(attacking);
+				else
+					if (moveDirection.x == 0 && moveDirection.y == 0)
+						ChangeState(idle);
+			break;
+
+			break;
+		case gamespace::dashing:
+			if (stateTimer >= dashTime)
+				ChangeState(idle);
+			break;
+		case gamespace::attacking:
+			if (stateTimer >= attackTime)
+				ChangeState(idle);
+			else
+				if (IsKeyPressed(KEY_SPACE))
+					ChangeState(dashing);
+			break;
+		case gamespace::damaged:
+
+			break;
 		}
-		if (moveDirection.y != 0.f)
-		{
-			moveDirection.y = moveDirection.y / sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
-			AABB.y += moveDirection.y * moveSpeed * frameTime;
-		}
+
+		animatedSprite::Update(frameTime);
+		stateTimer += frameTime;
 
 		actualRectangle.x = AABB.x - AABBxOffset;
 		actualRectangle.y = AABB.y - AABByOffset;
@@ -120,6 +171,36 @@ namespace gamespace
 		else
 		{
 			return false;
+		}
+
+
+
+	}
+
+	void thanatos::ChangeState(thanatosStates newState)
+	{
+		if (state != newState)
+		{
+			state = newState;
+			stateTimer = 0.f;
+			switch (state)
+			{
+			case gamespace::idle:
+				NewAnimation(idleAnim);
+				break;
+			case gamespace::walking:
+				NewAnimation(walkAnim);
+				break;
+			case gamespace::attacking:
+				NewAnimation(attackAnim);
+				break;
+			case gamespace::dashing:
+				NewAnimation(dashAnim);
+				break;
+			case gamespace::damaged:
+				NewAnimation(damageAnim);
+				break;
+			}
 		}
 	}
 }

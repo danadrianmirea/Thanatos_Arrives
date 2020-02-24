@@ -55,7 +55,7 @@
       <Filter>Gameplay Objects</Filter>
     </ClCompile>
     <ClCompile Include="..\src\attack.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Gameplay Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,8 +86,11 @@
     <ClInclude Include="..\src\drone.h">
       <Filter>Gameplay Objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\attack.h">
+    <ClInclude Include="..\src\animatedSprite.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\attack.h">
+      <Filter>Gameplay Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

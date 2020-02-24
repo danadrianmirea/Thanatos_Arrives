@@ -33,6 +33,7 @@
     <ClCompile Include="..\src\sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\animatedSprite.h" />
     <ClInclude Include="..\src\attack.h" />
     <ClInclude Include="..\src\cursor.h" />
     <ClInclude Include="..\src\drone.h" />
