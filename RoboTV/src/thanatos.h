@@ -10,6 +10,7 @@ namespace gamespace
 	const float AABBWidthOffset= -9.5f;
 	const float AABBHeightOffset= -8.f;
 
+	const float moveSpeed = 150.f;
 
 	class thanatos : public animatedSprite
 	{
@@ -29,6 +30,7 @@ namespace gamespace
 		animationData damageAnim;
 		Rectangle AABB;
 		Vector2 safePosition;
+		Vector2 moveDirection;
 	};
 }
 #endif

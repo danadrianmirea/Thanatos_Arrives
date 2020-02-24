@@ -15,6 +15,9 @@ namespace gamespace
 		AABB.width = actualRectangle.width +AABBWidthOffset;
 		AABB.height = actualRectangle.height + AABBHeightOffset;
 
+		moveDirection.x = 0.f;
+		moveDirection.y = 0.f;
+
 		idleAnim.animationTime = 1.f;
 		idleAnim.addFrame({ 0,0 });
 		idleAnim.addFrame({ 1,0 });
@@ -50,18 +53,28 @@ namespace gamespace
 
 	void thanatos::Update(float frameTime)
 	{
+
+		moveDirection.x = 0.f;
+		moveDirection.y = 0.f;
+
 		animatedSprite::Update(frameTime);
 		if (IsKeyDown(KEY_D))
-			Move(frameTime * 200.f, 0.f);
-
+			moveDirection.x += 1;
 		if (IsKeyDown(KEY_A))
-			Move(-frameTime * 200.f, 0.f);
+			moveDirection.x -= 1;
 
 		if (IsKeyDown(KEY_W))
-			Move(0.f, -frameTime * 200.f);
+			moveDirection.y -= 1;
 
 		if (IsKeyDown(KEY_S))
-			Move(0.f, frameTime * 200.f);
+			moveDirection.y += 1;
+
+		if(moveDirection.x != 0.f)
+		moveDirection.x = moveDirection.x / sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
+		if(moveDirection.y != 0.f)
+		moveDirection.y = moveDirection.y / sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
+
+		Move(moveDirection.x * moveSpeed * frameTime, moveDirection.y * moveSpeed* frameTime);
 
 		AABB.x = actualRectangle.x + AABBxOffset;
 		AABB.y = actualRectangle.y + AABByOffset;
