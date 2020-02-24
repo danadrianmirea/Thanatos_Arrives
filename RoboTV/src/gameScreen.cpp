@@ -23,16 +23,17 @@ namespace gamespace
 		gameCursor = new cursor();
 		gameObjectList.push_front(gameCursor);
 
-		player= new thanatos(500.f, 250.f);
+		player= new thanatos(100.f, 50.f);
 		gameObjectList.push_front(player);
 
 		thanatosDrone = new drone(player);
 		gameObjectList.push_front(thanatosDrone);
 
-		testWall = new rectangle(300.f, 200.f, 30.f, 30.f, RED);
-		gameObjectList.push_front(testWall);
+		rectangle* testWall = new rectangle(-360.f, -240.f, 39.f, 480.f, RED);
+		testWall->visible = false;
+		wallLayer.push_front(testWall);
 
-		background = new sprite(500.f, 250.f, 720.f, 480.f, "../res/assets/jail.png", 240, 160);
+		background = new sprite(0.f, 0.f, 720.f, 480.f, "../res/assets/jail.png", 240, 160);
 		gameObjectList.push_front(background);
 
 		gameCamera.target = { player->actualRectangle.x, player->actualRectangle.y };
@@ -47,7 +48,8 @@ namespace gamespace
 	{
 		elapsedScreenTime += GetFrameTime();
 		
-		gameCursor->UpdateCursor(GetMousePosition().x, GetMousePosition().y);
+		gameCursor->UpdateCursor(GetMousePosition().x - gameCamera.offset.x, GetMousePosition().y - gameCamera.offset.y);
+		
 		for (std::list<gameObject*> ::iterator it = gameObjectList.begin(); it != gameObjectList.end(); it++)
 		{
 			if((*it)->active)
@@ -56,13 +58,27 @@ namespace gamespace
 
 		thanatosDrone->UpdateDrone(gameCursor);
 
-		if (!player->CoolideWithWall(testWall)) 
+		//manage collisions
+
+		/*if (!player->CoolideWithWall(testWall)) 
 		{
 			player->UpdateSafePosition();
+		}*/
+
+		bool isPlayerSafe = true;
+		for (std::list<rectangle*>::iterator it = wallLayer.begin(); it != wallLayer.end(); it++)
+		{
+			if ((*it)->active)
+				if (player->CoolideWithWall((*it)))
+					isPlayerSafe = false;
 		}
+		if (isPlayerSafe)
+			player->UpdateSafePosition();
+
+
 
 		gameCamera.target = { player->actualRectangle.x,  player->actualRectangle.y };
-		gameCamera.offset = { -player->actualRectangle.x + 500,  -player->actualRectangle.y + 290};
+		gameCamera.offset = { -player->actualRectangle.x + 1920 / 2,  -player->actualRectangle.y + 1080 / 2};
 		//DrawText(TextFormat("%1.1f", elapsedScreenTime), 190, 200, 20, LIGHTGRAY);
 	}
 

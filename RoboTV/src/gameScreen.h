@@ -21,13 +21,12 @@ namespace gamespace
 	private:
 		thanatos* player;
 		sprite* background;
-		rectangle* testWall;
 		cursor* gameCursor;
 		drone* thanatosDrone;
 		Camera2D gameCamera;
 
 		std::list<gameObject*> enemyLayer;
-		std::list<gameObject*> wallLayer;
+		std::list<rectangle*> wallLayer;
 
 	};
 }
