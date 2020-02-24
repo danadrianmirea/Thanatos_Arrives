@@ -16,9 +16,11 @@ namespace flowspace {
 	void flowManager::InitGame()
 	{
 		// Initialization options and setup
-		const int screenWidth = 1024;
-		const int screenHeight = 576;
+		const int screenWidth = 1080;
+		const int screenHeight = 768;
 		InitWindow(screenWidth, screenHeight, "Thanatos Arrives");
+		SetConfigFlags(FLAG_VSYNC_HINT);
+		ToggleFullscreen();
 
 		SetTargetFPS(60);
 		gamespace::screen* gameScreenInstance = new gamespace::gameScreen;
