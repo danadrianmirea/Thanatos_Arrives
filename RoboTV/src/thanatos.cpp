@@ -12,7 +12,7 @@ namespace gamespace
 	{
 		AABB.x = actualRectangle.x + AABBxOffset;
 		AABB.y = actualRectangle.y + AABByOffset;
-		AABB.width = actualRectangle.width +AABBWidthOffset;
+		AABB.width = actualRectangle.width + AABBWidthOffset;
 		AABB.height = actualRectangle.height + AABBHeightOffset;
 
 		moveDirection.x = 0.f;
@@ -69,15 +69,21 @@ namespace gamespace
 		if (IsKeyDown(KEY_S))
 			moveDirection.y += 1;
 
-		if(moveDirection.x != 0.f)
-		moveDirection.x = moveDirection.x / sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
-		if(moveDirection.y != 0.f)
-		moveDirection.y = moveDirection.y / sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
+		if (moveDirection.x != 0.f)
+		{
+			moveDirection.x = moveDirection.x / sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
+			AABB.x += moveDirection.x * moveSpeed * frameTime;
 
-		Move(moveDirection.x * moveSpeed * frameTime, moveDirection.y * moveSpeed* frameTime);
+		}
+		if (moveDirection.y != 0.f)
+		{
+			moveDirection.y = moveDirection.y / sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
+			AABB.y += moveDirection.y * moveSpeed * frameTime;
+		}
 
-		AABB.x = actualRectangle.x + AABBxOffset;
-		AABB.y = actualRectangle.y + AABByOffset;
+		actualRectangle.x = AABB.x - AABBxOffset;
+		actualRectangle.y = AABB.y - AABByOffset;
+
 	}
 
 	void thanatos::UpdateSafePosition()
@@ -89,19 +95,26 @@ namespace gamespace
 	{
 		if (CheckCollisionRecs(AABB, wall->actualRectangle))
 		{
-			if (safePosition.x + AABB.width <= wall->actualRectangle.x ||
-				safePosition.x >= wall->actualRectangle.x + wall->actualRectangle.width)
+			if (safePosition.x + AABB.width <= wall->actualRectangle.x)
 			{
-				actualRectangle.x = safePosition.x - AABBxOffset;
+				actualRectangle.x = wall->actualRectangle.x - AABB.width / 2;
+			}
+			if (safePosition.x >= wall->actualRectangle.x + wall->actualRectangle.width)
+			{
+				actualRectangle.x = wall->actualRectangle.x + wall->actualRectangle.width + AABB.width / 2;
 			}
 
-			if (safePosition.y + AABB.height <= wall->actualRectangle.y ||
-				safePosition.y >= wall->actualRectangle.y + wall->actualRectangle.height)
+			if (safePosition.y + AABB.height <= wall->actualRectangle.y)
 			{
-				actualRectangle.y = safePosition.y - AABByOffset;
+				actualRectangle.y = wall->actualRectangle.y - AABB.height + wallCollisionOffset;
+			}
+			if (safePosition.y >= wall->actualRectangle.y + wall->actualRectangle.height)
+			{
+				actualRectangle.y = wall->actualRectangle.y + wall->actualRectangle.height + wallCollisionOffset;
 			}
 
-
+			AABB.x = actualRectangle.x + AABBxOffset;
+			AABB.y = actualRectangle.y + AABByOffset;
 			return true;
 		}
 		else

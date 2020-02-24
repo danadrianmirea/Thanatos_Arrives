@@ -9,6 +9,8 @@ namespace gamespace
 	const float AABByOffset = -4.f;
 	const float AABBWidthOffset= -9.5f;
 	const float AABBHeightOffset= -8.f;
+	const float wallCollisionOffset = 3.f;
+	
 
 	const float moveSpeed = 150.f;
 
