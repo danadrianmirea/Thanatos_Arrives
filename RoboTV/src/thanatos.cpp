@@ -7,9 +7,11 @@ namespace gamespace
 	{
 	}
 
-	thanatos::thanatos(float xPosition, float yPosition)
+	thanatos::thanatos(float xPosition, float yPosition, const cursor* gameCursor)
 		:animatedSprite(xPosition, yPosition, 24.f, 24.f, "../res/assets/thanatos_spritesheet.png", 2, 3, 8, 8)
 	{
+		cursorInstance = gameCursor;
+
 		AABB.x = actualRectangle.x + AABBxOffset;
 		AABB.y = actualRectangle.y + AABByOffset;
 		AABB.width = actualRectangle.width + AABBWidthOffset;
@@ -55,7 +57,10 @@ namespace gamespace
 	void thanatos::Draw()
 	{
 		//DrawRectangleRec(AABB, RED);  //see hitbox compared to the character
-		animatedSprite::Draw();
+		if(cursorInstance->actualRectangle.x > AABB.x)
+			animatedSprite::Draw();
+		else
+			DrawTexturePro(spriteTexture, {sourceRec.x,sourceRec.y, -sourceRec.width, sourceRec.height}, actualRectangle, origin, rotation, WHITE);
 	}
 
 	void thanatos::Update(float frameTime)

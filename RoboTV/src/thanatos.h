@@ -3,6 +3,8 @@
 
 #include "animatedSprite.h"
 
+#include "cursor.h"
+
 namespace gamespace
 {
 	const float AABBxOffset = -8.5f;
@@ -13,7 +15,7 @@ namespace gamespace
 	
 	const float moveSpeed = 150.f;
 
-	const float attackTime = 0.3f;
+	const float attackTime = 0.2f;
 	const float dashTime = 0.2f;
 	const float damageTime = 0.5f;
 
@@ -26,7 +28,7 @@ namespace gamespace
 	{
 	public:
 		thanatos();
-		thanatos(float xPosition, float yPosition);
+		thanatos(float xPosition, float yPosition, const cursor* gameCursor);
 		~thanatos();
 		void Draw();
 		void Update(float frameTime);
@@ -46,6 +48,8 @@ namespace gamespace
 		Vector2 safePosition;
 		Vector2 moveDirection;
 		thanatosStates state;
+
+		const cursor* cursorInstance;
 	};
 }
 #endif

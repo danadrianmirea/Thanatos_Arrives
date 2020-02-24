@@ -23,7 +23,7 @@ namespace gamespace
 		gameCursor = new cursor();
 		gameObjectList.push_front(gameCursor);
 
-		player = new thanatos(100.f, 50.f);
+		player = new thanatos(100.f, 50.f, gameCursor);
 		gameObjectList.push_front(player);
 
 		thanatosDrone = new drone(player);
