@@ -20,7 +20,6 @@ namespace gamespace
 
 	private:
 		thanatos* parentThanatos;
-
 		animationData idleAnim;
 	};
 }

@@ -54,6 +54,9 @@
     <ClCompile Include="..\src\drone.cpp">
       <Filter>Gameplay Objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\attack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\flowManager.h">
@@ -82,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="..\src\drone.h">
       <Filter>Gameplay Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\attack.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

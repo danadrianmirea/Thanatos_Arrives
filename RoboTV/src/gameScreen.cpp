@@ -29,6 +29,11 @@ namespace gamespace
 		thanatosDrone = new drone(player);
 		gameObjectList.push_front(thanatosDrone);
 
+		testAttack = new attack();
+		testAttack->Activate({ 100.f, 100.f }, 90.f);
+		gameObjectList.push_front(testAttack);
+
+
 		rectangle* leftWall = new rectangle(-360.f, -240.f, 39.f, 480.f, RED);
 		wallLayer.push_front(leftWall);
 
@@ -47,7 +52,7 @@ namespace gamespace
 		gameCamera.target = { player->actualRectangle.x, player->actualRectangle.y };
 		gameCamera.offset = { 0,0 };
 		gameCamera.rotation = 0.0f;
-		gameCamera.zoom = 1.5f;
+		gameCamera.zoom = 2.0f;
 
 		HideCursor();
 	}
@@ -68,11 +73,6 @@ namespace gamespace
 
 		//manage collisions
 
-		/*if (!player->CoolideWithWall(testWall))
-		{
-			player->UpdateSafePosition();
-		}*/
-
 		bool isPlayerSafe = true;
 		for (std::list<rectangle*>::iterator it = wallLayer.begin(); it != wallLayer.end(); it++)
 		{
@@ -88,7 +88,6 @@ namespace gamespace
 
 		gameCamera.target = { player->actualRectangle.x,  player->actualRectangle.y };
 		gameCamera.offset = { -player->actualRectangle.x + 1920 / 2,  -player->actualRectangle.y + 1080 / 2 };
-		//DrawText(TextFormat("%1.1f", elapsedScreenTime), 190, 200, 20, LIGHTGRAY);
 	}
 
 	void gameScreen::Draw()
@@ -103,5 +102,6 @@ namespace gamespace
 				(*it)->Draw();
 		}
 		EndMode2D();
+		//DrawText(TextFormat("%1.1f", elapsedScreenTime), 190, 200, 20, LIGHTGRAY);
 	}
 }
