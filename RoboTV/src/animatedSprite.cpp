@@ -47,7 +47,6 @@ namespace gamespace
 				currentAnimTime = currentAnimTime - currentAnimation.animationTime;
 
 			int frameIndex = static_cast<int>(currentAnimation.frameList.size() * currentAnimTime / currentAnimation.animationTime);
-			
 
 			sourceRec.x = (float)currentAnimation.frameList[frameIndex].x * spriteWidth;
 			sourceRec.y = (float)currentAnimation.frameList[frameIndex].y * spriteHeight;

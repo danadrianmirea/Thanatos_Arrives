@@ -29,11 +29,6 @@ namespace gamespace
 		thanatosDrone = new drone(player);
 		gameObjectList.push_front(thanatosDrone);
 
-		testAttack = new attack();
-		testAttack->Activate({ 100.f, 100.f }, 90.f);
-		gameObjectList.push_front(testAttack);
-
-
 		rectangle* leftWall = new rectangle(-360.f, -240.f, 39.f, 480.f, RED);
 		wallLayer.push_front(leftWall);
 

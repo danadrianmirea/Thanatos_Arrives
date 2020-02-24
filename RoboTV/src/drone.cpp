@@ -18,18 +18,45 @@ namespace gamespace
 		idleAnim.addFrame({ 1,0 });
 
 		NewAnimation(idleAnim);
+		attackInstance = new attack();
 	}
 
 	drone::~drone()
 	{
-
+		delete attackInstance;
 	}
 
-	void drone::Update(float frameTime) 
+	void drone::Draw() 
+	{
+		animatedSprite::Draw();
+		if (attackInstance->visible)
+			attackInstance->Draw();
+	}
+
+	void drone::Update(float frameTime)
 	{
 		animatedSprite::Update(frameTime);
-		actualRectangle.y = parentThanatos->actualRectangle.y;
-		actualRectangle.x = parentThanatos->actualRectangle.x + droneOffset;
+		/*actualRectangle.y = parentThanatos->actualRectangle.y;
+		actualRectangle.x = parentThanatos->actualRectangle.x + droneOffset;*/
+
+		if (IsMouseButtonPressed(0))
+		{
+			float resultantX = actualRectangle.x - parentThanatos->actualRectangle.x;
+			float resultantY = actualRectangle.y - parentThanatos->actualRectangle.y;
+
+			float magnitude = sqrtf(resultantX * resultantX + resultantY * resultantY);
+
+			float normalizedX = resultantX / magnitude;
+			float normalizedY = resultantY / magnitude;
+
+			float attackAngle = acosf(normalizedX) * 180.f / PI + 90.f;
+			if (normalizedY < 0)
+				attackAngle = -attackAngle;
+			attackInstance->Activate({ actualRectangle.x + normalizedX * attackOffset, actualRectangle.y + normalizedY * attackOffset},attackAngle, normalizedY<0);
+		}
+
+		if (attackInstance->active)
+			attackInstance->Update(frameTime);
 	}
 
 	void drone::UpdateDrone(cursor* cursorInstance) 

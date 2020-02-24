@@ -10,6 +10,7 @@
 
 namespace gamespace
 {
+
 	class gameScreen: public screen
 	{
 	public:
@@ -24,7 +25,6 @@ namespace gamespace
 		sprite* background;
 		cursor* gameCursor;
 		drone* thanatosDrone;
-		attack* testAttack;
 		Camera2D gameCamera;
 
 		std::list<gameObject*> enemyLayer;

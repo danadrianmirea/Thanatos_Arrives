@@ -4,6 +4,8 @@
 
 namespace gamespace
 {
+	const float attackDuration = 0.3f;
+
 	class attack :
 		public animatedSprite
 	{
@@ -11,10 +13,15 @@ namespace gamespace
 		attack();
 		~attack();
 		void Draw();
-		void Activate(Vector2 position, float attackRotation);
+		void Update(float frameTime);
+		void Activate(Vector2 position, float attackRotation, bool yInverted);
 		void CheckCollisionWithEnemy(const animatedSprite* enemy);
 
 		float attackRadius;
+		bool inverted;
+
+	private:
+		float activeTime;
 	};
 
 }

@@ -4,10 +4,12 @@
 #include "thanatos.h"
 
 #include "cursor.h"
+#include "attack.h"
 
 namespace gamespace
 {
 	const float droneOffset = 18.f;
+	const float attackOffset = 20.f;
 
 	class drone : public animatedSprite
 	{
@@ -15,11 +17,13 @@ namespace gamespace
 		drone();
 		drone(thanatos* thanatosInstance);
 		~drone();
+		void Draw();
 		void Update(float frameTime);
 		void UpdateDrone(cursor* cursorInstance);
 
 	private:
 		thanatos* parentThanatos;
+		attack* attackInstance;
 		animationData idleAnim;
 	};
 }
