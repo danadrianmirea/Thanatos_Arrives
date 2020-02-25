@@ -45,6 +45,7 @@ namespace gamespace
 
 		state = idle;
 		stateTimer = 0.f;
+		dashCooldown = 0.f;
 	}
 
 
@@ -65,25 +66,27 @@ namespace gamespace
 
 	void thanatos::Update(float frameTime)
 	{
+		if (state != dashing)
+		{
+			moveDirection.x = 0.f;
+			moveDirection.y = 0.f;
 
-		moveDirection.x = 0.f;
-		moveDirection.y = 0.f;
+			if (IsKeyDown(KEY_D))
+				moveDirection.x += 1;
+			if (IsKeyDown(KEY_A))
+				moveDirection.x -= 1;
 
-		if (IsKeyDown(KEY_D))
-			moveDirection.x += 1;
-		if (IsKeyDown(KEY_A))
-			moveDirection.x -= 1;
+			if (IsKeyDown(KEY_W))
+				moveDirection.y -= 1;
 
-		if (IsKeyDown(KEY_W))
-			moveDirection.y -= 1;
-
-		if (IsKeyDown(KEY_S))
-			moveDirection.y += 1;
+			if (IsKeyDown(KEY_S))
+				moveDirection.y += 1;
+		}
 
 		switch (state)
 		{
 		case idle:
-			if (IsKeyDown(KEY_SPACE))
+			if (IsKeyPressed(KEY_SPACE))
 				ChangeState(dashing);
 			else
 				if (IsMouseButtonPressed(0))
@@ -107,7 +110,7 @@ namespace gamespace
 				AABB.y += moveDirection.y * moveSpeed * frameTime;
 			}
 
-			if (IsKeyDown(KEY_SPACE))
+			if (IsKeyPressed(KEY_SPACE))
 				ChangeState(dashing);
 			else
 				if (IsMouseButtonPressed(0))
@@ -119,8 +122,14 @@ namespace gamespace
 
 			break;
 		case dashing:
+			AABB.x += moveDirection.x * dashSpeed * frameTime;
+			AABB.y += moveDirection.y * dashSpeed * frameTime;
+
 			if (stateTimer >= dashTime)
+			{
+				dashCooldown = dashCooldownTime;
 				ChangeState(idle);
+			}
 			break;
 		case attacking:
 			if (stateTimer >= attackTime)
@@ -136,6 +145,8 @@ namespace gamespace
 
 		animatedSprite::Update(frameTime);
 		stateTimer += frameTime;
+		if (state != dashing)
+			dashCooldown -= frameTime;
 
 		actualRectangle.x = AABB.x - AABBxOffset;
 		actualRectangle.y = AABB.y - AABByOffset;
@@ -171,6 +182,10 @@ namespace gamespace
 
 			AABB.x = actualRectangle.x + AABBxOffset;
 			AABB.y = actualRectangle.y + AABByOffset;
+
+			if (state == dashing)
+				ChangeState(idle);
+
 			return true;
 		}
 		else
@@ -200,7 +215,18 @@ namespace gamespace
 				NewAnimation(attackAnim);
 				break;
 			case dashing:
-				NewAnimation(dashAnim);
+				if ((moveDirection.x != 0.f || moveDirection.y != 0.f ) && dashCooldown <= 0.f)
+				{
+					if (moveDirection.x != 0.f)
+						moveDirection.x = moveDirection.x / sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
+
+					if (moveDirection.y != 0.f)
+						moveDirection.y = moveDirection.y / sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
+
+					NewAnimation(dashAnim);
+				}
+				else
+					ChangeState(idle);
 				break;
 			case damaged:
 				NewAnimation(damageAnim);

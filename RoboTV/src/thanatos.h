@@ -26,10 +26,12 @@ namespace gamespace
 		const float wallCollisionOffset = 3.f;
 
 		const float moveSpeed = 150.f;
+		const float dashSpeed = 800.f;
 
 		const float attackTime = 0.2f;
-		const float dashTime = 0.2f;
+		const float dashTime = 0.1f;
 		const float damageTime = 0.5f;
+		const float dashCooldownTime = 0.7f;
 
 		enum thanatosStates
 		{
@@ -39,6 +41,7 @@ namespace gamespace
 		void ChangeState(thanatosStates newState);
 
 		float stateTimer;
+		float dashCooldown;
 		animationData idleAnim;
 		animationData walkAnim;
 		animationData attackAnim;
