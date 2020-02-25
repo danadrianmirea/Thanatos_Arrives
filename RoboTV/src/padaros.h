@@ -19,12 +19,13 @@ namespace gamespace
 
 		const float targetWalkDistance = 180.f;
 		const float targetAttackDistance = 70.f;
-		const float windupTime = 0.7f;
-		const float attackTime = 0.2f;
-		const float recoveryTime = 1.0f;
+		const float windupTime = 0.4f;
+		const float attackTime = 0.15f;
+		const float recoveryTime = 0.3f;
+		const float attackCooldown = 1.0f;
 		const float damagedTime = 0.3f;
 		const float moveSpeed = 140.f;
-		const float attackSpeed = 200.f;
+		const float attackSpeed = 600.f;
 
 		enum padarosStates
 		{

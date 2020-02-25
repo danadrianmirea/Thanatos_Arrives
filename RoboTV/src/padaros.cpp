@@ -43,29 +43,35 @@ namespace gamespace
 		animatedSprite::Update(frameTime);
 		if (state == walking) 
 		{
-			lastKnownTargetPosition.x = lastKnownTargetPosition.x / distanceToTarget;
-			lastKnownTargetPosition.y = lastKnownTargetPosition.y / distanceToTarget;
-
 			Move(lastKnownTargetPosition.x * frameTime * moveSpeed, lastKnownTargetPosition.y * frameTime * moveSpeed);
+		}
+		if (state == attacking) 
+		{
+			Move(lastKnownTargetPosition.x * frameTime * attackSpeed, lastKnownTargetPosition.y * frameTime * attackSpeed);
 		}
 			stateTimer += frameTime;
 	}
 
 	void padaros::UpdatePadaros(Vector2 targetPosition)
 	{
-		lastKnownTargetPosition.x = targetPosition.x - actualRectangle.x;
-		lastKnownTargetPosition.y = targetPosition.y - actualRectangle.y;
+		if (state != attacking && state != windup)
+		{
+			lastKnownTargetPosition.x = targetPosition.x - actualRectangle.x;
+			lastKnownTargetPosition.y = targetPosition.y - actualRectangle.y;
 
-		distanceToTarget = sqrtf(lastKnownTargetPosition.x * lastKnownTargetPosition.x + lastKnownTargetPosition.y * lastKnownTargetPosition.y);
+			distanceToTarget = sqrtf(lastKnownTargetPosition.x * lastKnownTargetPosition.x + lastKnownTargetPosition.y * lastKnownTargetPosition.y);
 
+			lastKnownTargetPosition.x = lastKnownTargetPosition.x / distanceToTarget;
+			lastKnownTargetPosition.y = lastKnownTargetPosition.y / distanceToTarget;
+		}
 		switch (state)
 		{
 		case idle:
-			if (distanceToTarget <= targetWalkDistance)
+			if (stateTimer >= recoveryTime && distanceToTarget <= targetWalkDistance)
 				ChangeState(walking);
 			break;
 		case walking:
-			if (stateTimer >= recoveryTime && distanceToTarget <= targetAttackDistance)
+			if (stateTimer >= attackCooldown && distanceToTarget <= targetAttackDistance)
 				ChangeState(windup);
 			else
 				if (distanceToTarget > targetWalkDistance)
