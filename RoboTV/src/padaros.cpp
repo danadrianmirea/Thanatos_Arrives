@@ -38,16 +38,24 @@ namespace gamespace
 
 	}
 
+	void padaros::Draw()
+	{
+		if (moveDirection.x <= 0.f)
+			animatedSprite::Draw();
+		else
+			DrawTexturePro(spriteTexture, { sourceRec.x,sourceRec.y, -sourceRec.width, sourceRec.height }, actualRectangle, origin, rotation, WHITE);
+	}
+
 	void padaros::Update(float frameTime)
 	{
 		animatedSprite::Update(frameTime);
 		if (state == walking) 
 		{
-			Move(lastKnownTargetPosition.x * frameTime * moveSpeed, lastKnownTargetPosition.y * frameTime * moveSpeed);
+			Move(moveDirection.x * frameTime * moveSpeed, moveDirection.y * frameTime * moveSpeed);
 		}
 		if (state == attacking) 
 		{
-			Move(lastKnownTargetPosition.x * frameTime * attackSpeed, lastKnownTargetPosition.y * frameTime * attackSpeed);
+			Move(moveDirection.x * frameTime * attackSpeed, moveDirection.y * frameTime * attackSpeed);
 		}
 			stateTimer += frameTime;
 	}
@@ -61,8 +69,8 @@ namespace gamespace
 
 			distanceToTarget = sqrtf(lastKnownTargetPosition.x * lastKnownTargetPosition.x + lastKnownTargetPosition.y * lastKnownTargetPosition.y);
 
-			lastKnownTargetPosition.x = lastKnownTargetPosition.x / distanceToTarget;
-			lastKnownTargetPosition.y = lastKnownTargetPosition.y / distanceToTarget;
+			moveDirection.x = lastKnownTargetPosition.x / distanceToTarget;
+			moveDirection.y = lastKnownTargetPosition.y / distanceToTarget;
 		}
 		switch (state)
 		{

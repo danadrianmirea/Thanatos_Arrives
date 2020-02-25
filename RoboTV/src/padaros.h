@@ -12,6 +12,7 @@ namespace gamespace
 		padaros();
 		padaros(float xPosition, float yPosition);
 		~padaros();
+		void Draw();
 		void Update(float frameTime);
 		void UpdatePadaros(Vector2 targetPosition);
 
@@ -37,6 +38,7 @@ namespace gamespace
 		float stateTimer;
 		float distanceToTarget;
 		Vector2 lastKnownTargetPosition;
+		Vector2 moveDirection;
 		padarosStates state;
 		animationData idleAnim;
 		animationData walkAnim;
