@@ -30,6 +30,7 @@ namespace gamespace
 		const float moveSpeed = 150.f;
 		const float dashSpeed = 800.f;
 		const float damageSpeed = 600.f;
+		const float maxHP = 100.f;
 
 		const float attackTime = 0.2f;
 		const float dashTime = 0.1f;
@@ -44,6 +45,7 @@ namespace gamespace
 
 		void ChangeState(thanatosStates newState);
 
+		float currentHP;
 		float stateTimer;
 		float dashCooldown;
 		float damageCooldown;

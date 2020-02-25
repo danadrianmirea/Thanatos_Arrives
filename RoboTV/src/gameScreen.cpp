@@ -59,11 +59,6 @@ namespace gamespace
 	{
 		elapsedScreenTime += GetFrameTime();
 
-		if (IsKeyPressed(KEY_F)) 
-		{
-			player->RecieveDamage({ gameCursor->actualRectangle.x, gameCursor->actualRectangle.y }, 2.f);
-		}
-
 		gameCursor->UpdateCursor(GetMousePosition().x - gameCamera.offset.x, GetMousePosition().y - gameCamera.offset.y);
 
 		testPadaros->UpdatePadaros({ player->actualRectangle.x, player->actualRectangle.y });
@@ -92,7 +87,7 @@ namespace gamespace
 
 		if (testPadaros->isAttacking && CheckCollisionCircleRec({ testPadaros->actualRectangle.x, testPadaros->actualRectangle.y }, testPadaros->attackRadius, player->AABB))
 		{
-			player->RecieveDamage({ testPadaros->actualRectangle.x, testPadaros->actualRectangle.y }, 30.f);
+			player->RecieveDamage({ testPadaros->actualRectangle.x, testPadaros->actualRectangle.y }, 50.f);
 		}
 
 		gameCamera.target = { player->actualRectangle.x,  player->actualRectangle.y };

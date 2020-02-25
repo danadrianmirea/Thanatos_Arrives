@@ -46,6 +46,7 @@ namespace gamespace
 		state = idle;
 		stateTimer = 0.f;
 		dashCooldown = 0.f;
+		currentHP = maxHP;
 	}
 
 
@@ -161,6 +162,12 @@ namespace gamespace
 		actualRectangle.x = AABB.x - AABBxOffset;
 		actualRectangle.y = AABB.y - AABByOffset;
 
+		if (currentHP <= 0.f)
+		{
+			active = false;
+			visible = false;
+		}
+
 	}
 
 	void thanatos::UpdateSafePosition()
@@ -206,9 +213,10 @@ namespace gamespace
 
 	void thanatos::RecieveDamage(Vector2 damageSource, float damageTaken) 
 	{
-		if (damageCooldown <= 0.f)
+		if (state != damaged && damageCooldown <= 0.f)
 		{
 			ChangeState(damaged);
+			currentHP -= damageTaken;
 			moveDirection.x = AABB.x - damageSource.x;
 			moveDirection.y = AABB.y - damageSource.y;
 			float distanceToSource = sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
