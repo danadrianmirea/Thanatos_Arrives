@@ -59,6 +59,11 @@ namespace gamespace
 	{
 		elapsedScreenTime += GetFrameTime();
 
+		if (IsKeyPressed(KEY_F)) 
+		{
+			player->RecieveDamage({ gameCursor->actualRectangle.x, gameCursor->actualRectangle.y }, 2.f);
+		}
+
 		gameCursor->UpdateCursor(GetMousePosition().x - gameCamera.offset.x, GetMousePosition().y - gameCamera.offset.y);
 
 		testPadaros->UpdatePadaros({ player->actualRectangle.x, player->actualRectangle.y });
@@ -70,6 +75,7 @@ namespace gamespace
 		}
 
 		thanatosDrone->UpdateDrone(gameCursor);
+
 
 		//manage collisions
 

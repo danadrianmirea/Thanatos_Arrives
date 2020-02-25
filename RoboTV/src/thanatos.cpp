@@ -66,7 +66,7 @@ namespace gamespace
 
 	void thanatos::Update(float frameTime)
 	{
-		if (state != dashing)
+		if (state != dashing && state != damaged)
 		{
 			moveDirection.x = 0.f;
 			moveDirection.y = 0.f;
@@ -139,7 +139,14 @@ namespace gamespace
 					ChangeState(dashing);
 			break;
 		case damaged:
+			AABB.x += moveDirection.x * damageSpeed * frameTime;
+			AABB.y += moveDirection.y * damageSpeed * frameTime;
 
+			if (stateTimer >= damageTime)
+			{
+				damageCooldown = invulnerabilityTime;
+				ChangeState(idle);
+			}
 			break;
 		}
 
@@ -147,6 +154,9 @@ namespace gamespace
 		stateTimer += frameTime;
 		if (state != dashing)
 			dashCooldown -= frameTime;
+
+		if (state != damaged)
+			damageCooldown -= frameTime;
 
 		actualRectangle.x = AABB.x - AABBxOffset;
 		actualRectangle.y = AABB.y - AABByOffset;
@@ -183,7 +193,7 @@ namespace gamespace
 			AABB.x = actualRectangle.x + AABBxOffset;
 			AABB.y = actualRectangle.y + AABByOffset;
 
-			if (state == dashing)
+			if (state == dashing || state == damaged)
 				ChangeState(idle);
 
 			return true;
@@ -192,10 +202,21 @@ namespace gamespace
 		{
 			return false;
 		}
-
-
-
 	}
+
+	void thanatos::RecieveDamage(Vector2 damageSource, float damageTaken) 
+	{
+		if (damageCooldown <= 0.f)
+		{
+			ChangeState(damaged);
+			moveDirection.x = AABB.x - damageSource.x;
+			moveDirection.y = AABB.y - damageSource.y;
+			float distanceToSource = sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
+			moveDirection.x = moveDirection.x / distanceToSource;
+			moveDirection.y = moveDirection.y / distanceToSource;
+		}
+	}
+
 
 	void thanatos::ChangeState(thanatosStates newState)
 	{

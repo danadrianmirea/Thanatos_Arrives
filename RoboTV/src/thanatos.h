@@ -17,6 +17,7 @@ namespace gamespace
 		void Update(float frameTime);
 		void UpdateSafePosition();
 		bool CoolideWithWall(const rectangle* wall);
+		void RecieveDamage(Vector2 damageSource, float damageTaken);
 
 	private:
 		const float AABBxOffset = -8.5f;
@@ -27,11 +28,13 @@ namespace gamespace
 
 		const float moveSpeed = 150.f;
 		const float dashSpeed = 800.f;
+		const float damageSpeed = 600.f;
 
 		const float attackTime = 0.2f;
 		const float dashTime = 0.1f;
-		const float damageTime = 0.5f;
+		const float damageTime = 0.05f;
 		const float dashCooldownTime = 0.7f;
+		const float invulnerabilityTime = 0.8f;
 
 		enum thanatosStates
 		{
@@ -42,6 +45,7 @@ namespace gamespace
 
 		float stateTimer;
 		float dashCooldown;
+		float damageCooldown;
 		animationData idleAnim;
 		animationData walkAnim;
 		animationData attackAnim;
