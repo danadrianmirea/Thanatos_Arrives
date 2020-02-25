@@ -82,7 +82,7 @@ namespace gamespace
 
 		switch (state)
 		{
-		case gamespace::idle:
+		case idle:
 			if (IsKeyDown(KEY_SPACE))
 				ChangeState(dashing);
 			else
@@ -93,7 +93,7 @@ namespace gamespace
 						ChangeState(walking);
 
 			break;
-		case gamespace::walking:
+		case walking:
 
 			if (moveDirection.x != 0.f)
 			{
@@ -118,18 +118,18 @@ namespace gamespace
 			break;
 
 			break;
-		case gamespace::dashing:
+		case dashing:
 			if (stateTimer >= dashTime)
 				ChangeState(idle);
 			break;
-		case gamespace::attacking:
+		case attacking:
 			if (stateTimer >= attackTime)
 				ChangeState(idle);
 			else
 				if (IsKeyPressed(KEY_SPACE))
 					ChangeState(dashing);
 			break;
-		case gamespace::damaged:
+		case damaged:
 
 			break;
 		}
@@ -190,19 +190,19 @@ namespace gamespace
 			stateTimer = 0.f;
 			switch (state)
 			{
-			case gamespace::idle:
+			case idle:
 				NewAnimation(idleAnim);
 				break;
-			case gamespace::walking:
+			case walking:
 				NewAnimation(walkAnim);
 				break;
-			case gamespace::attacking:
+			case attacking:
 				NewAnimation(attackAnim);
 				break;
-			case gamespace::dashing:
+			case dashing:
 				NewAnimation(dashAnim);
 				break;
-			case gamespace::damaged:
+			case damaged:
 				NewAnimation(damageAnim);
 				break;
 			}

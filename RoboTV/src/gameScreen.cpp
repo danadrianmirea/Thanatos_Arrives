@@ -61,6 +61,8 @@ namespace gamespace
 
 		gameCursor->UpdateCursor(GetMousePosition().x - gameCamera.offset.x, GetMousePosition().y - gameCamera.offset.y);
 
+		testPadaros->UpdatePadaros({ player->actualRectangle.x, player->actualRectangle.y });
+
 		for (std::list<gameObject*> ::iterator it = gameObjectList.begin(); it != gameObjectList.end(); it++)
 		{
 			if ((*it)->active)
