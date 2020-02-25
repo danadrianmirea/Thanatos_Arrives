@@ -27,6 +27,7 @@
     <ClCompile Include="..\src\gameObject.cpp" />
     <ClCompile Include="..\src\gameScreen.cpp" />
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\padaros.cpp" />
     <ClCompile Include="..\src\thanatos.cpp" />
     <ClCompile Include="..\src\rectangle.cpp" />
     <ClCompile Include="..\src\screen.cpp" />
@@ -40,6 +41,7 @@
     <ClInclude Include="..\src\flowManager.h" />
     <ClInclude Include="..\src\gameObject.h" />
     <ClInclude Include="..\src\gameScreen.h" />
+    <ClInclude Include="..\src\padaros.h" />
     <ClInclude Include="..\src\thanatos.h" />
     <ClInclude Include="..\src\rectangle.h" />
     <ClInclude Include="..\src\screen.h" />

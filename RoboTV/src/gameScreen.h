@@ -7,6 +7,7 @@
 #include "cursor.h"
 #include "drone.h"
 #include "attack.h"
+#include "padaros.h"
 
 namespace gamespace
 {
@@ -25,6 +26,8 @@ namespace gamespace
 		sprite* background;
 		cursor* gameCursor;
 		drone* thanatosDrone;
+		padaros* testPadaros;
+
 		Camera2D gameCamera;
 
 		std::list<gameObject*> enemyLayer;

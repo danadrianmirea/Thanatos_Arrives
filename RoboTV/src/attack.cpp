@@ -18,6 +18,8 @@ namespace gamespace
 
 		activeTime = 0.f;
 		inverted = false;
+		active = false;
+		visible = false;
 	}
 
 
