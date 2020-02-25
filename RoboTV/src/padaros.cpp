@@ -31,6 +31,7 @@ namespace gamespace
 
 		NewAnimation(idleAnim);
 		ChangeState(idle);
+		isAttacking = false;
 	}
 
 	padaros::~padaros()
@@ -92,7 +93,10 @@ namespace gamespace
 			break;
 		case attacking:
 			if (stateTimer >= attackTime)
+			{
 				ChangeState(idle);
+				isAttacking = false;
+			}
 			break;
 		case damaged:
 			if (stateTimer >= damagedTime)
@@ -120,6 +124,7 @@ namespace gamespace
 				NewAnimation(windupAnim);
 				break;
 			case attacking:
+				isAttacking = true;
 				NewAnimation(attackAnim);
 				break;
 			case damaged:

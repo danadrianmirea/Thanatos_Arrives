@@ -9,12 +9,15 @@ namespace gamespace
 	{
 
 	public:
+
+		const float attackRadius = 10.f;
 		padaros();
 		padaros(float xPosition, float yPosition);
 		~padaros();
 		void Draw();
 		void Update(float frameTime);
 		void UpdatePadaros(Vector2 targetPosition);
+		bool isAttacking;
 
 	private:
 

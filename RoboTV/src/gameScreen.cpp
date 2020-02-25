@@ -90,7 +90,10 @@ namespace gamespace
 		if (isPlayerSafe)
 			player->UpdateSafePosition();
 
-
+		if (testPadaros->isAttacking && CheckCollisionCircleRec({ testPadaros->actualRectangle.x, testPadaros->actualRectangle.y }, testPadaros->attackRadius, player->AABB))
+		{
+			player->RecieveDamage({ testPadaros->actualRectangle.x, testPadaros->actualRectangle.y }, 30.f);
+		}
 
 		gameCamera.target = { player->actualRectangle.x,  player->actualRectangle.y };
 		gameCamera.offset = { -player->actualRectangle.x + 1920 / 2,  -player->actualRectangle.y + 1080 / 2 };

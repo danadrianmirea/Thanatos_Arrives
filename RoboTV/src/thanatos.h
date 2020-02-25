@@ -18,6 +18,7 @@ namespace gamespace
 		void UpdateSafePosition();
 		bool CoolideWithWall(const rectangle* wall);
 		void RecieveDamage(Vector2 damageSource, float damageTaken);
+		Rectangle AABB;
 
 	private:
 		const float AABBxOffset = -8.5f;
@@ -51,7 +52,6 @@ namespace gamespace
 		animationData attackAnim;
 		animationData dashAnim;
 		animationData damageAnim;
-		Rectangle AABB;
 		Vector2 safePosition;
 		Vector2 moveDirection;
 		thanatosStates state;
