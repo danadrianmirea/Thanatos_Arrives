@@ -266,8 +266,6 @@ namespace gamespace
 
 					NewAnimation(dashAnim);
 				}
-				else
-					ChangeState(idle);
 				break;
 			case damaged:
 				NewAnimation(damageAnim);
