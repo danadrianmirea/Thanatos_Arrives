@@ -91,7 +91,7 @@ namespace gamespace
 			}
 			break;
 		case damaged:
-			if (stateTimer >= damagedTime)
+			if (stateTimer >= damagedTime && currentHP > 0.f)
 				ChangeState(idle);
 			break;
 		default:

@@ -59,7 +59,7 @@ namespace gamespace
 
 	void sfaira::UpdateEnemy(Vector2 targetPosition) 
 	{
-		/*if (state != attacking && state != windup)
+		if (state != attacking && state != windup)
 		{
 			lastKnownTargetPosition.x = targetPosition.x - actualRectangle.x;
 			lastKnownTargetPosition.y = targetPosition.y - actualRectangle.y;
@@ -68,10 +68,10 @@ namespace gamespace
 
 			if (state != damaged)
 			{
-				moveDirection.x = lastKnownTargetPosition.x / distanceToTarget;
-				moveDirection.y = lastKnownTargetPosition.y / distanceToTarget;
+				/*moveDirection.x = lastKnownTargetPosition.x / distanceToTarget;
+				moveDirection.y = lastKnownTargetPosition.y / distanceToTarget;*/
 			}
-		}*/
+		}
 
 		switch (state)
 		{
@@ -98,7 +98,7 @@ namespace gamespace
 			}
 			break;
 		case damaged:
-			if (stateTimer >= damagedTime)
+			if (stateTimer >= damagedTime && currentHP > 0.f)
 				ChangeState(idle);
 			break;
 		default:
