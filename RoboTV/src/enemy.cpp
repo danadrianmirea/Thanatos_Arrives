@@ -22,7 +22,7 @@ namespace gamespace
 
 	void enemy::Draw()
 	{
-		if (!explosionInstance->active)
+		if (state != dead)
 		{
 			if (moveDirection.x <= 0.f)
 				animatedSprite::Draw();
@@ -51,20 +51,17 @@ namespace gamespace
 			break;
 		case damaged:
 			Move(moveDirection.x * frameTime * damagedSpeed, moveDirection.y * frameTime * damagedSpeed);
-			if (currentHP <= 0.f)
-			{
-				if (explosionInstance->active)
-				{
-					explosionInstance->Update(frameTime);
-				}
-				else
-				{
-					active = false;
-					visible = false;
-				}
-			}
 			break;
-		default:
+		case dead:
+			if (explosionInstance->active)
+			{
+				explosionInstance->Update(frameTime);
+			}
+			else
+			{
+				active = false;
+				visible = false;
+			}
 			break;
 		}
 		stateTimer += frameTime;
@@ -72,16 +69,16 @@ namespace gamespace
 
 	void enemy::UpdateEnemy(Vector2 targetPosition)
 	{
-		
+
 	}
 
-	void enemy::RecieveDamage(Vector2 damageSource, float damageRecieved) 
+	void enemy::RecieveDamage(Vector2 damageSource, float damageRecieved)
 	{
-		if (state != damaged)
+		if (state != damaged && state != dead)
 		{
 			ChangeState(damaged);
 			currentHP -= damageRecieved;
-			if (currentHP >= 0.f)
+			if (currentHP > 0.f)
 			{
 				float resultantX = actualRectangle.x - damageSource.x;
 				float resultantY = actualRectangle.y - damageSource.y;
@@ -93,13 +90,13 @@ namespace gamespace
 			}
 			else
 			{
-				explosionInstance->Activate({ actualRectangle.x, actualRectangle.y });
+				ChangeState(dead);
 			}
 		}
 
 	}
 
-	bool enemy::CollideWithWall(Rectangle wall) 
+	bool enemy::CollideWithWall(Rectangle wall)
 	{
 		if (!explosionInstance->active)
 		{
@@ -139,7 +136,7 @@ namespace gamespace
 		}
 	}
 
-	void enemy::UpdateSafePosition() 
+	void enemy::UpdateSafePosition()
 	{
 		safePosition = { actualRectangle.x, actualRectangle.y };
 	}
@@ -166,6 +163,9 @@ namespace gamespace
 				break;
 			case damaged:
 				NewAnimation(damageAnim);
+				break;
+			case dead:
+				explosionInstance->Activate({ actualRectangle.x, actualRectangle.y });
 				break;
 			}
 			stateTimer = 0.f;

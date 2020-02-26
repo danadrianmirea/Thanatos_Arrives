@@ -44,7 +44,7 @@ namespace gamespace
 
 		enum enemyStates
 		{
-			idle, walking, windup, attacking, damaged
+			idle, walking, windup, attacking, damaged, dead
 		};
 
 		void ChangeState(enemyStates newState);
