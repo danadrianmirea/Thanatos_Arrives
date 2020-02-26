@@ -98,10 +98,10 @@ namespace gamespace
 
 		distanceToTarget = sqrtf(lastKnownTargetPosition.x * lastKnownTargetPosition.x + lastKnownTargetPosition.y * lastKnownTargetPosition.y);
 
-		if (state != damaged)
+		if (state == walking)
 		{
-			/*moveDirection.x = lastKnownTargetPosition.x / distanceToTarget;
-			moveDirection.y = lastKnownTargetPosition.y / distanceToTarget;*/
+			moveDirection.x = lastKnownTargetPosition.x / distanceToTarget;
+			moveDirection.y = lastKnownTargetPosition.y / distanceToTarget;
 		}
 
 		switch (state)
@@ -109,11 +109,11 @@ namespace gamespace
 		case idle:
 			if (stateTimer >= recoveryTime && distanceToTarget <= targetWalkDistance)
 				ChangeState(walking);
+			else
+				if (stateTimer >= recoveryTime && distanceToTarget <= targetAttackDistance)
+					ChangeState(windup);
 			break;
 		case walking:
-			if (stateTimer >= attackCooldown && distanceToTarget <= targetAttackDistance)
-				ChangeState(windup);
-			else
 				if (distanceToTarget > targetWalkDistance)
 					ChangeState(idle);
 			break;
