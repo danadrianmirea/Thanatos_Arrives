@@ -84,12 +84,14 @@ namespace gamespace
 			player->RecieveDamage({ testPadaros->actualRectangle.x, testPadaros->actualRectangle.y }, 50.f);
 		}
 
-		attack* collidingAttack = player->CheckIfAttackingEnemy(testPadaros->actualRectangle);
-		if (collidingAttack != nullptr) 
+		if (testPadaros->active)
 		{
-			testPadaros->RecieveDamage({ collidingAttack->actualRectangle.x, collidingAttack->actualRectangle.y }, collidingAttack->attackDamage);
+			attack* collidingAttack = player->CheckIfAttackingEnemy(testPadaros->actualRectangle);
+			if (collidingAttack != nullptr)
+			{
+				testPadaros->RecieveDamage({ collidingAttack->actualRectangle.x, collidingAttack->actualRectangle.y }, collidingAttack->attackDamage);
+			}
 		}
-
 		//camera
 
 		gameCamera.target = { player->actualRectangle.x,  player->actualRectangle.y };

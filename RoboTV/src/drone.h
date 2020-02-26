@@ -25,6 +25,7 @@ namespace gamespace
 
 		const float droneOffset = 18.f;
 		const float attackOffset = 20.f;
+		const float minCursorDistance = 40.f;
 		const int maxVelos = 3;
 
 		Vector2 thanatosPosition;

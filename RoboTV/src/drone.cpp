@@ -65,7 +65,7 @@ namespace gamespace
 		{
 			Fire(attackInstance);
 		}
-		if (IsMouseButtonPressed(1))
+		if (IsMouseButtonPressed(1) && magnitude >= minCursorDistance)
 		{
 			for (int i = 0; i < maxVelos; i++)
 			{

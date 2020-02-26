@@ -23,18 +23,20 @@ namespace gamespace
 	void velos::Update(float frameTime)
 	{
 		animatedSprite::Update(frameTime);
+
 		Move(moveDirection.x * frameTime * moveSpeed, moveDirection.y * frameTime * moveSpeed);
-		activeTime += frameTime;
+
 		if (activeTime >= attackDuration)
 		{
 			active = false;
 			visible = false;
 		}
+
+		activeTime += frameTime;
 	}
 
 	void velos::UpdateTarget(Vector2 newPosition)
 	{
-		activeTime = 0.f;
 		moveDirection.x = newPosition.x - actualRectangle.x;
 		moveDirection.y = newPosition.y - actualRectangle.y;
 
@@ -42,5 +44,7 @@ namespace gamespace
 
 		moveDirection.x = moveDirection.x / magnitude;
 		moveDirection.y = moveDirection.y / magnitude;
+
+		activeTime = 0.f;
 	}
 }

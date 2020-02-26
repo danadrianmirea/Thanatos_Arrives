@@ -11,7 +11,6 @@ namespace gamespace
 		velos();
 		~velos();
 		void Update(float frameTime);
-		//void Activate(Vector2 position, float attackRotation, bool yInverted);
 		void UpdateTarget(Vector2 newPosition);
 
 	private:
@@ -19,7 +18,7 @@ namespace gamespace
 		const float moveSpeed = 800.f;
 		const float velosAttackRadius = 10.f;
 		const float velosAttackDamage = 60.f;
-		const float velosAttackDuration = 3.f;
+		const float velosAttackDuration = 20.0f;
 	};
 }
 #endif
