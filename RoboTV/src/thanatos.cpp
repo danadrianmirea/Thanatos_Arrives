@@ -242,6 +242,7 @@ namespace gamespace
 
 	void thanatos::ChangeState(thanatosStates newState)
 	{
+		thanatosStates previousState = state;
 		if (state != newState)
 		{
 			state = newState;
@@ -258,7 +259,7 @@ namespace gamespace
 				NewAnimation(attackAnim);
 				break;
 			case dashing:
-				if ((moveDirection.x != 0.f || moveDirection.y != 0.f ) && dashCooldown <= 0.f)
+				if ((moveDirection.x != 0.f || moveDirection.y != 0.f) && dashCooldown <= 0.f)
 				{
 					if (moveDirection.x != 0.f)
 						moveDirection.x = moveDirection.x / sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
@@ -268,6 +269,8 @@ namespace gamespace
 
 					NewAnimation(dashAnim);
 				}
+				else
+					state = previousState;
 				break;
 			case damaged:
 				NewAnimation(damageAnim);

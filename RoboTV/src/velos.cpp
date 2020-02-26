@@ -34,6 +34,7 @@ namespace gamespace
 
 	void velos::UpdateTarget(Vector2 newPosition)
 	{
+		activeTime = 0.f;
 		moveDirection.x = newPosition.x - actualRectangle.x;
 		moveDirection.y = newPosition.y - actualRectangle.y;
 
