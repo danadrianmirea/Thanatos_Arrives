@@ -7,33 +7,11 @@ namespace gamespace
 
 	}
 
-	enemy::enemy(float xPosition, float yPosition)
-		: animatedSprite(xPosition, yPosition, 24.f, 24.f, "../res/assets/padaros.png", 2, 5, 8, 8)
+	enemy::enemy(float xPosition, float yPosition, float recWidth, float recHeight,
+		const char* textureFile, int columns, int rows, int frameWidth, int frameHeight)
+		: animatedSprite(xPosition, yPosition, recWidth, recHeight, textureFile, columns, rows, frameWidth, frameHeight)
 	{
-		idleAnim.animationTime = 1.1f;
-		idleAnim.addFrame({ 0,0 });
-		idleAnim.addFrame({ 1,0 });
-
-		walkAnim.animationTime = 0.3f;
-		walkAnim.addFrame({ 0,1 });
-		walkAnim.addFrame({ 1,1 });
-
-		windupAnim.animationTime = 0.2f;
-		windupAnim.addFrame({ 0,2 });
-		windupAnim.addFrame({ 1,2 });
-
-		attackAnim.animationTime = 0.2f;
-		attackAnim.addFrame({ 0,3 });
-
-		damageAnim.animationTime = 0.2f;
-		damageAnim.addFrame({ 1,3 });
-		damageAnim.addFrame({ 0,4 });
-
-		NewAnimation(idleAnim);
-		ChangeState(idle);
 		isAttacking = false;
-
-		currentHP = maxHP;
 		explosionInstance = new explosion();
 	}
 
@@ -90,57 +68,11 @@ namespace gamespace
 			break;
 		}
 		stateTimer += frameTime;
-
-		
 	}
 
 	void enemy::UpdateEnemy(Vector2 targetPosition)
 	{
-		if (state != attacking && state != windup)
-		{
-			lastKnownTargetPosition.x = targetPosition.x - actualRectangle.x;
-			lastKnownTargetPosition.y = targetPosition.y - actualRectangle.y;
-
-			distanceToTarget = sqrtf(lastKnownTargetPosition.x * lastKnownTargetPosition.x + lastKnownTargetPosition.y * lastKnownTargetPosition.y);
-
-			if (state != damaged)
-			{
-				moveDirection.x = lastKnownTargetPosition.x / distanceToTarget;
-				moveDirection.y = lastKnownTargetPosition.y / distanceToTarget;
-			}
-		}
-		switch (state)
-		{
-		case idle:
-			if (stateTimer >= recoveryTime && distanceToTarget <= targetWalkDistance)
-				ChangeState(walking);
-			break;
-		case walking:
-			if (stateTimer >= attackCooldown && distanceToTarget <= targetAttackDistance)
-				ChangeState(windup);
-			else
-				if (distanceToTarget > targetWalkDistance)
-					ChangeState(idle);
-
-			break;
-		case windup:
-			if (stateTimer >= windupTime)
-				ChangeState(attacking);
-			break;
-		case attacking:
-			if (stateTimer >= attackTime)
-			{
-				ChangeState(idle);
-				isAttacking = false;
-			}
-			break;
-		case damaged:
-			if (stateTimer >= damagedTime)
-				ChangeState(idle);
-			break;
-		default:
-			break;
-		}
+		
 	}
 
 	void enemy::RecieveDamage(Vector2 damageSource, float damageRecieved) 

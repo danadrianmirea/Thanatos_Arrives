@@ -14,28 +14,29 @@ namespace gamespace
 
 		const float attackRadius = 10.f;
 		enemy();
-		enemy(float xPosition, float yPosition);
+		enemy(float xPosition, float yPosition, float recWidth, float recHeight,
+			const char* textureFile, int columns, int rows, int frameWidth, int frameHeight);
 		~enemy();
 		void Draw();
 		void Update(float frameTime);
-		void UpdateEnemy(Vector2 targetPosition);
+		virtual void UpdateEnemy(Vector2 targetPosition);
 		void RecieveDamage(Vector2 damageSource, float damageRecieved);
 		bool isAttacking;
 
-	private:
+	protected:
 
-		const float targetWalkDistance = 180.f;
-		const float targetAttackDistance = 70.f;
-		const float windupTime = 0.4f;
-		const float attackTime = 0.15f;
-		const float recoveryTime = 0.3f;
-		const float attackCooldown = 1.0f;
-		const float damagedTime = 0.6f;
-		const float moveSpeed = 140.f;
-		const float attackSpeed = 600.f;
-		const float damagedSpeed = 100.f;
+		float targetWalkDistance = 180.f;
+		float targetAttackDistance = 70.f;
+		float windupTime = 0.4f;
+		float attackTime = 0.15f;
+		float recoveryTime = 0.3f;
+		float attackCooldown = 1.0f;
+		float damagedTime = 0.6f;
+		float moveSpeed = 140.f;
+		float attackSpeed = 600.f;
+		float damagedSpeed = 100.f;
 
-		const float maxHP = 70.f;
+		float maxHP;
 
 		enum enemyStates
 		{
