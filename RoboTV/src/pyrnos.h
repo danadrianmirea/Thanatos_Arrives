@@ -11,8 +11,6 @@ namespace gamespace
 		pyrnos();
 		~pyrnos();
 		void Update(float frameTime);
-		//void Activate(Vector2 position, float attackRotation, bool yInverted);
-
 	};
 }
 #endif
