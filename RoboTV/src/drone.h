@@ -14,6 +14,7 @@ namespace gamespace
 		~drone();
 		void Draw();
 		void Update(float frameTime, Vector2 targetPosition, cursor* cursorInstance);
+		attack* GetCollidingAttack(Rectangle enemyHitbox);
 
 	private:
 		const float droneOffset = 18.f;

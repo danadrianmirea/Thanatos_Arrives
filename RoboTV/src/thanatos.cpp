@@ -231,6 +231,12 @@ namespace gamespace
 		}
 	}
 
+	attack* thanatos::CheckIfAttackingEnemy(Rectangle enemyHitbox) 
+	{
+		return droneInstance->GetCollidingAttack(enemyHitbox);
+	}
+
+
 
 	void thanatos::ChangeState(thanatosStates newState)
 	{

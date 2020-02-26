@@ -32,6 +32,8 @@ namespace gamespace
 		NewAnimation(idleAnim);
 		ChangeState(idle);
 		isAttacking = false;
+
+		currentHP = maxHP;
 	}
 
 	padaros::~padaros()
@@ -50,15 +52,32 @@ namespace gamespace
 	void padaros::Update(float frameTime)
 	{
 		animatedSprite::Update(frameTime);
-		if (state == walking) 
+
+		switch (state)
 		{
+		case idle:
+			break;
+		case walking:
 			Move(moveDirection.x * frameTime * moveSpeed, moveDirection.y * frameTime * moveSpeed);
-		}
-		if (state == attacking) 
-		{
+			break;
+		case windup:
+			break;
+		case attacking:
 			Move(moveDirection.x * frameTime * attackSpeed, moveDirection.y * frameTime * attackSpeed);
+			break;
+		case damaged:
+			Move(moveDirection.x * frameTime * damagedSpeed, moveDirection.y * frameTime * damagedSpeed);
+			break;
+		default:
+			break;
 		}
-			stateTimer += frameTime;
+		stateTimer += frameTime;
+
+		if (currentHP <= 0.f) 
+		{
+			active = false;
+			visible = false;
+		}
 	}
 
 	void padaros::UpdatePadaros(Vector2 targetPosition)
@@ -70,8 +89,11 @@ namespace gamespace
 
 			distanceToTarget = sqrtf(lastKnownTargetPosition.x * lastKnownTargetPosition.x + lastKnownTargetPosition.y * lastKnownTargetPosition.y);
 
-			moveDirection.x = lastKnownTargetPosition.x / distanceToTarget;
-			moveDirection.y = lastKnownTargetPosition.y / distanceToTarget;
+			if (state != damaged)
+			{
+				moveDirection.x = lastKnownTargetPosition.x / distanceToTarget;
+				moveDirection.y = lastKnownTargetPosition.y / distanceToTarget;
+			}
 		}
 		switch (state)
 		{
@@ -105,6 +127,23 @@ namespace gamespace
 		default:
 			break;
 		}
+	}
+
+	void padaros::RecieveDamage(Vector2 damageSource, float damageRecieved) 
+	{
+		if (state != damaged)
+		{
+			ChangeState(damaged);
+			currentHP -= damageRecieved;
+			float resultantX = actualRectangle.x - damageSource.x;
+			float resultantY = actualRectangle.y - damageSource.y;
+
+			float magnitude = sqrtf(resultantX * resultantX + resultantY * resultantY);
+
+			moveDirection.x = resultantX / magnitude;
+			moveDirection.y = resultantY / magnitude;
+		}
+
 	}
 
 	void padaros::ChangeState(padarosStates newState)

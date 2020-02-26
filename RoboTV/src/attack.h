@@ -15,7 +15,9 @@ namespace gamespace
 		void Draw();
 		void Update(float frameTime);
 		void Activate(Vector2 position, float attackRotation, bool yInverted);
-		void CheckCollisionWithEnemy(const animatedSprite* enemy);
+		bool CheckCollisionWithEnemy(Rectangle enemyHitbox);
+
+		const float attackDamage = 30.f;
 
 		float attackRadius;
 		bool inverted;

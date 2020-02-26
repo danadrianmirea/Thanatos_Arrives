@@ -66,4 +66,14 @@ namespace gamespace
 		if (attackInstance->active)
 			attackInstance->Update(frameTime);
 	}
+
+	attack* drone::GetCollidingAttack(Rectangle enemyHitbox)
+	{
+		if (attackInstance->active)
+			if (attackInstance->CheckCollisionWithEnemy(enemyHitbox))
+				return attackInstance;
+		
+		return nullptr;
+	}
+
 }

@@ -17,6 +17,7 @@ namespace gamespace
 		void Draw();
 		void Update(float frameTime);
 		void UpdatePadaros(Vector2 targetPosition);
+		void RecieveDamage(Vector2 damageSource, float damageRecieved);
 		bool isAttacking;
 
 	private:
@@ -27,9 +28,12 @@ namespace gamespace
 		const float attackTime = 0.15f;
 		const float recoveryTime = 0.3f;
 		const float attackCooldown = 1.0f;
-		const float damagedTime = 0.3f;
+		const float damagedTime = 0.6f;
 		const float moveSpeed = 140.f;
 		const float attackSpeed = 600.f;
+		const float damagedSpeed = 100.f;
+
+		const float maxHP = 70.f;
 
 		enum padarosStates
 		{
@@ -40,6 +44,7 @@ namespace gamespace
 
 		float stateTimer;
 		float distanceToTarget;
+		float currentHP;
 		Vector2 lastKnownTargetPosition;
 		Vector2 moveDirection;
 		padarosStates state;

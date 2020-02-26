@@ -62,8 +62,8 @@ namespace gamespace
 		}
 	}
 
-	void attack::CheckCollisionWithEnemy(const animatedSprite* enemy)
+	bool attack::CheckCollisionWithEnemy(Rectangle enemyHitbox)
 	{
-
+		return CheckCollisionCircleRec({ actualRectangle.x, actualRectangle.y }, attackRadius, enemyHitbox);
 	}
 }
