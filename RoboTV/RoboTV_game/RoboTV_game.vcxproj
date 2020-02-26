@@ -31,6 +31,7 @@
     <ClCompile Include="..\src\enemy.cpp" />
     <ClCompile Include="..\src\padaros.cpp" />
     <ClCompile Include="..\src\pyrnos.cpp" />
+    <ClCompile Include="..\src\sfaira.cpp" />
     <ClCompile Include="..\src\thanatos.cpp" />
     <ClCompile Include="..\src\rectangle.cpp" />
     <ClCompile Include="..\src\screen.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="..\src\enemy.h" />
     <ClInclude Include="..\src\padaros.h" />
     <ClInclude Include="..\src\pyrnos.h" />
+    <ClInclude Include="..\src\sfaira.h" />
     <ClInclude Include="..\src\thanatos.h" />
     <ClInclude Include="..\src\rectangle.h" />
     <ClInclude Include="..\src\screen.h" />

@@ -72,6 +72,9 @@
     <ClCompile Include="..\src\padaros.cpp">
       <Filter>Gameplay Objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\sfaira.cpp">
+      <Filter>Gameplay Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\flowManager.h">
@@ -120,6 +123,9 @@
       <Filter>Gameplay Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\src\padaros.h">
+      <Filter>Gameplay Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\sfaira.h">
       <Filter>Gameplay Objects</Filter>
     </ClInclude>
   </ItemGroup>

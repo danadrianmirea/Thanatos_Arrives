@@ -6,7 +6,8 @@ namespace gamespace
 	{
 	}
 
-	padaros::padaros(float xPosition, float yPosition) :enemy(xPosition, yPosition, 24.f, 24.f, "../res/assets/padaros.png", 2, 5, 8, 8)
+	padaros::padaros(float xPosition, float yPosition) 
+		:enemy(xPosition, yPosition, 24.f, 24.f, "../res/assets/padaros.png", 2, 5, 8, 8)
 	{
 		targetWalkDistance = padarosTargetWalkDistance;
 		targetAttackDistance = padarosTargetAttackDistance;
