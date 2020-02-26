@@ -71,6 +71,7 @@ namespace gamespace
 
 	void thanatos::Update(float frameTime)
 	{
+
 		if (state != dashing && state != damaged)
 		{
 			moveDirection.x = 0.f;

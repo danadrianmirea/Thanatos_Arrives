@@ -82,6 +82,7 @@ namespace gamespace
 
 		//manage collisions
 
+		//player->walls
 		bool isPlayerSafe = true;
 		for (std::list<rectangle*>::iterator it = wallLayer.begin(); it != wallLayer.end(); it++)
 		{
@@ -92,6 +93,28 @@ namespace gamespace
 
 		if (isPlayerSafe)
 			player->UpdateSafePosition();
+
+		//enemies->walls
+		bool isEnemySafe;
+		{
+			isEnemySafe = true;
+
+			for (std::list<enemy*>::iterator it = enemyLayer.begin(); it != enemyLayer.end(); it++)
+			{
+				if ((*it)->active)
+				{
+					for (std::list<rectangle*>::iterator it2 = wallLayer.begin(); it2 != wallLayer.end(); it2++)
+					{
+						if ((*it2)->active)
+							if ((*it)->CollideWithWall((*it2)->actualRectangle))
+								isEnemySafe = false;
+					}
+				}
+
+				if (isEnemySafe)
+					(*it)->UpdateSafePosition();
+			}
+		}
 
 		//player against enemy attacks
 

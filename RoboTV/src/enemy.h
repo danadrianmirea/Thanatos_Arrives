@@ -21,6 +21,8 @@ namespace gamespace
 		void Update(float frameTime);
 		virtual void UpdateEnemy(Vector2 targetPosition);
 		void RecieveDamage(Vector2 damageSource, float damageRecieved);
+		bool CollideWithWall(Rectangle wall);
+		void UpdateSafePosition();
 		bool isAttacking;
 		float attackDamage;
 
@@ -36,6 +38,7 @@ namespace gamespace
 		float moveSpeed = 140.f;
 		float attackSpeed = 600.f;
 		float damagedSpeed = 100.f;
+		const float wallCollisionOffset = 2.f;
 
 		float maxHP;
 
@@ -51,6 +54,7 @@ namespace gamespace
 		float currentHP;
 		Vector2 lastKnownTargetPosition;
 		Vector2 moveDirection;
+		Vector2 safePosition;
 		enemyStates state;
 		animationData idleAnim;
 		animationData walkAnim;
