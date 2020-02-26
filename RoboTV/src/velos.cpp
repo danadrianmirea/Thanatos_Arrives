@@ -11,7 +11,7 @@ namespace gamespace
 		attackAnimation.animationTime = 0.2f;
 
 		NewAnimation(attackAnimation);
-		attackRadius = 8.f;
+		attackRadius = 10.f;
 	}
 
 
@@ -23,12 +23,22 @@ namespace gamespace
 	{
 		animatedSprite::Update(frameTime);
 		Move(moveDirection.x * frameTime * moveSpeed, moveDirection.y * frameTime * moveSpeed);
+		activeTime += frameTime;
+		if (activeTime >= attackDuration)
+		{
+			active = false;
+			visible = false;
+		}
 	}
 
-	void velos::Activate(Vector2 position, float attackRotation, bool yInverted) 
+	void velos::UpdateTarget(Vector2 newPosition)
 	{
-		attack::Activate(position, attackRotation, yInverted);
-		moveDirection.x = cosf(attackRotation);
-		moveDirection.y = sinf(attackRotation);
+		moveDirection.x = newPosition.x - actualRectangle.x;
+		moveDirection.y = newPosition.y - actualRectangle.y;
+
+		float magnitude = sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
+
+		moveDirection.x = moveDirection.x / magnitude;
+		moveDirection.y = moveDirection.y / magnitude;
 	}
 }

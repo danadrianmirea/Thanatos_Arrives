@@ -1,8 +1,11 @@
 #ifndef  DRONE_H
 #define DRONE_H
 
+#include <vector>
+
 #include "cursor.h"
 #include "pyrnos.h"
+#include "velos.h"
 
 namespace gamespace
 {
@@ -17,11 +20,15 @@ namespace gamespace
 		attack* GetCollidingAttack(Rectangle enemyHitbox);
 
 	private:
+		void Fire(attack* attacktoFire);
+
 		const float droneOffset = 18.f;
 		const float attackOffset = 20.f;
+		const int maxVelos = 3;
 
 		Vector2 thanatosPosition;
 		pyrnos* attackInstance;
+		std::vector<velos*> velosList;
 		animationData idleAnim;
 	};
 }

@@ -11,12 +11,12 @@ namespace gamespace
 		velos();
 		~velos();
 		void Update(float frameTime);
-		void Activate(Vector2 position, float attackRotation, bool yInverted);
-	
+		//void Activate(Vector2 position, float attackRotation, bool yInverted);
+		void UpdateTarget(Vector2 newPosition);
+
 	private:
 		Vector2 moveDirection;
-		const float moveSpeed = 400.f;
-	
+		const float moveSpeed = 800.f;
 	};
 }
 #endif

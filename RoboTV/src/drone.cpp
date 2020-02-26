@@ -19,6 +19,12 @@ namespace gamespace
 
 		NewAnimation(idleAnim);
 		attackInstance = new pyrnos();
+
+		for (int i = 0; i < maxVelos; i++)
+		{
+			velosList.push_back(new velos());
+		}
+
 	}
 
 	drone::~drone()
@@ -31,6 +37,14 @@ namespace gamespace
 		animatedSprite::Draw();
 		if (attackInstance->visible)
 			attackInstance->Draw();
+
+		for (int i = 0; i < maxVelos; i++)
+		{
+			if (velosList[i]->active)
+			{
+				velosList[i]->Draw();
+			}
+		}
 	}
 
 	void drone::Update(float frameTime, Vector2 targetPosition, cursor* cursorInstance)
@@ -49,22 +63,32 @@ namespace gamespace
 
 		if (IsMouseButtonPressed(0))
 		{
-			resultantX = actualRectangle.x - thanatosPosition.x;
-			resultantY = actualRectangle.y - thanatosPosition.y;
-
-			magnitude = sqrtf(resultantX * resultantX + resultantY * resultantY);
-
-			float normalizedX = resultantX / magnitude;
-			float normalizedY = resultantY / magnitude;
-
-			float attackAngle = acosf(normalizedX) * 180.f / PI + 90.f;
-			if (normalizedY < 0)
-				attackAngle = -attackAngle;
-			attackInstance->Activate({ actualRectangle.x + normalizedX * attackOffset, actualRectangle.y + normalizedY * attackOffset},attackAngle, normalizedY<0);
+			Fire(attackInstance);
+		}
+		if (IsMouseButtonPressed(1))
+		{
+			for (int i = 0; i < maxVelos; i++)
+			{
+				if (!velosList[i]->active)
+				{
+					Fire(velosList[i]);
+					velosList[i]->UpdateTarget({ cursorInstance->actualRectangle.x, cursorInstance->actualRectangle.y });
+						i = maxVelos;
+				}
+			}
 		}
 
 		if (attackInstance->active)
 			attackInstance->Update(frameTime);
+
+		for (int i = 0; i < maxVelos; i++)
+		{
+			if (velosList[i]->active)
+			{
+				velosList[i]->Update(frameTime);
+			}
+		}
+
 	}
 
 	attack* drone::GetCollidingAttack(Rectangle enemyHitbox)
@@ -73,7 +97,38 @@ namespace gamespace
 			if (attackInstance->CheckCollisionWithEnemy(enemyHitbox))
 				return attackInstance;
 		
+		for (int i = 0; i < maxVelos; i++)
+		{
+			if (velosList[i]->active)
+			{
+				if (velosList[i]->CheckCollisionWithEnemy(enemyHitbox))
+				{
+					velosList[i]->active = false;
+					velosList[i]->visible = false;
+					return velosList[i];
+				}
+			}
+		}
+
 		return nullptr;
 	}
+
+	void drone::Fire(attack* attacktoFire)
+	{
+		float resultantX = actualRectangle.x - thanatosPosition.x;
+		float resultantY = actualRectangle.y - thanatosPosition.y;
+
+		float magnitude = sqrtf(resultantX * resultantX + resultantY * resultantY);
+
+		float normalizedX = resultantX / magnitude;
+		float normalizedY = resultantY / magnitude;
+
+		float attackAngle = acosf(normalizedX) * 180.f / PI + 90.f;
+		if (normalizedY < 0)
+			attackAngle = -attackAngle;
+
+		attacktoFire->Activate({ actualRectangle.x + normalizedX * attackOffset, actualRectangle.y + normalizedY * attackOffset }, attackAngle, normalizedY < 0);
+	}
+
 
 }
