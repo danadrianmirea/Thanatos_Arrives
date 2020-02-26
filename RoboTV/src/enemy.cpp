@@ -101,34 +101,41 @@ namespace gamespace
 
 	bool enemy::CollideWithWall(Rectangle wall) 
 	{
-		if (CheckCollisionRecs(actualRectangle, wall))
+		if (!explosionInstance->active)
 		{
-			if (safePosition.x + actualRectangle.width <= wall.x)
+			if (CheckCollisionRecs(actualRectangle, wall))
 			{
-				actualRectangle.x = wall.x - actualRectangle.width / 2;
-			}
-			if (safePosition.x >= wall.x + wall.width)
-			{
-				actualRectangle.x = wall.x + wall.width + actualRectangle.width / 2;
-			}
+				if (safePosition.x + actualRectangle.width <= wall.x)
+				{
+					actualRectangle.x = wall.x - actualRectangle.width / 2;
+				}
+				if (safePosition.x >= wall.x + wall.width)
+				{
+					actualRectangle.x = wall.x + wall.width + actualRectangle.width / 2;
+				}
 
-			if (safePosition.y + actualRectangle.height <= wall.y)
-			{
-				actualRectangle.y = wall.y - actualRectangle.height + wallCollisionOffset;
-			}
-			if (safePosition.y >= wall.y + wall.height)
-			{
-				actualRectangle.y = wall.y + wall.height + wallCollisionOffset;
-			}
+				if (safePosition.y + actualRectangle.height <= wall.y)
+				{
+					actualRectangle.y = wall.y - actualRectangle.height + wallCollisionOffset;
+				}
+				if (safePosition.y >= wall.y + wall.height)
+				{
+					actualRectangle.y = wall.y + wall.height + wallCollisionOffset;
+				}
 
-			if (state == attacking || state == damaged)
-				ChangeState(idle);
+				if (state == attacking || state == damaged)
+					ChangeState(idle);
 
-			return true;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		else
 		{
-			return false;
+			return true;
 		}
 	}
 
