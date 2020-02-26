@@ -11,10 +11,11 @@ namespace gamespace
 	{
 	public:
 		attack();
+		attack(float recWidth, float recHeight, const char* textureFile, 
+			int columns, int rows, int frameWidth, int frameHeight);
 		~attack();
 		void Draw();
-		void Update(float frameTime);
-		void Activate(Vector2 position, float attackRotation, bool yInverted);
+		virtual void Activate(Vector2 position, float attackRotation, bool yInverted);
 		bool CheckCollisionWithEnemy(Rectangle enemyHitbox);
 
 		const float attackDamage = 30.f;
@@ -22,7 +23,7 @@ namespace gamespace
 		float attackRadius;
 		bool inverted;
 
-	private:
+	protected:
 		float activeTime;
 	};
 

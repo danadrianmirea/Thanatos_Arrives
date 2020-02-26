@@ -2,7 +2,7 @@
 #define DRONE_H
 
 #include "cursor.h"
-#include "attack.h"
+#include "pyrnos.h"
 
 namespace gamespace
 {
@@ -21,7 +21,7 @@ namespace gamespace
 		const float attackOffset = 20.f;
 
 		Vector2 thanatosPosition;
-		attack* attackInstance;
+		pyrnos* attackInstance;
 		animationData idleAnim;
 	};
 }

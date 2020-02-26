@@ -18,7 +18,7 @@ namespace gamespace
 		idleAnim.addFrame({ 1,0 });
 
 		NewAnimation(idleAnim);
-		attackInstance = new attack();
+		attackInstance = new pyrnos();
 	}
 
 	drone::~drone()
