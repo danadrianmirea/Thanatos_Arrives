@@ -50,27 +50,58 @@ namespace gamespace
 
 		ChangeState(idle);
 		currentHP = sfairaMaxHP;
+
+		for (int i = 0; i < maxVelos; i++)
+		{
+			velosList.push_back(new velos(false));
+		}
 	}
 
 	sfaira::~sfaira()
 	{
+		for (int i = 0; i < maxVelos; i++)
+		{
+			delete velosList[i];
+		}
+	}
 
+	void sfaira::Draw() 
+	{
+		enemy::Draw();
+
+		for (int i = 0; i < maxVelos; i++)
+		{
+			if (velosList[i]->visible)
+			{
+				velosList[i]->Draw();
+			}
+		}
+	}
+
+	void sfaira::Update(float frameTime)
+	{
+		enemy::Update(frameTime);
+
+		for (int i = 0; i < maxVelos; i++)
+		{
+			if (velosList[i]->active)
+			{
+				velosList[i]->Update(frameTime);
+			}
+		}
 	}
 
 	void sfaira::UpdateEnemy(Vector2 targetPosition) 
 	{
-		if (state != attacking && state != windup)
+		lastKnownTargetPosition.x = targetPosition.x - actualRectangle.x;
+		lastKnownTargetPosition.y = targetPosition.y - actualRectangle.y;
+
+		distanceToTarget = sqrtf(lastKnownTargetPosition.x * lastKnownTargetPosition.x + lastKnownTargetPosition.y * lastKnownTargetPosition.y);
+
+		if (state != damaged)
 		{
-			lastKnownTargetPosition.x = targetPosition.x - actualRectangle.x;
-			lastKnownTargetPosition.y = targetPosition.y - actualRectangle.y;
-
-			distanceToTarget = sqrtf(lastKnownTargetPosition.x * lastKnownTargetPosition.x + lastKnownTargetPosition.y * lastKnownTargetPosition.y);
-
-			if (state != damaged)
-			{
-				/*moveDirection.x = lastKnownTargetPosition.x / distanceToTarget;
-				moveDirection.y = lastKnownTargetPosition.y / distanceToTarget;*/
-			}
+			/*moveDirection.x = lastKnownTargetPosition.x / distanceToTarget;
+			moveDirection.y = lastKnownTargetPosition.y / distanceToTarget;*/
 		}
 
 		switch (state)
@@ -93,6 +124,14 @@ namespace gamespace
 		case attacking:
 			if (stateTimer >= attackTime)
 			{
+				for (int i = 0; i < maxVelos; i++)
+				{
+					if (!velosList[i]->active)
+					{
+						Fire(velosList[i], targetPosition);
+						i = maxVelos;
+					}
+				}
 				ChangeState(idle);
 				isAttacking = false;
 			}
@@ -104,6 +143,24 @@ namespace gamespace
 		default:
 			break;
 		}
+	}
+
+	void sfaira::Fire(velos* attackToFire, Vector2 targetPosition) 
+	{
+		float resultantX = targetPosition.x - actualRectangle.x;
+		float resultantY = targetPosition.y - actualRectangle.y;
+
+		float magnitude = sqrtf(resultantX * resultantX + resultantY * resultantY);
+
+		float normalizedX = resultantX / magnitude;
+		float normalizedY = resultantY / magnitude;
+
+		float attackAngle = acosf(normalizedX) * 180.f / PI + 90.f;
+		if (normalizedY < 0)
+			attackAngle = -attackAngle;
+
+		attackToFire->Activate({ actualRectangle.x, actualRectangle.y}, attackAngle, normalizedY < 0);
+		attackToFire->UpdateTarget(targetPosition);
 	}
 
 }

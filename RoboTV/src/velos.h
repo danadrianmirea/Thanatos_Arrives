@@ -8,7 +8,7 @@ namespace gamespace
 	class velos : public attack
 	{
 	public:
-		velos();
+		velos(bool friendly);
 		~velos();
 		void Update(float frameTime);
 		void UpdateTarget(Vector2 newPosition);

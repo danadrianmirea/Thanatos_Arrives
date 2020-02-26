@@ -2,8 +2,10 @@
 
 namespace gamespace
 {
-	velos::velos() : attack(24.f, 24.f, "../res/assets/velos.png", 2, 1, 8, 8)
+	velos::velos(bool friendly) : attack(24.f, 24.f, "../res/assets/velos.png", 2, 1, 8, 8)
 	{
+		if(!friendly)
+			spriteTexture = LoadTexture("../res/assets/daivelos.png");
 		animationData attackAnimation;
 		attackAnimation.addFrame({ 0,0 });
 		attackAnimation.addFrame({ 1,0 });

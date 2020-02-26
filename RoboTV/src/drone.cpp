@@ -22,7 +22,7 @@ namespace gamespace
 
 		for (int i = 0; i < maxVelos; i++)
 		{
-			velosList.push_back(new velos());
+			velosList.push_back(new velos(true));
 		}
 
 	}
@@ -30,6 +30,10 @@ namespace gamespace
 	drone::~drone()
 	{
 		delete attackInstance;
+		for (int i = 0; i < maxVelos; i++)
+		{
+			delete velosList[i];
+		}
 	}
 
 	void drone::Draw() 
