@@ -17,7 +17,7 @@ namespace gamespace
 		Vector2 moveDirection;
 		const float moveSpeed = 800.f;
 		const float velosAttackRadius = 10.f;
-		const float velosAttackDamage = 60.f;
+		const float velosAttackDamage = 30.f;
 		const float velosAttackDuration = 20.0f;
 	};
 }

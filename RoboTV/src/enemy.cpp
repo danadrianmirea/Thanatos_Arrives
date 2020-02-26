@@ -141,11 +141,17 @@ namespace gamespace
 		safePosition = { actualRectangle.x, actualRectangle.y };
 	}
 
+	rectangle* enemy::CheckIfAttackingPlayer(Rectangle playerHitbox) 
+	{
+		return nullptr;
+	}
+
 	void enemy::ChangeState(enemyStates newState)
 	{
 		if (newState != state)
 		{
 			state = newState;
+			isAttacking = false;
 			switch (state)
 			{
 			case idle:

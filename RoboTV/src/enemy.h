@@ -23,6 +23,7 @@ namespace gamespace
 		void RecieveDamage(Vector2 damageSource, float damageRecieved);
 		bool CollideWithWall(Rectangle wall);
 		void UpdateSafePosition();
+		virtual rectangle* CheckIfAttackingPlayer(Rectangle playerHitbox);
 		bool isAttacking;
 		float attackDamage;
 

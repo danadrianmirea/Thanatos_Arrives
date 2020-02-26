@@ -98,4 +98,12 @@ namespace gamespace
 			break;
 		}
 	}
+
+	rectangle* padaros::CheckIfAttackingPlayer(Rectangle playerHitbox)
+	{
+		if (CheckCollisionCircleRec({ actualRectangle.x, actualRectangle.y }, attackRadius, playerHitbox))
+			return this;
+		else
+			return nullptr;
+	}
 }

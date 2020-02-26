@@ -12,6 +12,7 @@ namespace gamespace
 		padaros(float xPosition, float yPosition);
 		~padaros();
 		void UpdateEnemy(Vector2 targetPosition);
+		rectangle* CheckIfAttackingPlayer(Rectangle playerHitbox);
 
 	private:
 		const float padarosTargetWalkDistance = 180.f;
@@ -24,7 +25,7 @@ namespace gamespace
 		const float padarosMoveSpeed = 140.f;
 		const float padarosAttackSpeed = 600.f;
 		const float padarosDamagedSpeed = 100.f;
-		const float padarosMaxHP = 70.f;
+		const float padarosMaxHP = 50.f;
 		const float padarosAttackDamage = 30.f;
 
 	};

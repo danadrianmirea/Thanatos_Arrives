@@ -118,13 +118,15 @@ namespace gamespace
 
 		//player against enemy attacks
 
+		rectangle* enemyAttack = nullptr;
 		for (std::list<enemy*>::iterator it = enemyLayer.begin(); it != enemyLayer.end(); it++)
 		{
 			if ((*it)->active)
 			{
-				if ((*it)->isAttacking && CheckCollisionCircleRec({ (*it)->actualRectangle.x, (*it)->actualRectangle.y }, (*it)->attackRadius, player->AABB))
+				enemyAttack = (*it)->CheckIfAttackingPlayer(player->AABB);
+				if (enemyAttack != nullptr)
 				{
-					player->RecieveDamage({ (*it)->actualRectangle.x, (*it)->actualRectangle.y }, (*it)->attackDamage);
+					player->RecieveDamage({ enemyAttack->actualRectangle.x, enemyAttack->actualRectangle.y }, (*it)->attackDamage);
 				}
 			}
 		}
@@ -134,7 +136,7 @@ namespace gamespace
 		attack* collidingAttack;
 		for (std::list<enemy*>::iterator it = enemyLayer.begin(); it != enemyLayer.end(); it++)
 		{
-			if ((*it)->active)
+			if ((*it)->active && (*it)->isAttacking)
 			{
 				collidingAttack = player->CheckIfAttackingEnemy((*it)->actualRectangle);
 				if(collidingAttack != nullptr)

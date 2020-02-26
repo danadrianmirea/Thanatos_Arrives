@@ -17,6 +17,7 @@ namespace gamespace
 		void Draw();
 		void Update(float frameTime);
 		void UpdateEnemy(Vector2 targetPosition);
+		rectangle* CheckIfAttackingPlayer(Rectangle playerHitbox);
 
 	private:
 		void Fire(velos* attackToFire, Vector2 targetPosition);
@@ -31,10 +32,9 @@ namespace gamespace
 		const float sfairaMoveSpeed = -80.f;
 		const float sfairaAttackSpeed = 0.f;
 		const float sfairaDamagedSpeed = 200.f;
-		const float sfairaMaxHP = 60.f;
+		const float sfairaMaxHP = 40.f;
 		const float sfairaAttackDamage = 30.f;
-		const int maxVelos = 20;
-		//const float attackOffset = 30.f;
+		const int maxVelos = 2;
 
 		std::vector<velos*> velosList;
 	};
