@@ -7,11 +7,11 @@ namespace gamespace
 	{
 	}
 
-	drone::drone(thanatos* thanatosInstance) : animatedSprite(0.f,0.f,12.f,12.f,"../res/assets/drone_spritesheet.png",2,4,4,4)
+	drone::drone(Vector2 targetPosition) : animatedSprite(0.f,0.f,12.f,12.f,"../res/assets/drone_spritesheet.png",2,4,4,4)
 	{
-		parentThanatos = thanatosInstance;
-		actualRectangle.y = parentThanatos->actualRectangle.y;
-		actualRectangle.x = parentThanatos->actualRectangle.x + droneOffset;
+		thanatosPosition = targetPosition;
+		actualRectangle.y = thanatosPosition.y;
+		actualRectangle.x = thanatosPosition.x + droneOffset;
 
 		idleAnim.animationTime = 1.9f;
 		idleAnim.addFrame({ 0,0 });
@@ -33,18 +33,26 @@ namespace gamespace
 			attackInstance->Draw();
 	}
 
-	void drone::Update(float frameTime)
+	void drone::Update(float frameTime, Vector2 targetPosition, cursor* cursorInstance)
 	{
 		animatedSprite::Update(frameTime);
-		/*actualRectangle.y = parentThanatos->actualRectangle.y;
-		actualRectangle.x = parentThanatos->actualRectangle.x + droneOffset;*/
+
+		thanatosPosition = targetPosition;
+		
+		float resultantX = cursorInstance->actualRectangle.x - thanatosPosition.x;
+		float resultantY = cursorInstance->actualRectangle.y - thanatosPosition.y;
+
+		float magnitude = sqrtf(resultantX * resultantX + resultantY * resultantY);
+
+		actualRectangle.x = thanatosPosition.x + (resultantX / magnitude * droneOffset);
+		actualRectangle.y = thanatosPosition.y + (resultantY / magnitude * droneOffset);
 
 		if (IsMouseButtonPressed(0))
 		{
-			float resultantX = actualRectangle.x - parentThanatos->actualRectangle.x;
-			float resultantY = actualRectangle.y - parentThanatos->actualRectangle.y;
+			resultantX = actualRectangle.x - thanatosPosition.x;
+			resultantY = actualRectangle.y - thanatosPosition.y;
 
-			float magnitude = sqrtf(resultantX * resultantX + resultantY * resultantY);
+			magnitude = sqrtf(resultantX * resultantX + resultantY * resultantY);
 
 			float normalizedX = resultantX / magnitude;
 			float normalizedY = resultantY / magnitude;
@@ -58,16 +66,4 @@ namespace gamespace
 		if (attackInstance->active)
 			attackInstance->Update(frameTime);
 	}
-
-	void drone::UpdateDrone(cursor* cursorInstance) 
-	{
-		float resultantX = cursorInstance->actualRectangle.x - parentThanatos->actualRectangle.x;
-		float resultantY = cursorInstance->actualRectangle.y - parentThanatos->actualRectangle.y;
-
-		float magnitude = sqrtf(resultantX * resultantX + resultantY * resultantY);
-
-		actualRectangle.x = parentThanatos->actualRectangle.x + (resultantX / magnitude * droneOffset);
-		actualRectangle.y = parentThanatos->actualRectangle.y + (resultantY / magnitude * droneOffset);
-	}
-
 }

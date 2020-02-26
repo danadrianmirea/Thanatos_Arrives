@@ -4,6 +4,8 @@
 #include "animatedSprite.h"
 
 #include "cursor.h"
+#include "drone.h"
+
 
 namespace gamespace
 {
@@ -11,7 +13,7 @@ namespace gamespace
 	{
 	public:
 		thanatos();
-		thanatos(float xPosition, float yPosition, const cursor* gameCursor);
+		thanatos(float xPosition, float yPosition, cursor* gameCursor);
 		~thanatos();
 		void Draw();
 		void Update(float frameTime);
@@ -58,7 +60,8 @@ namespace gamespace
 		Vector2 moveDirection;
 		thanatosStates state;
 
-		const cursor* cursorInstance;
+		cursor* cursorInstance;
+		drone* droneInstance;
 	};
 }
 #endif

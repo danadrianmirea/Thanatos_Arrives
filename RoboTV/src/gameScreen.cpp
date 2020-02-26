@@ -26,9 +26,6 @@ namespace gamespace
 		player = new thanatos(100.f, 50.f, gameCursor);
 		gameObjectList.push_front(player);
 
-		thanatosDrone = new drone(player);
-		gameObjectList.push_front(thanatosDrone);
-
 		testPadaros = new padaros(150.f, 50.f);
 		gameObjectList.push_front(testPadaros);
 
@@ -68,9 +65,6 @@ namespace gamespace
 			if ((*it)->active)
 				(*it)->Update(GetFrameTime());
 		}
-
-		thanatosDrone->UpdateDrone(gameCursor);
-
 
 		//manage collisions
 

@@ -7,7 +7,7 @@ namespace gamespace
 	{
 	}
 
-	thanatos::thanatos(float xPosition, float yPosition, const cursor* gameCursor)
+	thanatos::thanatos(float xPosition, float yPosition, cursor* gameCursor)
 		:animatedSprite(xPosition, yPosition, 24.f, 24.f, "../res/assets/thanatos_spritesheet.png", 2, 3, 8, 8)
 	{
 		cursorInstance = gameCursor;
@@ -47,13 +47,15 @@ namespace gamespace
 		stateTimer = 0.f;
 		dashCooldown = 0.f;
 		currentHP = maxHP;
+
+		droneInstance = new drone({ AABB.x, AABB.y });
 	}
 
 
 
 	thanatos::~thanatos()
 	{
-
+		delete droneInstance;
 	}
 
 	void thanatos::Draw()
@@ -63,6 +65,8 @@ namespace gamespace
 			animatedSprite::Draw();
 		else
 			DrawTexturePro(spriteTexture, {sourceRec.x,sourceRec.y, -sourceRec.width, sourceRec.height}, actualRectangle, origin, rotation, WHITE);
+
+		droneInstance->Draw();
 	}
 
 	void thanatos::Update(float frameTime)
@@ -167,6 +171,8 @@ namespace gamespace
 			active = false;
 			visible = false;
 		}
+
+		droneInstance->Update(frameTime, { actualRectangle.x , actualRectangle.y }, cursorInstance);
 
 	}
 

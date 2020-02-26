@@ -1,28 +1,25 @@
 #ifndef  DRONE_H
 #define DRONE_H
 
-#include "thanatos.h"
-
 #include "cursor.h"
 #include "attack.h"
 
 namespace gamespace
 {
-	const float droneOffset = 18.f;
-	const float attackOffset = 20.f;
-
 	class drone : public animatedSprite
 	{
 	public:
 		drone();
-		drone(thanatos* thanatosInstance);
+		drone(Vector2 targetPosition);
 		~drone();
 		void Draw();
-		void Update(float frameTime);
-		void UpdateDrone(cursor* cursorInstance);
+		void Update(float frameTime, Vector2 targetPosition, cursor* cursorInstance);
 
 	private:
-		thanatos* parentThanatos;
+		const float droneOffset = 18.f;
+		const float attackOffset = 20.f;
+
+		Vector2 thanatosPosition;
 		attack* attackInstance;
 		animationData idleAnim;
 	};

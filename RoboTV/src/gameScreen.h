@@ -25,7 +25,6 @@ namespace gamespace
 		thanatos* player;
 		sprite* background;
 		cursor* gameCursor;
-		drone* thanatosDrone;
 		padaros* testPadaros;
 
 		Camera2D gameCamera;
