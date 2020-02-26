@@ -19,6 +19,7 @@ namespace gamespace
 		moveSpeed = padarosMoveSpeed;
 		attackSpeed = padarosAttackSpeed;
 		damagedSpeed = padarosDamagedSpeed;
+		attackDamage = padarosAttackDamage;
 
 		idleAnim.animationTime = 1.1f;
 		idleAnim.addFrame({ 0,0 });

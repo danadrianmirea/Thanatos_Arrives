@@ -25,7 +25,7 @@ namespace gamespace
 		const float sfairaAttackSpeed = 600.f;
 		const float sfairaDamagedSpeed = 100.f;
 		const float sfairaMaxHP = 70.f;
-
+		const float sfairaAttackDamage = 30.f;
 	};
 }
 

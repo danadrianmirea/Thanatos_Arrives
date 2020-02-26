@@ -22,6 +22,7 @@ namespace gamespace
 		virtual void UpdateEnemy(Vector2 targetPosition);
 		void RecieveDamage(Vector2 damageSource, float damageRecieved);
 		bool isAttacking;
+		float attackDamage;
 
 	protected:
 

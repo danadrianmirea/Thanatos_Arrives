@@ -29,6 +29,13 @@ namespace gamespace
 		testPadaros = new padaros(150.f, 50.f);
 		gameObjectList.push_front(testPadaros);
 
+		enemyLayer.push_front(testPadaros);
+
+		testSfaira = new sfaira(100.f, 0.f);
+		gameObjectList.push_front(testSfaira);
+
+		enemyLayer.push_front(testSfaira);
+
 		rectangle* leftWall = new rectangle(-360.f, -240.f, 39.f, 480.f, RED);
 		wallLayer.push_front(leftWall);
 
@@ -57,14 +64,21 @@ namespace gamespace
 		elapsedScreenTime += GetFrameTime();
 
 		gameCursor->UpdateCursor(GetMousePosition().x - gameCamera.offset.x, GetMousePosition().y - gameCamera.offset.y);
-
-		testPadaros->UpdateEnemy({ player->actualRectangle.x, player->actualRectangle.y });
-
+		
+		//Update all gameObjects
 		for (std::list<gameObject*> ::iterator it = gameObjectList.begin(); it != gameObjectList.end(); it++)
 		{
 			if ((*it)->active)
 				(*it)->Update(GetFrameTime());
 		}
+
+		//Update enemies
+		for (std::list<enemy*>::iterator it = enemyLayer.begin(); it != enemyLayer.end(); it++)
+		{
+			if ((*it)->active)
+				(*it)->UpdateEnemy({ player->actualRectangle.x, player->actualRectangle.y });
+		}
+
 
 		//manage collisions
 
@@ -79,19 +93,34 @@ namespace gamespace
 		if (isPlayerSafe)
 			player->UpdateSafePosition();
 
-		if (testPadaros->isAttacking && CheckCollisionCircleRec({ testPadaros->actualRectangle.x, testPadaros->actualRectangle.y }, testPadaros->attackRadius, player->AABB))
-		{
-			player->RecieveDamage({ testPadaros->actualRectangle.x, testPadaros->actualRectangle.y }, 50.f);
-		}
+		//player against enemy attacks
 
-		if (testPadaros->active)
+		for (std::list<enemy*>::iterator it = enemyLayer.begin(); it != enemyLayer.end(); it++)
 		{
-			attack* collidingAttack = player->CheckIfAttackingEnemy(testPadaros->actualRectangle);
-			if (collidingAttack != nullptr)
+			if ((*it)->active)
 			{
-				testPadaros->RecieveDamage({ collidingAttack->actualRectangle.x, collidingAttack->actualRectangle.y }, collidingAttack->attackDamage);
+				if ((*it)->isAttacking && CheckCollisionCircleRec({ (*it)->actualRectangle.x, (*it)->actualRectangle.y }, (*it)->attackRadius, player->AABB))
+				{
+					player->RecieveDamage({ (*it)->actualRectangle.x, (*it)->actualRectangle.y }, (*it)->attackDamage);
+				}
 			}
 		}
+
+		//enemies against player attacks
+
+		attack* collidingAttack;
+		for (std::list<enemy*>::iterator it = enemyLayer.begin(); it != enemyLayer.end(); it++)
+		{
+			if ((*it)->active)
+			{
+				collidingAttack = player->CheckIfAttackingEnemy((*it)->actualRectangle);
+				if(collidingAttack != nullptr)
+				{
+					(*it)->RecieveDamage({ collidingAttack->actualRectangle.x, collidingAttack->actualRectangle.y }, collidingAttack->attackDamage);
+				}
+			}
+		}
+
 		//camera
 
 		gameCamera.target = { player->actualRectangle.x,  player->actualRectangle.y };

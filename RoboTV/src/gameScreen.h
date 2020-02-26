@@ -8,6 +8,7 @@
 #include "drone.h"
 #include "attack.h"
 #include "padaros.h"
+#include "sfaira.h"
 
 namespace gamespace
 {
@@ -26,10 +27,11 @@ namespace gamespace
 		sprite* background;
 		cursor* gameCursor;
 		padaros* testPadaros;
+		sfaira* testSfaira;
 
 		Camera2D gameCamera;
 
-		std::list<gameObject*> enemyLayer;
+		std::list<enemy*> enemyLayer;
 		std::list<rectangle*> wallLayer;
 
 	};

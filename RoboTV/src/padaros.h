@@ -25,6 +25,7 @@ namespace gamespace
 		const float padarosAttackSpeed = 600.f;
 		const float padarosDamagedSpeed = 100.f;
 		const float padarosMaxHP = 70.f;
+		const float padarosAttackDamage = 30.f;
 
 	};
 }
