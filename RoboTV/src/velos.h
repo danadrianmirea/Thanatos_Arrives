@@ -18,7 +18,7 @@ namespace gamespace
 		const float moveSpeed = 800.f;
 		const float velosAttackRadius = 10.f;
 		const float velosAttackDamage = 30.f;
-		const float velosAttackDuration = 20.0f;
+		const float velosAttackDuration = 2.0f;
 	};
 }
 #endif

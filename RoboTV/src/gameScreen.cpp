@@ -118,9 +118,11 @@ namespace gamespace
 
 		//player against enemy attacks
 
-		rectangle* enemyAttack = nullptr;
+		rectangle* enemyAttack;
 		for (std::list<enemy*>::iterator it = enemyLayer.begin(); it != enemyLayer.end(); it++)
 		{
+			enemyAttack = nullptr;
+
 			if ((*it)->active)
 			{
 				enemyAttack = (*it)->CheckIfAttackingPlayer(player->AABB);
@@ -136,7 +138,7 @@ namespace gamespace
 		attack* collidingAttack;
 		for (std::list<enemy*>::iterator it = enemyLayer.begin(); it != enemyLayer.end(); it++)
 		{
-			if ((*it)->active && (*it)->isAttacking)
+			if ((*it)->active)
 			{
 				collidingAttack = player->CheckIfAttackingEnemy((*it)->actualRectangle);
 				if(collidingAttack != nullptr)
