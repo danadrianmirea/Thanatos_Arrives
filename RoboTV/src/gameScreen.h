@@ -21,6 +21,7 @@ namespace gamespace
 		void Init();
 		void Update();
 		void Draw();
+		void Destroy();
 
 	private:
 		thanatos* player;
@@ -33,7 +34,6 @@ namespace gamespace
 
 		std::list<enemy*> enemyLayer;
 		std::list<rectangle*> wallLayer;
-
 	};
 }
 #endif

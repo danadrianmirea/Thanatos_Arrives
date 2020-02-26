@@ -46,7 +46,7 @@ namespace flowspace {
 			activeScreen->Draw();
 			EndDrawing();
 		}
-
+		activeScreen->Destroy();
 		EndGame();
 	}
 }

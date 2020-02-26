@@ -8,6 +8,7 @@ namespace gamespace
 {
 	gameScreen::gameScreen()
 	{
+
 	}
 
 
@@ -167,5 +168,11 @@ namespace gamespace
 		}
 		EndMode2D();
 		//DrawText(TextFormat("%1.1f", elapsedScreenTime), 190, 200, 20, LIGHTGRAY);
+	}
+
+	void gameScreen::Destroy() 
+	{
+		gameObjectList.erase(gameObjectList.begin(), gameObjectList.end());
+		wallLayer.erase(wallLayer.begin(), wallLayer.end());
 	}
 }
