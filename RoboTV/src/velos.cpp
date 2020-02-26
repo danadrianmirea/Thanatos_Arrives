@@ -4,14 +4,15 @@ namespace gamespace
 {
 	velos::velos() : attack(24.f, 24.f, "../res/assets/velos.png", 2, 1, 8, 8)
 	{
-		attackRadius = 10.f;
 		animationData attackAnimation;
 		attackAnimation.addFrame({ 0,0 });
 		attackAnimation.addFrame({ 1,0 });
 		attackAnimation.animationTime = 0.2f;
-
 		NewAnimation(attackAnimation);
-		attackRadius = 10.f;
+
+		attackRadius = velosAttackRadius;
+		attackDamage = velosAttackDamage;
+		attackDuration = velosAttackDuration;
 	}
 
 

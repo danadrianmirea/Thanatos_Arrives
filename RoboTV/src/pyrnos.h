@@ -11,6 +11,11 @@ namespace gamespace
 		pyrnos();
 		~pyrnos();
 		void Update(float frameTime);
+	private:
+		const float pyrnosAttackRadius = 10.f;
+		const float pyrnosAttackDamage = 30.f;
+		const float pyrnosAttackDuration = 0.3f;
+
 	};
 }
 #endif

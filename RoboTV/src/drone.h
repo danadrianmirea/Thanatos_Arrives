@@ -18,6 +18,7 @@ namespace gamespace
 		void Draw();
 		void Update(float frameTime, Vector2 targetPosition, cursor* cursorInstance);
 		attack* GetCollidingAttack(Rectangle enemyHitbox);
+		void CollideVelosWithWall(rectangle wall);
 
 	private:
 		void Fire(attack* attacktoFire);

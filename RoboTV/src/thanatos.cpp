@@ -183,6 +183,8 @@ namespace gamespace
 
 	bool thanatos::CoolideWithWall(const rectangle* wall)
 	{
+		droneInstance->CollideVelosWithWall(*wall);
+
 		if (CheckCollisionRecs(AABB, wall->actualRectangle))
 		{
 			if (safePosition.x + AABB.width <= wall->actualRectangle.x)

@@ -113,6 +113,21 @@ namespace gamespace
 		return nullptr;
 	}
 
+	void drone::CollideVelosWithWall(rectangle wall) 
+	{
+		for (int i = 0; i < maxVelos; i++)
+		{
+			if (velosList[i]->active)
+			{
+				if (velosList[i]->CheckCollisionWithEnemy(wall.actualRectangle))
+				{
+					velosList[i]->active = false;
+					velosList[i]->visible = false;
+				}
+			}
+		}
+	}
+
 	void drone::Fire(attack* attacktoFire)
 	{
 		float resultantX = actualRectangle.x - thanatosPosition.x;
