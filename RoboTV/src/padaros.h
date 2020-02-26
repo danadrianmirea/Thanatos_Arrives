@@ -2,6 +2,8 @@
 #define PADAROS_H
 
 #include "animatedSprite.h"
+#include "explosion.h"
+
 namespace gamespace
 {
 
@@ -53,6 +55,7 @@ namespace gamespace
 		animationData windupAnim;
 		animationData attackAnim;
 		animationData damageAnim;
+		explosion* explosionInstance;
 
 	};
 }

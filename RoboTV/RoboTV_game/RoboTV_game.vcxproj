@@ -23,6 +23,7 @@
     <ClCompile Include="..\src\attack.cpp" />
     <ClCompile Include="..\src\cursor.cpp" />
     <ClCompile Include="..\src\drone.cpp" />
+    <ClCompile Include="..\src\explosion.cpp" />
     <ClCompile Include="..\src\flowManager.cpp" />
     <ClCompile Include="..\src\gameObject.cpp" />
     <ClCompile Include="..\src\gameScreen.cpp" />
@@ -40,6 +41,7 @@
     <ClInclude Include="..\src\attack.h" />
     <ClInclude Include="..\src\cursor.h" />
     <ClInclude Include="..\src\drone.h" />
+    <ClInclude Include="..\src\explosion.h" />
     <ClInclude Include="..\src\flowManager.h" />
     <ClInclude Include="..\src\gameObject.h" />
     <ClInclude Include="..\src\gameScreen.h" />

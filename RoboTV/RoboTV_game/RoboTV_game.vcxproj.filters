@@ -66,6 +66,9 @@
     <ClCompile Include="..\src\velos.cpp">
       <Filter>Gameplay Objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\explosion.cpp">
+      <Filter>Gameplay Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\flowManager.h">
@@ -108,6 +111,9 @@
       <Filter>Gameplay Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\src\velos.h">
+      <Filter>Gameplay Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\explosion.h">
       <Filter>Gameplay Objects</Filter>
     </ClInclude>
   </ItemGroup>
