@@ -26,7 +26,7 @@ namespace gamespace
 		player = new thanatos(100.f, 50.f, gameCursor);
 		gameObjectList.push_front(player);
 
-		testPadaros = new padaros(150.f, 50.f);
+		testPadaros = new enemy(150.f, 50.f);
 		gameObjectList.push_front(testPadaros);
 
 		rectangle* leftWall = new rectangle(-360.f, -240.f, 39.f, 480.f, RED);
@@ -58,7 +58,7 @@ namespace gamespace
 
 		gameCursor->UpdateCursor(GetMousePosition().x - gameCamera.offset.x, GetMousePosition().y - gameCamera.offset.y);
 
-		testPadaros->UpdatePadaros({ player->actualRectangle.x, player->actualRectangle.y });
+		testPadaros->UpdateEnemy({ player->actualRectangle.x, player->actualRectangle.y });
 
 		for (std::list<gameObject*> ::iterator it = gameObjectList.begin(); it != gameObjectList.end(); it++)
 		{

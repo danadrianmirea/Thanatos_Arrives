@@ -1,13 +1,13 @@
-#include "padaros.h"
+#include "enemy.h"
 
 namespace gamespace
 {
-	padaros::padaros()
+	enemy::enemy()
 	{
 
 	}
 
-	padaros::padaros(float xPosition, float yPosition)
+	enemy::enemy(float xPosition, float yPosition)
 		: animatedSprite(xPosition, yPosition, 24.f, 24.f, "../res/assets/padaros.png", 2, 5, 8, 8)
 	{
 		idleAnim.animationTime = 1.1f;
@@ -37,12 +37,12 @@ namespace gamespace
 		explosionInstance = new explosion();
 	}
 
-	padaros::~padaros()
+	enemy::~enemy()
 	{
 		delete explosionInstance;
 	}
 
-	void padaros::Draw()
+	void enemy::Draw()
 	{
 		if (!explosionInstance->active)
 		{
@@ -55,7 +55,7 @@ namespace gamespace
 			explosionInstance->Draw();
 	}
 
-	void padaros::Update(float frameTime)
+	void enemy::Update(float frameTime)
 	{
 		animatedSprite::Update(frameTime);
 
@@ -94,7 +94,7 @@ namespace gamespace
 		
 	}
 
-	void padaros::UpdatePadaros(Vector2 targetPosition)
+	void enemy::UpdateEnemy(Vector2 targetPosition)
 	{
 		if (state != attacking && state != windup)
 		{
@@ -143,7 +143,7 @@ namespace gamespace
 		}
 	}
 
-	void padaros::RecieveDamage(Vector2 damageSource, float damageRecieved) 
+	void enemy::RecieveDamage(Vector2 damageSource, float damageRecieved) 
 	{
 		if (state != damaged)
 		{
@@ -167,7 +167,7 @@ namespace gamespace
 
 	}
 
-	void padaros::ChangeState(padarosStates newState)
+	void enemy::ChangeState(enemyStates newState)
 	{
 		if (newState != state)
 		{

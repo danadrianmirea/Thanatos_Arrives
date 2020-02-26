@@ -1,5 +1,5 @@
-#ifndef PADAROS_H
-#define PADAROS_H
+#ifndef ENEMY_H
+#define ENEMY_H
 
 #include "animatedSprite.h"
 #include "explosion.h"
@@ -7,18 +7,18 @@
 namespace gamespace
 {
 
-	class padaros : public animatedSprite
+	class enemy : public animatedSprite
 	{
 
 	public:
 
 		const float attackRadius = 10.f;
-		padaros();
-		padaros(float xPosition, float yPosition);
-		~padaros();
+		enemy();
+		enemy(float xPosition, float yPosition);
+		~enemy();
 		void Draw();
 		void Update(float frameTime);
-		void UpdatePadaros(Vector2 targetPosition);
+		void UpdateEnemy(Vector2 targetPosition);
 		void RecieveDamage(Vector2 damageSource, float damageRecieved);
 		bool isAttacking;
 
@@ -37,19 +37,19 @@ namespace gamespace
 
 		const float maxHP = 70.f;
 
-		enum padarosStates
+		enum enemyStates
 		{
 			idle, walking, windup, attacking, damaged
 		};
 
-		void ChangeState(padarosStates newState);
+		void ChangeState(enemyStates newState);
 
 		float stateTimer;
 		float distanceToTarget;
 		float currentHP;
 		Vector2 lastKnownTargetPosition;
 		Vector2 moveDirection;
-		padarosStates state;
+		enemyStates state;
 		animationData idleAnim;
 		animationData walkAnim;
 		animationData windupAnim;
