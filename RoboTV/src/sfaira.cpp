@@ -180,7 +180,7 @@ namespace gamespace
 	{
 		for (int i = 0; i < maxVelos; i++)
 		{
-			if (CheckCollisionCircleRec({velosList[i]->actualRectangle.x, velosList[i]->actualRectangle.y }, attackRadius, playerHitbox))
+			if (velosList[i]->active && CheckCollisionCircleRec({velosList[i]->actualRectangle.x, velosList[i]->actualRectangle.y }, attackRadius, playerHitbox))
 				return velosList[i];
 		}
 			return nullptr;

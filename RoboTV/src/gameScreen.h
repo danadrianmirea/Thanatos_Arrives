@@ -27,6 +27,9 @@ namespace gamespace
 	private:
 		const int maxPadaros = 9;
 		const int maxSfaira = 9;
+		const float timeBetweenWaves = 3.f;
+		float waveTimer;
+		int liveEnemies;
 
 		thanatos* player;
 		sprite* background;

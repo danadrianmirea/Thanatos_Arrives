@@ -27,6 +27,7 @@ namespace gamespace
 		~waveManager();
 		void SpawnNextWave(std::list<padaros*> availablePadaros, std::list<sfaira*> availableSfaira);
 		void ResetWaveIterator();
+		int GetCurrentWaveEnemies();
 		bool levelCleared;
 		std::vector<Vector2> spawnList;
 		std::list<wave> waveList;

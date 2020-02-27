@@ -16,34 +16,47 @@ namespace gamespace
 
 	void waveManager::SpawnNextWave(std::list<padaros*> availablePadaros, std::list<sfaira*> availableSfaira)
 	{
-
-		std::list<padaros*>::iterator padarosCounter = availablePadaros.begin();
-		std::list<sfaira*>::iterator sfairaCounter = availableSfaira.begin();
-
-		for (int i = 0; i < waveIterator->enemyList.size(); i++)
+		if (!levelCleared)
 		{
-			int enemySpawnIndex = waveIterator->enemyList[i].spawnIndex;
-			switch (waveIterator->enemyList[i].enemyToSpawn)
-			{
-			case padarosType:
-				(*padarosCounter)->Activate(spawnList[enemySpawnIndex]);
-				padarosCounter++;
-				std::printf("spawned Padaros");
-				break;
-			case sfairaType:
-				(*sfairaCounter)->Activate(spawnList[enemySpawnIndex]);
-				sfairaCounter++;
-				std::printf("spawned Sfeira");
-				break;
-			}
-		}
+			std::list<padaros*>::iterator padarosCounter = availablePadaros.begin();
+			std::list<sfaira*>::iterator sfairaCounter = availableSfaira.begin();
 
-		waveIterator++;
+			for (int i = 0; i < waveIterator->enemyList.size(); i++)
+			{
+				int enemySpawnIndex = waveIterator->enemyList[i].spawnIndex;
+				switch (waveIterator->enemyList[i].enemyToSpawn)
+				{
+				case padarosType:
+					(*padarosCounter)->Activate(spawnList[enemySpawnIndex]);
+					padarosCounter++;
+					std::printf("spawned Padaros");
+					break;
+				case sfairaType:
+					(*sfairaCounter)->Activate(spawnList[enemySpawnIndex]);
+					sfairaCounter++;
+					std::printf("spawned Sfeira");
+					break;
+				}
+			}
+
+			if (waveIterator == waveList.end());
+			{
+				levelCleared = true;
+			}
+
+			waveIterator++;
+		}
 	}
 
 	void waveManager::ResetWaveIterator() 
 	{
 		waveIterator = waveList.begin();
 	}
+
+	int waveManager::GetCurrentWaveEnemies() 
+	{
+		return waveIterator->enemyList.size();
+	}
+
 
 }

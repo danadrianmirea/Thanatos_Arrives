@@ -21,14 +21,18 @@ namespace gamespace
 	{
 		active = true;
 		waveManagerInstance = new waveManager();
-
+		waveTimer = 0.f;
 		elapsedScreenTime = 0.f;
+
+		//player initialization
 
 		gameCursor = new cursor();
 		gameObjectList.push_front(gameCursor);
 
 		player = new thanatos(100.f, 50.f, gameCursor);
 		gameObjectList.push_front(player);
+
+		//enemy initialization
 
 		for (int i = 0; i < maxPadaros; i++)
 		{
@@ -46,6 +50,8 @@ namespace gamespace
 			enemyLayer.push_front(testSfaira);
 		}
 
+		//wall settings
+
 		rectangle* leftWall = new rectangle(-360.f, -240.f, 39.f, 480.f, RED);
 		wallLayer.push_front(leftWall);
 
@@ -60,6 +66,8 @@ namespace gamespace
 
 		background = new sprite(0.f, 0.f, 720.f, 480.f, "../res/assets/jail.png", 240, 160);
 		gameObjectList.push_front(background);
+
+		//camera settings
 
 		gameCamera.target = { player->actualRectangle.x, player->actualRectangle.y };
 		gameCamera.offset = { 0,0 };
@@ -76,22 +84,28 @@ namespace gamespace
 			SetMusicVolume(gameMusic, 0.6f);
 		}
 
+		//spawn settings
+
 		waveManagerInstance->spawnList.push_back({ -240.f, 150.f });
 		waveManagerInstance->spawnList.push_back({ 240.f, 150.f });
 		waveManagerInstance->spawnList.push_back({ -240.f, -150.f });
 		waveManagerInstance->spawnList.push_back({ 240.f, -150.f });
+		waveManagerInstance->spawnList.push_back({ 0.f, 150.f });
+		waveManagerInstance->spawnList.push_back({ 0.f, -150.f });
+		waveManagerInstance->spawnList.push_back({ -240.f, 0.f });
+		waveManagerInstance->spawnList.push_back({ 240.f, 0.f });
 
+		//wave Settings
 
 		wave wave0;
-		wave0.enemyList.push_back({ padarosType, 0 });
 		wave0.enemyList.push_back({ padarosType, 1 });
 		wave0.enemyList.push_back({ padarosType, 2 });
-		wave0.enemyList.push_back({ sfairaType, 3 });
+		wave0.enemyList.push_back({ padarosType, 3 });
+		wave0.enemyList.push_back({ sfairaType, 4 });
 
 		waveManagerInstance->waveList.push_front(wave0);
 		waveManagerInstance->ResetWaveIterator();
 
-		waveManagerInstance->SpawnNextWave(availablePadaros, availableSfaira);
 	}
 
 	void gameScreen::Update()
@@ -108,10 +122,14 @@ namespace gamespace
 		}
 
 		//Update enemies
+		liveEnemies = 0;
 		for (std::list<enemy*>::iterator it = enemyLayer.begin(); it != enemyLayer.end(); it++)
 		{
 			if ((*it)->active)
+			{
 				(*it)->UpdateEnemy({ player->actualRectangle.x, player->actualRectangle.y });
+				liveEnemies++;
+			}
 		}
 
 
@@ -192,6 +210,17 @@ namespace gamespace
 		//sound
 		if (!IsMuted())
 			UpdateMusicStream(gameMusic);
+
+		//update waves
+		if (liveEnemies <= 0 && !waveManagerInstance->levelCleared)
+		{
+			waveTimer += GetFrameTime();
+			if (waveTimer > timeBetweenWaves)
+			{
+				waveManagerInstance->SpawnNextWave(availablePadaros, availableSfaira);
+				waveTimer = 0.f;
+			}
+		}
 	}
 
 	void gameScreen::Draw()
@@ -206,7 +235,6 @@ namespace gamespace
 				(*it)->Draw();
 		}
 		EndMode2D();
-		//DrawText(TextFormat("%1.1f", elapsedScreenTime), 190, 200, 20, LIGHTGRAY);
 	}
 
 	void gameScreen::Destroy() 
