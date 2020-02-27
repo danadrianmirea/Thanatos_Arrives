@@ -24,6 +24,7 @@ namespace gamespace
 		cursor* gameCursor;
 		std::list<button*> buttonList;
 		buttonOptions currentOption;
+		Music menuMusic;
 	};
 }
 #endif

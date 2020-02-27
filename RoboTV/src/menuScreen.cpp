@@ -37,9 +37,15 @@ namespace gamespace
 
 		HideCursor();
 		currentOption = none;
+
+		menuMusic = LoadMusicStream("../res/assets/menu.ogg");
+		StopMusicStream(menuMusic);
+		PlayMusicStream(menuMusic);
+		SetMusicVolume(menuMusic, 0.6f);
 	}
 	void menuScreen::Update() 
 	{
+		UpdateMusicStream(menuMusic);
 		gameCursor->UpdateCursor(GetMousePosition().x, GetMousePosition().y);
 		
 		for (std::list<gameObject*>::iterator it = gameObjectList.begin(); it != gameObjectList.end(); it++)
