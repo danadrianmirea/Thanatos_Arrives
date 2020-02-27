@@ -19,6 +19,7 @@ namespace gamespace
 		void Update(float frameTime, Vector2 targetPosition, cursor* cursorInstance);
 		attack* GetCollidingAttack(Rectangle enemyHitbox);
 		void CollideVelosWithWall(rectangle wall);
+		void GainResource();
 
 	private:
 		void Fire(attack* attacktoFire);
@@ -27,7 +28,9 @@ namespace gamespace
 		const float attackOffset = 20.f;
 		const float minCursorDistance = 40.f;
 		const int maxVelos = 3;
+		const int maxResource = 3;
 
+		int resource;
 		Vector2 thanatosPosition;
 		pyrnos* attackInstance;
 		std::vector<velos*> velosList;

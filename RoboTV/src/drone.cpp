@@ -7,7 +7,7 @@ namespace gamespace
 	{
 	}
 
-	drone::drone(Vector2 targetPosition) : animatedSprite(0.f,0.f,12.f,12.f,"../res/assets/drone_spritesheet.png",2,4,4,4)
+	drone::drone(Vector2 targetPosition) : animatedSprite(0.f, 0.f, 12.f, 12.f, "../res/assets/drone_spritesheet.png", 2, 4, 4, 4)
 	{
 		thanatosPosition = targetPosition;
 		actualRectangle.y = thanatosPosition.y;
@@ -25,6 +25,7 @@ namespace gamespace
 			velosList.push_back(new velos(true));
 		}
 
+		resource = 0;
 	}
 
 	drone::~drone()
@@ -36,7 +37,7 @@ namespace gamespace
 		}
 	}
 
-	void drone::Draw() 
+	void drone::Draw()
 	{
 		animatedSprite::Draw();
 		if (attackInstance->visible)
@@ -56,7 +57,7 @@ namespace gamespace
 		animatedSprite::Update(frameTime);
 
 		thanatosPosition = targetPosition;
-		
+
 		float resultantX = cursorInstance->actualRectangle.x - thanatosPosition.x;
 		float resultantY = cursorInstance->actualRectangle.y - thanatosPosition.y;
 
@@ -71,13 +72,17 @@ namespace gamespace
 		}
 		if (IsMouseButtonPressed(1) && magnitude >= minCursorDistance)
 		{
-			for (int i = 0; i < maxVelos; i++)
+			if (resource > 0)
 			{
-				if (!velosList[i]->active)
+				for (int i = 0; i < maxVelos; i++)
 				{
-					Fire(velosList[i]);
-					velosList[i]->UpdateTarget({ cursorInstance->actualRectangle.x, cursorInstance->actualRectangle.y });
+					if (!velosList[i]->active)
+					{
+						Fire(velosList[i]);
+						velosList[i]->UpdateTarget({ cursorInstance->actualRectangle.x, cursorInstance->actualRectangle.y });
 						i = maxVelos;
+						resource--;
+					}
 				}
 			}
 		}
@@ -100,7 +105,7 @@ namespace gamespace
 		if (attackInstance->active)
 			if (attackInstance->CheckCollisionWithEnemy(enemyHitbox))
 				return attackInstance;
-		
+
 		for (int i = 0; i < maxVelos; i++)
 		{
 			if (velosList[i]->active)
@@ -117,7 +122,7 @@ namespace gamespace
 		return nullptr;
 	}
 
-	void drone::CollideVelosWithWall(rectangle wall) 
+	void drone::CollideVelosWithWall(rectangle wall)
 	{
 		for (int i = 0; i < maxVelos; i++)
 		{
@@ -147,6 +152,12 @@ namespace gamespace
 			attackAngle = -attackAngle;
 
 		attacktoFire->Activate({ actualRectangle.x + normalizedX * attackOffset, actualRectangle.y + normalizedY * attackOffset }, attackAngle, normalizedY < 0);
+	}
+
+	void drone::GainResource()
+	{
+		if (resource < maxResource)
+			resource++;
 	}
 
 

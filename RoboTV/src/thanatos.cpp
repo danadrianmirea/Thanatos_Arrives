@@ -49,6 +49,7 @@ namespace gamespace
 		currentHP = maxHP;
 
 		droneInstance = new drone({ AABB.x, AABB.y });
+
 	}
 
 
@@ -174,7 +175,7 @@ namespace gamespace
 		}
 
 		droneInstance->Update(frameTime, { actualRectangle.x , actualRectangle.y }, cursorInstance);
-
+		resourceCooldown -= frameTime;
 	}
 
 	void thanatos::UpdateSafePosition()
@@ -222,15 +223,23 @@ namespace gamespace
 
 	void thanatos::RecieveDamage(Vector2 damageSource, float damageTaken) 
 	{
-		if (state != damaged && damageCooldown <= 0.f)
+		if (state == dashing && resourceCooldown <= 0.f)
 		{
-			ChangeState(damaged);
-			currentHP -= damageTaken;
-			moveDirection.x = AABB.x - damageSource.x;
-			moveDirection.y = AABB.y - damageSource.y;
-			float distanceToSource = sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
-			moveDirection.x = moveDirection.x / distanceToSource;
-			moveDirection.y = moveDirection.y / distanceToSource;
+			droneInstance->GainResource();
+			resourceCooldown = resourceCooldownTime;
+		}
+		else
+		{
+			if (state != damaged && damageCooldown <= 0.f)
+			{
+				ChangeState(damaged);
+				currentHP -= damageTaken;
+				moveDirection.x = AABB.x - damageSource.x;
+				moveDirection.y = AABB.y - damageSource.y;
+				float distanceToSource = sqrtf(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
+				moveDirection.x = moveDirection.x / distanceToSource;
+				moveDirection.y = moveDirection.y / distanceToSource;
+			}
 		}
 	}
 
