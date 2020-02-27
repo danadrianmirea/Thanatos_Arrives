@@ -20,7 +20,7 @@ namespace gamespace
 		gameCursor = new cursor();
 		gameObjectList.push_front(gameCursor);
 
-		button* testButton = new button( (float)(screenWidth / 2),(float)(screenHeight / 2), false);
+		button* testButton = new button((float)(screenWidth / 2),(float)(screenHeight / 2), false, "PLAY");
 		buttonList.push_front(testButton);
 		gameObjectList.push_front(testButton);
 
