@@ -19,7 +19,7 @@ namespace gamespace
 		void Update();
 		void Draw();
 		void Destroy();
-		float gameVersion = 0.6;
+		float gameVersion = 1.0;
 	protected:
 		const float buttonOffset = 100.f;
 		cursor* gameCursor;
