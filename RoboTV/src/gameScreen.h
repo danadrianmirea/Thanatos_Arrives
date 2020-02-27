@@ -42,6 +42,8 @@ namespace gamespace
 		std::list<padaros*> availablePadaros;
 		std::list<sfaira*> availableSfaira;
 		std::list<rectangle*> wallLayer;
+
+		Music gameMusic;
 	};
 }
 #endif

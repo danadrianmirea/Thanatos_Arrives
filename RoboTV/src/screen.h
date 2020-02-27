@@ -25,6 +25,9 @@ namespace gamespace
 		int screenWidth;
 		int screenHeight;
 		std::list<gameObject*> gameObjectList;
+		static bool mute;
+		static void Mute(bool muteState);
+		static bool IsMuted();
 	};
 }
 #endif // !SCREEN_H

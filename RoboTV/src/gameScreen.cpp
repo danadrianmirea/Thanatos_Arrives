@@ -68,6 +68,14 @@ namespace gamespace
 
 		HideCursor();
 		waveManagerInstance->spawnNextWave(availablePadaros, availableSfaira);
+
+		if (!IsMuted())
+		{
+			gameMusic = LoadMusicStream("../res/assets/battle.ogg");
+			StopMusicStream(gameMusic);
+			PlayMusicStream(gameMusic);
+			SetMusicVolume(gameMusic, 0.6f);
+		}
 	}
 
 	void gameScreen::Update()
@@ -163,6 +171,9 @@ namespace gamespace
 
 		gameCamera.target = { player->actualRectangle.x,  player->actualRectangle.y };
 		gameCamera.offset = { -player->actualRectangle.x + 1920 / 2,  -player->actualRectangle.y + 1080 / 2 };
+
+		if (!IsMuted())
+			UpdateMusicStream(gameMusic);
 	}
 
 	void gameScreen::Draw()

@@ -2,7 +2,7 @@
 
 namespace gamespace
 {
-	menuScreen::menuScreen(int windowWidth,int windowHeight) : screen(windowWidth, windowHeight)
+	menuScreen::menuScreen(int windowWidth, int windowHeight) : screen(windowWidth, windowHeight)
 	{
 		exitNumber = 1;
 	}
@@ -12,7 +12,7 @@ namespace gamespace
 	{
 	}
 
-	void menuScreen::Init() 
+	void menuScreen::Init()
 	{
 		active = true;
 		elapsedScreenTime = 0.f;
@@ -20,10 +20,10 @@ namespace gamespace
 		gameCursor = new cursor();
 		gameObjectList.push_front(gameCursor);
 
-		sprite* logo = new sprite(screenWidth / 2.f,(screenHeight / 2.f) - (float)buttonOffset * 3, 680.f, 320.f, "../res/assets/logo.png", 34,16 );
+		sprite* logo = new sprite(screenWidth / 2.f, (screenHeight / 2.f) - (float)buttonOffset * 3, 680.f, 320.f, "../res/assets/logo.png", 34, 16);
 		gameObjectList.push_front(logo);
 
-		button* testButton = new button((float)(screenWidth / 2),(float)(screenHeight / 2), "PLAY", -55, buttonOptions::play);
+		button* testButton = new button((float)(screenWidth / 2), (float)(screenHeight / 2), "PLAY", -55, buttonOptions::play);
 		buttonList.push_front(testButton);
 		gameObjectList.push_front(testButton);
 
@@ -38,18 +38,19 @@ namespace gamespace
 		HideCursor();
 		currentOption = none;
 
-		mute = false;
+		Mute(false);
 
+		InitAudioDevice();
 		menuMusic = LoadMusicStream("../res/assets/menu.ogg");
 		StopMusicStream(menuMusic);
 		PlayMusicStream(menuMusic);
 		SetMusicVolume(menuMusic, 0.6f);
 	}
-	void menuScreen::Update() 
+	void menuScreen::Update()
 	{
 		UpdateMusicStream(menuMusic);
 		gameCursor->UpdateCursor(GetMousePosition().x, GetMousePosition().y);
-		
+
 		for (std::list<gameObject*>::iterator it = gameObjectList.begin(); it != gameObjectList.end(); it++)
 		{
 			if ((*it)->active)
@@ -77,6 +78,8 @@ namespace gamespace
 		case gamespace::none:
 			break;
 		case gamespace::play:
+			active = false;
+			exitNumber = 0;
 			break;
 		case gamespace::credits:
 			break;
@@ -87,14 +90,14 @@ namespace gamespace
 			active = false;
 			break;
 		case gamespace::sound:
-			if (!mute)
+			if (!IsMuted())
 			{
 				CloseAudioDevice();
-				mute = true;
+				Mute(true);
 			}
 			else
 			{
-				mute = false;
+				Mute(false);
 				InitAudioDevice();
 				StopMusicStream(menuMusic);
 				PlayMusicStream(menuMusic);
@@ -106,7 +109,7 @@ namespace gamespace
 			break;
 		}
 	}
-	
+
 	void menuScreen::Draw()
 	{
 		ClearBackground(BLACK);
@@ -117,7 +120,7 @@ namespace gamespace
 				(*it)->Draw();
 		}
 	}
-	void menuScreen::Destroy() 
+	void menuScreen::Destroy()
 	{
 		gameObjectList.erase(gameObjectList.begin(), gameObjectList.end());
 	}
