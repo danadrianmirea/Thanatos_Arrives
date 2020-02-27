@@ -6,22 +6,6 @@ namespace gamespace
 	waveManager::waveManager()
 	{
 		levelCleared = false;
-
-		spawnList.push_back({ 0.f,0.f });
-		spawnList.push_back({150.f, 200.f});
-		spawnList.push_back({ -150.f, -200.f });
-		spawnList.push_back({ 150.f, -200.f });
-
-
-
-		wave wave0;
-		wave0.enemyList.push_back({ padarosType, 0 });
-		wave0.enemyList.push_back({ padarosType, 1 });
-		wave0.enemyList.push_back({ padarosType, 2 });
-		wave0.enemyList.push_back({ sfairaType, 0 });
-
-		waveList.push_front(wave0);
-		waveIterator = waveList.begin();
 	}
 
 
@@ -30,7 +14,7 @@ namespace gamespace
 
 	}
 
-	void waveManager::spawnNextWave(std::list<padaros*> availablePadaros, std::list<sfaira*> availableSfaira)
+	void waveManager::SpawnNextWave(std::list<padaros*> availablePadaros, std::list<sfaira*> availableSfaira)
 	{
 
 		std::list<padaros*>::iterator padarosCounter = availablePadaros.begin();
@@ -55,7 +39,11 @@ namespace gamespace
 		}
 
 		waveIterator++;
+	}
 
+	void waveManager::ResetWaveIterator() 
+	{
+		waveIterator = waveList.begin();
 	}
 
 }

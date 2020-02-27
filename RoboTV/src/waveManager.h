@@ -25,11 +25,12 @@ namespace gamespace
 	public:
 		waveManager();
 		~waveManager();
-		void spawnNextWave(std::list<padaros*> availablePadaros, std::list<sfaira*> availableSfaira);
+		void SpawnNextWave(std::list<padaros*> availablePadaros, std::list<sfaira*> availableSfaira);
+		void ResetWaveIterator();
 		bool levelCleared;
-	private:
 		std::vector<Vector2> spawnList;
 		std::list<wave> waveList;
+	private:
 		std::list<wave>::iterator waveIterator;
 	};
 }
