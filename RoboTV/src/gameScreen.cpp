@@ -170,8 +170,10 @@ namespace gamespace
 		//camera
 
 		gameCamera.target = { player->actualRectangle.x,  player->actualRectangle.y };
-		gameCamera.offset = { -player->actualRectangle.x + 1920 / 2,  -player->actualRectangle.y + 1080 / 2 };
+		gameCamera.offset = { -player->actualRectangle.x + screenWidth / 2,  -player->actualRectangle.y + screenHeight / 2 };
 
+
+		//sound
 		if (!IsMuted())
 			UpdateMusicStream(gameMusic);
 	}
