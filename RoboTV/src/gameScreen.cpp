@@ -93,7 +93,6 @@ namespace gamespace
 		waveManagerInstance->ResetWaveIterator();
 
 		waveManagerInstance->SpawnNextWave(availablePadaros, availableSfaira);
-
 	}
 
 	void gameScreen::Update()
