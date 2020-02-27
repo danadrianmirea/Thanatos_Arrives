@@ -6,16 +6,10 @@ namespace gamespace
 	{
 	}
 
-	button::button(float xPosition, float yPosition, bool big, std::string text)
-		:sprite(xPosition, yPosition, 160.f, 80.f, "../res/assets/button.png", 16, 8)
+	button::button(float xPosition, float yPosition, std::string text, int xOffset)
+		:sprite(xPosition, yPosition, 320.f, 80.f, "../res/assets/big_button.png", 32, 8)
 	{
-		if (big)
-		{
-			actualRectangle.width = 96.f;
-			spriteTexture = LoadTexture("../res/assets/big_button.png");
-			spriteWidth = 32;
-		}
-
+		textXOffset = xOffset;
 		showText = text;
 	}
 

@@ -20,9 +20,14 @@ namespace gamespace
 		gameCursor = new cursor();
 		gameObjectList.push_front(gameCursor);
 
-		button* testButton = new button((float)(screenWidth / 2),(float)(screenHeight / 2), false, "PLAY");
+		button* testButton = new button((float)(screenWidth / 2),(float)(screenHeight / 2), "PLAY", -55);
 		buttonList.push_front(testButton);
 		gameObjectList.push_front(testButton);
+
+		testButton = new button((float)(screenWidth / 2), (float)(screenHeight / 2) + buttonOffset, "SOUND", -76);
+		buttonList.push_front(testButton);
+		gameObjectList.push_front(testButton);
+
 
 		HideCursor();
 

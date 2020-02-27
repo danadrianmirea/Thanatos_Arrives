@@ -10,13 +10,13 @@ namespace gamespace
 	{
 	public:
 		button();
-		button(float xPosition, float yPosition, bool big, std::string text);
+		button(float xPosition, float yPosition, std::string text, int xOffset);
 		~button();
 		void Draw();
 
 	private:
-		const int textXOffset = -60;
 		const int textYOffset = -20;
+		int textXOffset = -60;
 		std::string showText;
 	};
 }
