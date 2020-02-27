@@ -38,6 +38,8 @@ namespace gamespace
 		HideCursor();
 		currentOption = none;
 
+		mute = false;
+
 		menuMusic = LoadMusicStream("../res/assets/menu.ogg");
 		StopMusicStream(menuMusic);
 		PlayMusicStream(menuMusic);
@@ -85,6 +87,20 @@ namespace gamespace
 			active = false;
 			break;
 		case gamespace::sound:
+			if (!mute)
+			{
+				CloseAudioDevice();
+				mute = true;
+			}
+			else
+			{
+				mute = false;
+				InitAudioDevice();
+				StopMusicStream(menuMusic);
+				PlayMusicStream(menuMusic);
+				PlayMusicStream(menuMusic);
+			}
+
 			break;
 		default:
 			break;

@@ -10,6 +10,8 @@ namespace flowspace
 
 	class flowManager
 	{
+		
+
 	public:
 		flowManager();
 		~flowManager();

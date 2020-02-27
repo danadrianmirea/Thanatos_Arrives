@@ -1,8 +1,10 @@
 #include "raylib.h"
 #include "flowManager.h"
 
-void main() 
+int main() 
 {
 	flowspace::flowManager flowManagerInstance;
 	flowManagerInstance.InitGame();
+
+	return 0;
 }

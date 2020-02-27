@@ -62,7 +62,6 @@ namespace flowspace {
 				if (activeScreen->exitNumber == -1)
 				{
 					activeScreen->Destroy();
-					//CloseWindow();
 				}
 				else
 				{

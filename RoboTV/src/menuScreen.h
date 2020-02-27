@@ -25,6 +25,7 @@ namespace gamespace
 		std::list<button*> buttonList;
 		buttonOptions currentOption;
 		Music menuMusic;
+		bool mute;
 	};
 }
 #endif
