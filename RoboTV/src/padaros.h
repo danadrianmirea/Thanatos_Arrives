@@ -15,7 +15,7 @@ namespace gamespace
 		rectangle* CheckIfAttackingPlayer(Rectangle playerHitbox);
 
 	private:
-		const float padarosTargetWalkDistance = 180.f;
+		const float padarosTargetWalkDistance = 330.f;
 		const float padarosTargetAttackDistance = 70.f;
 		const float padarosWindupTime = 0.4f;
 		const float padarosAttackTime = 0.15f;
@@ -27,7 +27,6 @@ namespace gamespace
 		const float padarosDamagedSpeed = 100.f;
 		const float padarosMaxHP = 50.f;
 		const float padarosAttackDamage = 30.f;
-
 	};
 }
 #endif
