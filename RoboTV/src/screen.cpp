@@ -2,8 +2,10 @@
 
 namespace gamespace
 {
-	screen::screen()
+	screen::screen(int windowWidth, int windowHeight)
 	{
+		screenWidth = windowWidth;
+		screenHeight = windowHeight;
 	}
 
 

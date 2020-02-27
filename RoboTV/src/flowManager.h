@@ -1,8 +1,9 @@
 #ifndef FLOWMANAGER_H
 #define FLOWMANAGER_H
 
-#include "screen.h"
 #include <vector>
+
+#include "screen.h"
 
 namespace flowspace
 {

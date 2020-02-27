@@ -5,7 +5,7 @@
 
 #include "screen.h"
 #include "sprite.h"
-
+#include "button.h"
 #include "cursor.h"
 
 namespace gamespace
@@ -13,7 +13,7 @@ namespace gamespace
 	class menuScreen : public screen
 	{
 	public:
-		menuScreen();
+		menuScreen(int windowWidth, int windowHeight);
 		~menuScreen();
 		void Init();
 		void Update();
@@ -21,7 +21,7 @@ namespace gamespace
 		void Destroy();
 	protected:
 		cursor* gameCursor;
-		std::list<sprite> buttonList;
+		std::list<button*> buttonList;
 	};
 }
 #endif

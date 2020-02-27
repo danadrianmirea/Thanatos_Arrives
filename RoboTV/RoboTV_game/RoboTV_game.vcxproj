@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="..\src\animatedSprite.cpp" />
     <ClCompile Include="..\src\attack.cpp" />
+    <ClCompile Include="..\src\button.cpp" />
     <ClCompile Include="..\src\cursor.cpp" />
     <ClCompile Include="..\src\drone.cpp" />
     <ClCompile Include="..\src\explosion.cpp" />
@@ -29,6 +30,7 @@
     <ClCompile Include="..\src\gameScreen.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\enemy.cpp" />
+    <ClCompile Include="..\src\menuScreen.cpp" />
     <ClCompile Include="..\src\padaros.cpp" />
     <ClCompile Include="..\src\pyrnos.cpp" />
     <ClCompile Include="..\src\sfaira.cpp" />
@@ -42,6 +44,7 @@
   <ItemGroup>
     <ClInclude Include="..\src\animatedSprite.h" />
     <ClInclude Include="..\src\attack.h" />
+    <ClInclude Include="..\src\button.h" />
     <ClInclude Include="..\src\cursor.h" />
     <ClInclude Include="..\src\drone.h" />
     <ClInclude Include="..\src\explosion.h" />
@@ -49,6 +52,7 @@
     <ClInclude Include="..\src\gameObject.h" />
     <ClInclude Include="..\src\gameScreen.h" />
     <ClInclude Include="..\src\enemy.h" />
+    <ClInclude Include="..\src\menuScreen.h" />
     <ClInclude Include="..\src\padaros.h" />
     <ClInclude Include="..\src\pyrnos.h" />
     <ClInclude Include="..\src\sfaira.h" />

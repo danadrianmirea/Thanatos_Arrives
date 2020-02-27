@@ -6,7 +6,7 @@
 
 namespace gamespace
 {
-	gameScreen::gameScreen()
+	gameScreen::gameScreen(int windowWidth, int windowHeight) : screen(windowWidth, windowHeight)
 	{
 		exitNumber = 0;
 	}

@@ -13,7 +13,7 @@ namespace gamespace
 	{
 	public:
 		bool active;
-		screen();
+		screen(int windowWidth, int windowHeight);
 		~screen();
 		virtual void Init() = 0;
 		virtual void Update() = 0;
@@ -22,6 +22,8 @@ namespace gamespace
 		int exitNumber;
 	protected:
 		float elapsedScreenTime;
+		int screenWidth;
+		int screenHeight;
 		std::list<gameObject*> gameObjectList;
 	};
 }

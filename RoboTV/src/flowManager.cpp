@@ -2,6 +2,7 @@
 
 #include "raylib.h"
 #include "gameScreen.h"
+#include "menuScreen.h"
 
 namespace flowspace {
 	flowManager::flowManager()
@@ -23,20 +24,22 @@ namespace flowspace {
 		//ToggleFullscreen();
 
 		SetTargetFPS(60);
-		gamespace::screen* gameScreenInstance = new gamespace::gameScreen;
-		activeScreen = gameScreenInstance;
-		screenList.push_back(activeScreen);
+		gamespace::screen* menuScreenInstance = new gamespace::menuScreen(screenWidth,screenHeight);
+		gamespace::screen* gameScreenInstance = new gamespace::gameScreen(screenWidth, screenHeight);
+		activeScreen = menuScreenInstance;
+		screenList.push_back(gameScreenInstance);
+		screenList.push_back(menuScreenInstance);
 		activeScreen->Init();
 		GameLoop();
 	}
 
-	void flowManager::EndGame() 
+	void flowManager::EndGame()
 	{
 		delete activeScreen;
 		CloseWindow();
 	}
 
-	void flowManager::GameLoop() 
+	void flowManager::GameLoop()
 	{
 		while (!WindowShouldClose())
 		{
@@ -48,9 +51,12 @@ namespace flowspace {
 				BeginDrawing();
 				activeScreen->Draw();
 				EndDrawing();
+
+				if (IsKeyDown(KEY_LEFT_ALT) && IsKeyDown(KEY_F4))
+					CloseWindow();
 			}
 
-			if (!activeScreen->active) 
+			if (!activeScreen->active)
 			{
 				activeScreen->Destroy();
 				activeScreen = screenList[activeScreen->exitNumber];

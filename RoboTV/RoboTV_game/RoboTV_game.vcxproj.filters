@@ -13,11 +13,14 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Gameplay Screens">
-      <UniqueIdentifier>{bc8d7ad4-fed8-4126-83c4-e551849dd51d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Gameplay Objects">
       <UniqueIdentifier>{efa3cdb9-0ffb-4513-b591-8e68bcdc4265}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Screens">
+      <UniqueIdentifier>{bc8d7ad4-fed8-4126-83c4-e551849dd51d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu Objects">
+      <UniqueIdentifier>{80d29190-89ab-4ce0-bbe0-0928708ac43a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -34,7 +37,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\gameScreen.cpp">
-      <Filter>Gameplay Screens</Filter>
+      <Filter>Screens</Filter>
     </ClCompile>
     <ClCompile Include="..\src\gameObject.cpp">
       <Filter>Source Files</Filter>
@@ -78,6 +81,12 @@
     <ClCompile Include="..\src\waveManager.cpp">
       <Filter>Gameplay Objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\menuScreen.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\button.cpp">
+      <Filter>Menu Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\flowManager.h">
@@ -90,7 +99,7 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\src\gameScreen.h">
-      <Filter>Gameplay Screens</Filter>
+      <Filter>Screens</Filter>
     </ClInclude>
     <ClInclude Include="..\src\gameObject.h">
       <Filter>Headers</Filter>
@@ -133,6 +142,12 @@
     </ClInclude>
     <ClInclude Include="..\src\waveManager.h">
       <Filter>Gameplay Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\menuScreen.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\button.h">
+      <Filter>Menu Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

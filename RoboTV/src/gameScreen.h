@@ -17,7 +17,7 @@ namespace gamespace
 	class gameScreen: public screen
 	{
 	public:
-		gameScreen();
+		gameScreen(int windowWidth, int windowHeight);
 		~gameScreen();
 		void Init();
 		void Update();

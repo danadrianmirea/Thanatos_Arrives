@@ -2,7 +2,7 @@
 
 namespace gamespace
 {
-	menuScreen::menuScreen()
+	menuScreen::menuScreen(int windowWidth,int windowHeight) : screen(windowWidth, windowHeight)
 	{
 		exitNumber = 1;
 	}
@@ -20,6 +20,10 @@ namespace gamespace
 		gameCursor = new cursor();
 		gameObjectList.push_front(gameCursor);
 
+		button* testButton = new button( (float)(screenWidth / 2),(float)(screenHeight / 2), false);
+		buttonList.push_front(testButton);
+		gameObjectList.push_front(testButton);
+
 	}
 	void menuScreen::Update() 
 	{
@@ -32,6 +36,8 @@ namespace gamespace
 	
 	void menuScreen::Draw()
 	{
+		ClearBackground(BLACK);
+
 		for (std::list<gameObject*>::iterator it = gameObjectList.begin(); it != gameObjectList.end(); it++)
 		{
 			if ((*it)->visible)
