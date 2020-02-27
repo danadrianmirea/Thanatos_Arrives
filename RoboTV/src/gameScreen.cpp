@@ -76,18 +76,17 @@ namespace gamespace
 			SetMusicVolume(gameMusic, 0.6f);
 		}
 
-		waveManagerInstance->spawnList.push_back({ 0.f,0.f });
-		waveManagerInstance->spawnList.push_back({ 150.f, 200.f });
-		waveManagerInstance->spawnList.push_back({ -150.f, -200.f });
-		waveManagerInstance->spawnList.push_back({ 150.f, -200.f });
-
+		waveManagerInstance->spawnList.push_back({ -240.f, 150.f });
+		waveManagerInstance->spawnList.push_back({ 240.f, 150.f });
+		waveManagerInstance->spawnList.push_back({ -240.f, -150.f });
+		waveManagerInstance->spawnList.push_back({ 240.f, -150.f });
 
 
 		wave wave0;
 		wave0.enemyList.push_back({ padarosType, 0 });
 		wave0.enemyList.push_back({ padarosType, 1 });
 		wave0.enemyList.push_back({ padarosType, 2 });
-		wave0.enemyList.push_back({ sfairaType, 0 });
+		wave0.enemyList.push_back({ sfairaType, 3 });
 
 		waveManagerInstance->waveList.push_front(wave0);
 		waveManagerInstance->ResetWaveIterator();
