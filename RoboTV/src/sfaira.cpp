@@ -108,12 +108,15 @@ namespace gamespace
 
 	void sfaira::UpdateEnemy(Vector2 targetPosition) 
 	{
-		lastKnownTargetPosition.x = targetPosition.x - actualRectangle.x;
-		lastKnownTargetPosition.y = targetPosition.y - actualRectangle.y;
+		if (state != windup)
+		{
+			lastKnownTargetPosition.x = targetPosition.x - actualRectangle.x;
+			lastKnownTargetPosition.y = targetPosition.y - actualRectangle.y;
 
-		distanceToTarget = sqrtf(lastKnownTargetPosition.x * lastKnownTargetPosition.x + lastKnownTargetPosition.y * lastKnownTargetPosition.y);
+			distanceToTarget = sqrtf(lastKnownTargetPosition.x * lastKnownTargetPosition.x + lastKnownTargetPosition.y * lastKnownTargetPosition.y);
 
-		if (state == walking)
+		}
+		if (state == walking || state == attacking)
 		{
 			moveDirection.x = lastKnownTargetPosition.x / distanceToTarget;
 			moveDirection.y = lastKnownTargetPosition.y / distanceToTarget;
@@ -122,11 +125,14 @@ namespace gamespace
 		switch (state)
 		{
 		case idle:
-			if (stateTimer >= recoveryTime && distanceToTarget <= targetWalkDistance)
-				ChangeState(walking);
+			if (stateTimer >= recoveryTime)
+				ChangeState(windup);
 			else
-				if (stateTimer >= recoveryTime && distanceToTarget <= targetAttackDistance)
-					ChangeState(windup);
+				if (distanceToTarget < targetWalkDistance)
+					ChangeState(walking);
+				else
+					if (distanceToTarget > targetAttackDistance)
+						ChangeState(attacking);
 			break;
 		case walking:
 				if (distanceToTarget > targetWalkDistance)
@@ -134,10 +140,6 @@ namespace gamespace
 			break;
 		case windup:
 			if (stateTimer >= windupTime)
-				ChangeState(attacking);
-			break;
-		case attacking:
-			if (stateTimer >= attackTime)
 			{
 				for (int i = 0; i < maxVelos; i++)
 				{
@@ -148,8 +150,11 @@ namespace gamespace
 					}
 				}
 				ChangeState(idle);
-				isAttacking = false;
 			}
+			break;
+		case attacking:
+			if (distanceToTarget < targetAttackDistance)
+				ChangeState(idle);
 			break;
 		case damaged:
 			if (stateTimer >= damagedTime && currentHP > 0.f)
