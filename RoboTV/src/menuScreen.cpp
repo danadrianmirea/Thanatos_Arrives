@@ -24,6 +24,9 @@ namespace gamespace
 		logo = new sprite(screenWidth / 2.f, (screenHeight / 2.f) - (float)buttonOffset * 3, 680.f, 320.f, "../res/assets/logo.png", 34, 16);
 		gameObjectList.push_front(logo);
 
+		sprite* controls = new sprite(screenWidth / 2.f + 550.f, screenHeight / 2.f + 100.f, 500.f, 320.f, "../res/assets/controls.png", 50, 32);
+		gameObjectList.push_front(controls);
+
 		button* testButton = new button((float)(screenWidth / 2), (float)(screenHeight / 2), "PLAY", -55, buttonOptions::play);
 		buttonList.push_front(testButton);
 		gameObjectList.push_front(testButton);
