@@ -5,11 +5,14 @@ namespace gamespace
 	menuScreen::menuScreen(int windowWidth, int windowHeight) : screen(windowWidth, windowHeight)
 	{
 		exitNumber = 1;
+		InitAudioDevice();
+		menuMusic = LoadMusicStream("../res/assets/menu.ogg");
 	}
 
 
 	menuScreen::~menuScreen()
 	{
+		UnloadMusicStream(menuMusic);
 	}
 
 	void menuScreen::Init()
@@ -50,8 +53,7 @@ namespace gamespace
 
 		Mute(false);
 
-		InitAudioDevice();
-		menuMusic = LoadMusicStream("../res/assets/menu.ogg");
+		
 		StopMusicStream(menuMusic);
 		PlayMusicStream(menuMusic);
 		SetMusicVolume(menuMusic, 0.6f);

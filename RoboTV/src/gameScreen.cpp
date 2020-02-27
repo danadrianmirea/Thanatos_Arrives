@@ -50,6 +50,8 @@ namespace gamespace
 			enemyLayer.push_front(testSfaira);
 		}
 
+		liveEnemies = 0;
+
 		//wall settings
 
 		rectangle* leftWall = new rectangle(-360.f, -240.f, 39.f, 480.f, RED);
@@ -219,7 +221,15 @@ namespace gamespace
 			{
 				waveManagerInstance->SpawnNextWave(availablePadaros, availableSfaira);
 				waveTimer = 0.f;
+				liveEnemies = 4000000;
 			}
+		}
+
+		//endgame
+		if ((liveEnemies <= 0 && waveManagerInstance->levelCleared) || !player->active) 
+		{
+			exitNumber = 1;
+			active = false;
 		}
 	}
 
