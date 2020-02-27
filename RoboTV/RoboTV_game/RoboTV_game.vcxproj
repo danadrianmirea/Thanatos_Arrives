@@ -136,7 +136,7 @@
       <AdditionalDependencies>raylib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>"$(SolutionDir)misc\setter.bat" "$(TargetDir)" "$(SolutionDir)lib\raylib\bin\raylib.dll"</Command>
+      <Command>"$(SolutionDir)misc\setter.bat" "$(TargetDir)" "$(SolutionDir)lib\raylib\bin\raylib.dll"  "$(SolutionDir)res\assets"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -167,7 +167,7 @@
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>"$(SolutionDir)misc\setter.bat" "$(TargetDir)" "$(SolutionDir)lib\raylib\bin\raylib.dll"</Command>
+      <Command>"$(SolutionDir)misc\setter.bat" "$(TargetDir)" "$(SolutionDir)lib\raylib\bin\raylib.dll"  "$(SolutionDir)res\assets"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
