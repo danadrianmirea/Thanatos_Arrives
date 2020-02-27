@@ -243,6 +243,16 @@ namespace gamespace
 		}
 	}
 
+	int thanatos::GetCurrentHealth() 
+	{
+		return static_cast<int>(currentHP);
+	}
+
+	int thanatos::GetCurrentResource() 
+	{
+		return droneInstance->GetCurrentResource();
+	}
+
 	attack* thanatos::CheckIfAttackingEnemy(Rectangle enemyHitbox) 
 	{
 		return droneInstance->GetCollidingAttack(enemyHitbox);

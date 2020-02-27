@@ -20,6 +20,7 @@ namespace gamespace
 		attack* GetCollidingAttack(Rectangle enemyHitbox);
 		void CollideVelosWithWall(rectangle wall);
 		void GainResource();
+		int GetCurrentResource();
 
 	private:
 		void Fire(attack* attacktoFire);

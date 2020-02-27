@@ -160,5 +160,10 @@ namespace gamespace
 			resource++;
 	}
 
+	int drone::GetCurrentResource()
+	{
+		return resource;
+	}
+
 
 }

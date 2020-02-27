@@ -248,6 +248,11 @@ namespace gamespace
 				(*it)->Draw();
 		}
 		EndMode2D();
+		if (player->active)
+		{
+			DrawText(TextFormat("HEALTH: %1i", player->GetCurrentHealth()), screenWidth - 300, screenHeight - 50, 40, RED);
+			DrawText(TextFormat("AMMO: %1i", player->GetCurrentResource()), screenWidth - 300, screenHeight - 100, 40, BLUE);
+		}
 	}
 
 	void gameScreen::Destroy() 

@@ -20,6 +20,9 @@ namespace gamespace
 		void UpdateSafePosition();
 		bool CoolideWithWall(const rectangle* wall);
 		void RecieveDamage(Vector2 damageSource, float damageTaken);
+		int GetCurrentHealth();
+		int GetCurrentResource();
+
 		attack* CheckIfAttackingEnemy(Rectangle enemyHitbox);
 		Rectangle AABB;
 
