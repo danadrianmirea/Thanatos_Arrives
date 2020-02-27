@@ -26,6 +26,10 @@ namespace gamespace
 		std::list<button*> buttonList;
 		buttonOptions currentOption;
 		Music menuMusic;
+		std::list<gameObject*> creditsObjectList;
+		button* backFromCreditsButton;
+		sprite* logo;
+		bool showCredits;
 	};
 }
 #endif
