@@ -67,6 +67,11 @@ namespace gamespace
 		stateTimer += frameTime;
 	}
 
+	void enemy::Activate(Vector2 initialPosition) 
+	{
+	
+	}
+
 	void enemy::UpdateEnemy(Vector2 targetPosition)
 	{
 

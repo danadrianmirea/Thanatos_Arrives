@@ -75,6 +75,9 @@
     <ClCompile Include="..\src\sfaira.cpp">
       <Filter>Gameplay Objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\waveManager.cpp">
+      <Filter>Gameplay Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\flowManager.h">
@@ -126,6 +129,9 @@
       <Filter>Gameplay Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\src\sfaira.h">
+      <Filter>Gameplay Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\waveManager.h">
       <Filter>Gameplay Objects</Filter>
     </ClInclude>
   </ItemGroup>

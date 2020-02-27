@@ -6,12 +6,15 @@
 
 namespace gamespace
 {
+	enum enemyType
+	{
+		padarosType, sfairaType
+	};
 
 	class enemy : public animatedSprite
 	{
 
 	public:
-
 		const float attackRadius = 10.f;
 		enemy();
 		enemy(float xPosition, float yPosition, float recWidth, float recHeight,
@@ -19,6 +22,7 @@ namespace gamespace
 		~enemy();
 		void Draw();
 		void Update(float frameTime);
+		virtual void Activate(Vector2 initialPosition);
 		virtual void UpdateEnemy(Vector2 targetPosition);
 		void RecieveDamage(Vector2 damageSource, float damageRecieved);
 		bool CollideWithWall(Rectangle wall);

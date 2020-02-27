@@ -37,6 +37,7 @@
     <ClCompile Include="..\src\screen.cpp" />
     <ClCompile Include="..\src\sprite.cpp" />
     <ClCompile Include="..\src\velos.cpp" />
+    <ClCompile Include="..\src\waveManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\animatedSprite.h" />
@@ -56,6 +57,7 @@
     <ClInclude Include="..\src\screen.h" />
     <ClInclude Include="..\src\sprite.h" />
     <ClInclude Include="..\src\velos.h" />
+    <ClInclude Include="..\src\waveManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
