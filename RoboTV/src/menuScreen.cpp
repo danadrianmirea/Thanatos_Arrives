@@ -20,6 +20,9 @@ namespace gamespace
 		gameCursor = new cursor();
 		gameObjectList.push_front(gameCursor);
 
+		sprite* logo = new sprite(screenWidth / 2.f,(screenHeight / 2.f) - (float)buttonOffset * 3, 680.f, 320.f, "../res/assets/logo.png", 34,16 );
+		gameObjectList.push_front(logo);
+
 		button* testButton = new button((float)(screenWidth / 2),(float)(screenHeight / 2), "PLAY", -55, buttonOptions::play);
 		buttonList.push_front(testButton);
 		gameObjectList.push_front(testButton);
