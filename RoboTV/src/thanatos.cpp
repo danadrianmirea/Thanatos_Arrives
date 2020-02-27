@@ -223,10 +223,13 @@ namespace gamespace
 
 	void thanatos::RecieveDamage(Vector2 damageSource, float damageTaken) 
 	{
-		if (state == dashing && resourceCooldown <= 0.f)
+		if (state == dashing)
 		{
-			droneInstance->GainResource();
-			resourceCooldown = resourceCooldownTime;
+			if (resourceCooldown <= 0.f)
+			{
+				droneInstance->GainResource();
+				resourceCooldown = resourceCooldownTime;
+			}
 		}
 		else
 		{

@@ -226,7 +226,7 @@ namespace gamespace
 		{
 			enemyAttack = nullptr;
 
-			if ((*it)->active)
+			if ((*it)->active && (*it)->isAttacking)
 			{
 				enemyAttack = (*it)->CheckIfAttackingPlayer(player->AABB);
 				if (enemyAttack != nullptr)

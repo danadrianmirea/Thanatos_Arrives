@@ -43,7 +43,7 @@ namespace gamespace
 		const float damageTime = 0.05f;
 		const float dashCooldownTime = 0.7f;
 		const float invulnerabilityTime = 0.8f;
-		const float resourceCooldownTime = 0.3f;
+		const float resourceCooldownTime = 0.6f;
 
 		enum thanatosStates
 		{

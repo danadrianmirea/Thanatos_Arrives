@@ -161,6 +161,7 @@ namespace gamespace
 				ChangeState(idle);
 			break;
 		}
+		isAttacking = true;
 	}
 
 	void sfaira::Fire(velos* attackToFire, Vector2 targetPosition) 
