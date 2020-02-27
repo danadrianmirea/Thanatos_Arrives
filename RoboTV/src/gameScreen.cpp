@@ -112,6 +112,48 @@ namespace gamespace
 		wave1.enemyList.push_back({ sfairaType, 2 });
 		waveManagerInstance->waveList.push_back(wave1);
 
+		wave wave2;
+		wave2.enemyList.push_back({ padarosType, 4 });
+		wave2.enemyList.push_back({ padarosType, 5 });
+		wave2.enemyList.push_back({ padarosType, 6 });
+		wave2.enemyList.push_back({ padarosType, 7 });
+		waveManagerInstance->waveList.push_back(wave2);
+
+		wave wave3;
+		wave3.enemyList.push_back({ sfairaType, 0 });
+		wave3.enemyList.push_back({ sfairaType, 1 });
+		wave3.enemyList.push_back({ sfairaType, 2 });
+		wave3.enemyList.push_back({ sfairaType, 3 });
+		waveManagerInstance->waveList.push_back(wave3);
+
+		wave wave4;
+		wave4.enemyList.push_back({ sfairaType, 4 });
+		wave4.enemyList.push_back({ sfairaType, 5 });
+		wave4.enemyList.push_back({ padarosType, 0 });
+		wave4.enemyList.push_back({ padarosType, 1 });
+		wave4.enemyList.push_back({ padarosType, 2 });
+		waveManagerInstance->waveList.push_back(wave4);
+
+		wave wave5;
+		wave5.enemyList.push_back({ sfairaType, 4 });
+		wave5.enemyList.push_back({ sfairaType, 5 });
+		wave5.enemyList.push_back({ sfairaType, 6 });
+		wave5.enemyList.push_back({ sfairaType, 7 });
+		wave5.enemyList.push_back({ padarosType, 1 });
+		wave5.enemyList.push_back({ padarosType, 2 });
+		waveManagerInstance->waveList.push_back(wave5);
+
+		wave wave6;
+		wave6.enemyList.push_back({ sfairaType, 4 });
+		wave6.enemyList.push_back({ sfairaType, 5 });
+		wave6.enemyList.push_back({ sfairaType, 6 });
+		wave6.enemyList.push_back({ sfairaType, 7 });
+		wave6.enemyList.push_back({ padarosType, 1 });
+		wave6.enemyList.push_back({ padarosType, 2 });
+		wave6.enemyList.push_back({ padarosType, 3 });
+		wave6.enemyList.push_back({ padarosType, 4 });
+		waveManagerInstance->waveList.push_back(wave6);
+
 		waveManagerInstance->ResetWaveIterator();
 		liveEnemies = 0;
 	}
