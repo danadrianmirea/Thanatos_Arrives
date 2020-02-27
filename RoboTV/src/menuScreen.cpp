@@ -119,6 +119,8 @@ namespace gamespace
 			if ((*it)->visible)
 				(*it)->Draw();
 		}
+
+		DrawText(TextFormat("version %1.1f", gameVersion), screenWidth - 320, screenHeight - 60, 40, WHITE);
 	}
 	void menuScreen::Destroy()
 	{
