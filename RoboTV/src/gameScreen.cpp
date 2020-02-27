@@ -9,12 +9,13 @@ namespace gamespace
 	gameScreen::gameScreen(int windowWidth, int windowHeight) : screen(windowWidth, windowHeight)
 	{
 		exitNumber = 0;
+		gameMusic = LoadMusicStream("../res/assets/battle.ogg");
 	}
 
 
 	gameScreen::~gameScreen()
 	{
-
+		UnloadMusicStream(gameMusic);
 	}
 
 	void gameScreen::Init()
@@ -80,7 +81,6 @@ namespace gamespace
 
 		if (!IsMuted())
 		{
-			gameMusic = LoadMusicStream("../res/assets/battle.ogg");
 			StopMusicStream(gameMusic);
 			PlayMusicStream(gameMusic);
 			SetMusicVolume(gameMusic, 0.6f);
