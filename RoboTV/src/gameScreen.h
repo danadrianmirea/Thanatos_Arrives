@@ -10,6 +10,7 @@
 #include "padaros.h"
 #include "sfaira.h"
 #include "waveManager.h"
+#include "button.h"
 
 namespace gamespace
 {
@@ -30,12 +31,17 @@ namespace gamespace
 		const float timeBetweenWaves = 3.f;
 		float waveTimer;
 		int liveEnemies;
+		bool endgame;
+		bool playerWon;
 
 		thanatos* player;
 		sprite* background;
 		cursor* gameCursor;
 		padaros* testPadaros;
 		sfaira* testSfaira;
+
+		button* retryButton;
+		button* exitButton;
 
 		waveManager* waveManagerInstance;
 

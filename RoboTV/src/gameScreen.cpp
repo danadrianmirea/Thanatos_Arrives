@@ -16,6 +16,8 @@ namespace gamespace
 	gameScreen::~gameScreen()
 	{
 		UnloadMusicStream(gameMusic);
+		delete retryButton;
+		delete exitButton;
 	}
 
 	void gameScreen::Init()
@@ -24,6 +26,8 @@ namespace gamespace
 		waveManagerInstance = new waveManager();
 		waveTimer = 0.f;
 		elapsedScreenTime = 0.f;
+		endgame = false;
+		playerWon = false;
 
 		//player initialization
 
@@ -156,151 +160,209 @@ namespace gamespace
 
 		waveManagerInstance->ResetWaveIterator();
 		liveEnemies = 0;
+
+		retryButton = new button((float)(screenWidth / 2), (float)(screenHeight / 2), "RETRY", -76, buttonOptions::play);
+		exitButton = new button((float)(screenWidth / 2), (float)(screenHeight / 2) + 120, "EXIT", -55, buttonOptions::exit);
 	}
 
 	void gameScreen::Update()
 	{
-		elapsedScreenTime += GetFrameTime();
-
-		gameCursor->UpdateCursor(GetMousePosition().x - gameCamera.offset.x, GetMousePosition().y - gameCamera.offset.y);
-		
-		//Update all gameObjects
-		for (std::list<gameObject*> ::iterator it = gameObjectList.begin(); it != gameObjectList.end(); it++)
+		if (!endgame)
 		{
-			if ((*it)->active)
-				(*it)->Update(GetFrameTime());
-		}
+			elapsedScreenTime += GetFrameTime();
 
-		//Update enemies
-		liveEnemies = 0;
-		for (std::list<enemy*>::iterator it = enemyLayer.begin(); it != enemyLayer.end(); it++)
-		{
-			if ((*it)->active)
+			gameCursor->UpdateCursor(GetMousePosition().x - gameCamera.offset.x, GetMousePosition().y - gameCamera.offset.y);
+
+			//Update all gameObjects
+			for (std::list<gameObject*> ::iterator it = gameObjectList.begin(); it != gameObjectList.end(); it++)
 			{
-				(*it)->UpdateEnemy({ player->actualRectangle.x, player->actualRectangle.y });
-				liveEnemies++;
+				if ((*it)->active)
+					(*it)->Update(GetFrameTime());
 			}
-		}
 
-
-		//manage collisions
-
-		//player->walls
-		bool isPlayerSafe = true;
-		for (std::list<rectangle*>::iterator it = wallLayer.begin(); it != wallLayer.end(); it++)
-		{
-			if ((*it)->active)
-				if (player->CoolideWithWall((*it)))
-					isPlayerSafe = false;
-		}
-
-		if (isPlayerSafe)
-			player->UpdateSafePosition();
-
-		//enemies->walls
-		bool isEnemySafe;
-		{
-			isEnemySafe = true;
-
+			//Update enemies
+			liveEnemies = 0;
 			for (std::list<enemy*>::iterator it = enemyLayer.begin(); it != enemyLayer.end(); it++)
 			{
 				if ((*it)->active)
 				{
-					for (std::list<rectangle*>::iterator it2 = wallLayer.begin(); it2 != wallLayer.end(); it2++)
+					(*it)->UpdateEnemy({ player->actualRectangle.x, player->actualRectangle.y });
+					liveEnemies++;
+				}
+			}
+
+
+			//manage collisions
+
+			//player->walls
+			bool isPlayerSafe = true;
+			for (std::list<rectangle*>::iterator it = wallLayer.begin(); it != wallLayer.end(); it++)
+			{
+				if ((*it)->active)
+					if (player->CoolideWithWall((*it)))
+						isPlayerSafe = false;
+			}
+
+			if (isPlayerSafe)
+				player->UpdateSafePosition();
+
+			//enemies->walls
+			bool isEnemySafe;
+			{
+				isEnemySafe = true;
+
+				for (std::list<enemy*>::iterator it = enemyLayer.begin(); it != enemyLayer.end(); it++)
+				{
+					if ((*it)->active)
 					{
-						if ((*it2)->active)
-							if ((*it)->CollideWithWall((*it2)->actualRectangle))
-								isEnemySafe = false;
+						for (std::list<rectangle*>::iterator it2 = wallLayer.begin(); it2 != wallLayer.end(); it2++)
+						{
+							if ((*it2)->active)
+								if ((*it)->CollideWithWall((*it2)->actualRectangle))
+									isEnemySafe = false;
+						}
+					}
+
+					if (isEnemySafe)
+						(*it)->UpdateSafePosition();
+				}
+			}
+
+			//player against enemy attacks
+
+			rectangle* enemyAttack;
+			for (std::list<enemy*>::iterator it = enemyLayer.begin(); it != enemyLayer.end(); it++)
+			{
+				enemyAttack = nullptr;
+
+				if ((*it)->active && (*it)->isAttacking)
+				{
+					enemyAttack = (*it)->CheckIfAttackingPlayer(player->AABB);
+					if (enemyAttack != nullptr)
+					{
+						player->RecieveDamage({ enemyAttack->actualRectangle.x, enemyAttack->actualRectangle.y }, (*it)->attackDamage);
 					}
 				}
-
-				if (isEnemySafe)
-					(*it)->UpdateSafePosition();
 			}
-		}
 
-		//player against enemy attacks
+			//enemies against player attacks
 
-		rectangle* enemyAttack;
-		for (std::list<enemy*>::iterator it = enemyLayer.begin(); it != enemyLayer.end(); it++)
-		{
-			enemyAttack = nullptr;
-
-			if ((*it)->active && (*it)->isAttacking)
+			attack* collidingAttack;
+			for (std::list<enemy*>::iterator it = enemyLayer.begin(); it != enemyLayer.end(); it++)
 			{
-				enemyAttack = (*it)->CheckIfAttackingPlayer(player->AABB);
-				if (enemyAttack != nullptr)
+				if ((*it)->active)
 				{
-					player->RecieveDamage({ enemyAttack->actualRectangle.x, enemyAttack->actualRectangle.y }, (*it)->attackDamage);
+					collidingAttack = player->CheckIfAttackingEnemy((*it)->actualRectangle);
+					if (collidingAttack != nullptr)
+					{
+						(*it)->RecieveDamage({ collidingAttack->actualRectangle.x, collidingAttack->actualRectangle.y }, collidingAttack->attackDamage);
+					}
 				}
 			}
-		}
 
-		//enemies against player attacks
+			//camera
 
-		attack* collidingAttack;
-		for (std::list<enemy*>::iterator it = enemyLayer.begin(); it != enemyLayer.end(); it++)
-		{
-			if ((*it)->active)
+			gameCamera.target = { player->actualRectangle.x,  player->actualRectangle.y };
+			gameCamera.offset = { -player->actualRectangle.x + screenWidth / 2,  -player->actualRectangle.y + screenHeight / 2 };
+
+
+			//sound
+			if (!IsMuted())
+				UpdateMusicStream(gameMusic);
+
+			//update waves
+			if (liveEnemies <= 0 && waveManagerInstance->currentWave < waveManagerInstance->waveList.size())
 			{
-				collidingAttack = player->CheckIfAttackingEnemy((*it)->actualRectangle);
-				if(collidingAttack != nullptr)
+				waveTimer += GetFrameTime();
+				if (waveTimer > timeBetweenWaves)
 				{
-					(*it)->RecieveDamage({ collidingAttack->actualRectangle.x, collidingAttack->actualRectangle.y }, collidingAttack->attackDamage);
+					waveManagerInstance->SpawnNextWave(availablePadaros, availableSfaira);
+					waveTimer = 0.f;
+					liveEnemies = 4000000;
 				}
 			}
-		}
 
-		//camera
-
-		gameCamera.target = { player->actualRectangle.x,  player->actualRectangle.y };
-		gameCamera.offset = { -player->actualRectangle.x + screenWidth / 2,  -player->actualRectangle.y + screenHeight / 2 };
-
-
-		//sound
-		if (!IsMuted())
-			UpdateMusicStream(gameMusic);
-
-		//update waves
-		if (liveEnemies <= 0 && waveManagerInstance->currentWave< waveManagerInstance->waveList.size())
-		{
-			waveTimer += GetFrameTime();
-			if (waveTimer > timeBetweenWaves)
+			//endgame
+			if (IsKeyDown(KEY_ESCAPE))
 			{
-				waveManagerInstance->SpawnNextWave(availablePadaros, availableSfaira);
-				waveTimer = 0.f;
-				liveEnemies = 4000000;
+				exitNumber = 1;
+				active = false;
+			}
+			if (liveEnemies <= 0 && waveManagerInstance->currentWave >= waveManagerInstance->waveList.size())
+			{
+				playerWon = true;
+				endgame = true;
+			}
+			if (!player->active)
+			{
+				endgame = true;
 			}
 		}
-
-		//endgame
-		if (liveEnemies <= 0 && waveManagerInstance->currentWave >= waveManagerInstance->waveList.size() || !player->active)
+		else
 		{
-			exitNumber = 1;
-			active = false;
+			gameCursor->UpdateCursor(GetMousePosition().x, GetMousePosition().y);
+
+			buttonOptions currentOption = none;
+			if (IsMouseButtonPressed(0))
+			{
+				if (CheckCollisionRecs(gameCursor->actualRectangle, retryButton->actualRectangle))
+					currentOption = retryButton->currentOption;
+				if (CheckCollisionRecs(gameCursor->actualRectangle, exitButton->actualRectangle))
+					currentOption = exitButton->currentOption;
+			}
+
+			switch (currentOption)
+			{
+			case play:
+				exitNumber = 0;
+				active = false;
+				break;
+			case exit:
+				exitNumber = 1;
+				active = false;
+				break;
+			default:
+				break;
+			}
+
 		}
 	}
 
 	void gameScreen::Draw()
 	{
 		ClearBackground(BLACK);
-
-		BeginMode2D(gameCamera);
-		std::list<gameObject*> ::iterator it;
-		for (it = gameObjectList.begin(); it != gameObjectList.end(); it++)
+		if (!endgame)
 		{
-			if ((*it)->visible)
-				(*it)->Draw();
+			BeginMode2D(gameCamera);
+			std::list<gameObject*> ::iterator it;
+			for (it = gameObjectList.begin(); it != gameObjectList.end(); it++)
+			{
+				if ((*it)->visible)
+					(*it)->Draw();
+			}
+			EndMode2D();
+			if (player->active)
+			{
+				DrawText(TextFormat("HEALTH: %1i", player->GetCurrentHealth()), screenWidth - 300, screenHeight - 50, 40, RED);
+				DrawText(TextFormat("AMMO: %1i", player->GetCurrentResource()), screenWidth - 300, screenHeight - 100, 40, BLUE);
+			}
 		}
-		EndMode2D();
-		if (player->active)
+		else
 		{
-			DrawText(TextFormat("HEALTH: %1i", player->GetCurrentHealth()), screenWidth - 300, screenHeight - 50, 40, RED);
-			DrawText(TextFormat("AMMO: %1i", player->GetCurrentResource()), screenWidth - 300, screenHeight - 100, 40, BLUE);
+			if (playerWon) 
+				DrawText("You Won!", screenWidth / 2 - 200, screenHeight / 2 - 300, 80, SKYBLUE);
+			else
+				DrawText("You Suck!", screenWidth / 2 - 200, screenHeight / 2 - 300, 80, RED);
+
+
+
+			exitButton->Draw();
+			retryButton->Draw();
+			gameCursor->Draw();
 		}
 	}
 
-	void gameScreen::Destroy() 
+	void gameScreen::Destroy()
 	{
 		gameObjectList.erase(gameObjectList.begin(), gameObjectList.end());
 		availablePadaros.erase(availablePadaros.begin(), availablePadaros.end());
