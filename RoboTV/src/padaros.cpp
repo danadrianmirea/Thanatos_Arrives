@@ -43,7 +43,8 @@ namespace gamespace
 		NewAnimation(idleAnim);
 
 		ChangeState(idle);
-		currentHP = padarosMaxHP;
+		maxHP = padarosMaxHP;
+		currentHP = maxHP;
 	}
 
 	padaros::~padaros()

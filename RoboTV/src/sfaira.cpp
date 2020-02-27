@@ -49,7 +49,8 @@ namespace gamespace
 		NewAnimation(idleAnim);
 
 		ChangeState(idle);
-		currentHP = sfairaMaxHP;
+		maxHP = sfairaMaxHP;
+		currentHP = maxHP;
 
 		for (int i = 0; i < maxVelos; i++)
 		{
@@ -89,7 +90,21 @@ namespace gamespace
 				velosList[i]->Update(frameTime);
 			}
 		}
+
+		if (!active && !explosionInstance->active)
+		{
+			for (int i = 0; i < maxVelos; i++)
+			{
+				if (velosList[i]->active)
+				{
+					velosList[i]->active = false;
+					velosList[i]->visible = false;
+				}
+			}
+		}
 	}
+
+
 
 	void sfaira::UpdateEnemy(Vector2 targetPosition) 
 	{

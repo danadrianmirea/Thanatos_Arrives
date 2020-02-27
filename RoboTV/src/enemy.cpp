@@ -13,6 +13,8 @@ namespace gamespace
 	{
 		isAttacking = false;
 		explosionInstance = new explosion();
+		active = false;
+		visible = false;
 	}
 
 	enemy::~enemy()
@@ -69,7 +71,12 @@ namespace gamespace
 
 	void enemy::Activate(Vector2 initialPosition) 
 	{
-	
+		actualRectangle.x = initialPosition.x;
+		actualRectangle.y = initialPosition.y;
+		active = true;
+		visible = true;
+		ChangeState(idle);
+		currentHP = maxHP;
 	}
 
 	void enemy::UpdateEnemy(Vector2 targetPosition)

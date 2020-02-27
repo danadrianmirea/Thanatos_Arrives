@@ -8,9 +8,18 @@ namespace gamespace
 		levelCleared = false;
 
 		spawnList.push_back({ 0.f,0.f });
-		
+		spawnList.push_back({150.f, 200.f});
+		spawnList.push_back({ -150.f, -200.f });
+		spawnList.push_back({ 150.f, -200.f });
+
+
+
 		wave wave0;
 		wave0.enemyList.push_back({ padarosType, 0 });
+		wave0.enemyList.push_back({ padarosType, 1 });
+		wave0.enemyList.push_back({ padarosType, 2 });
+		wave0.enemyList.push_back({ sfairaType, 0 });
+
 		waveList.push_front(wave0);
 		waveIterator = waveList.begin();
 	}
@@ -21,35 +30,32 @@ namespace gamespace
 
 	}
 
-	void waveManager::spawnNextWave(std::list<padaros*> availablePadaros, std::list<sfaira*> availableSfaira) 
+	void waveManager::spawnNextWave(std::list<padaros*> availablePadaros, std::list<sfaira*> availableSfaira)
 	{
-		if (waveIterator != waveList.begin())
-		{
-			std::list<padaros*>::iterator padarosCounter = availablePadaros.begin();
-			std::list<sfaira*>::iterator sfairaCounter = availableSfaira.begin();
 
-			for (int i = waveIterator->enemyList.size(); i < waveIterator->enemyList.size(); i++)
+		std::list<padaros*>::iterator padarosCounter = availablePadaros.begin();
+		std::list<sfaira*>::iterator sfairaCounter = availableSfaira.begin();
+
+		for (int i = 0; i < waveIterator->enemyList.size(); i++)
+		{
+			int enemySpawnIndex = waveIterator->enemyList[i].spawnIndex;
+			switch (waveIterator->enemyList[i].enemyToSpawn)
 			{
-				int enemySpawnIndex = waveIterator->enemyList[i].spawnIndex;
-				switch (waveIterator->enemyList[i].enemyToSpawn)
-				{
-				case padarosType:
-					(*padarosCounter)->Activate(spawnList[enemySpawnIndex]);
-					padarosCounter++;
-					break;
-				case sfairaType:
-					(*sfairaCounter)->Activate(spawnList[enemySpawnIndex]);
-					sfairaCounter++;
-					break;
-				}
+			case padarosType:
+				(*padarosCounter)->Activate(spawnList[enemySpawnIndex]);
+				padarosCounter++;
+				std::printf("spawned Padaros");
+				break;
+			case sfairaType:
+				(*sfairaCounter)->Activate(spawnList[enemySpawnIndex]);
+				sfairaCounter++;
+				std::printf("spawned Sfeira");
+				break;
 			}
+		}
 
-			waveIterator++;
-		}
-		else
-		{
-			levelCleared = true;
-		}
+		waveIterator++;
+
 	}
 
 }

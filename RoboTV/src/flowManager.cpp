@@ -20,7 +20,7 @@ namespace flowspace {
 		const int screenHeight = 1080;
 		InitWindow(screenWidth, screenHeight, "Thanatos Arrives");
 		SetConfigFlags(FLAG_VSYNC_HINT);
-		ToggleFullscreen();
+		//ToggleFullscreen();
 
 		SetTargetFPS(60);
 		gamespace::screen* gameScreenInstance = new gamespace::gameScreen;

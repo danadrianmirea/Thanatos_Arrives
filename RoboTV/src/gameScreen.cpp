@@ -19,6 +19,8 @@ namespace gamespace
 
 	void gameScreen::Init()
 	{
+		waveManagerInstance = new waveManager();
+
 		elapsedScreenTime = 0.f;
 
 		gameCursor = new cursor();
@@ -27,15 +29,21 @@ namespace gamespace
 		player = new thanatos(100.f, 50.f, gameCursor);
 		gameObjectList.push_front(player);
 
-		testPadaros = new padaros(150.f, 50.f);
-		gameObjectList.push_front(testPadaros);
+		for (int i = 0; i < maxPadaros; i++)
+		{
+			testPadaros = new padaros(0.f, 0.f);
+			gameObjectList.push_front(testPadaros);
+			availablePadaros.push_front(testPadaros);
+			enemyLayer.push_front(testPadaros);
+		}
 
-		enemyLayer.push_front(testPadaros);
-
-		testSfaira = new sfaira(100.f, 0.f);
-		gameObjectList.push_front(testSfaira);
-
-		enemyLayer.push_front(testSfaira);
+		for (int i = 0; i < maxSfaira; i++)
+		{
+			testSfaira = new sfaira(0.f, 0.f);
+			gameObjectList.push_front(testSfaira);
+			availableSfaira.push_front(testSfaira);
+			enemyLayer.push_front(testSfaira);
+		}
 
 		rectangle* leftWall = new rectangle(-360.f, -240.f, 39.f, 480.f, RED);
 		wallLayer.push_front(leftWall);
@@ -58,6 +66,7 @@ namespace gamespace
 		gameCamera.zoom = 2.0f;
 
 		HideCursor();
+		waveManagerInstance->spawnNextWave(availablePadaros, availableSfaira);
 	}
 
 	void gameScreen::Update()
