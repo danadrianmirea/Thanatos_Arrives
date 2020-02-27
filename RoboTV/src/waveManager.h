@@ -2,7 +2,7 @@
 #define WAVEMANAGER_H
 
 #include <list>
-#include <vector>
+#include <deque>
 
 #include "padaros.h"
 #include "sfaira.h"
@@ -27,9 +27,8 @@ namespace gamespace
 		~waveManager();
 		void SpawnNextWave(std::list<padaros*> availablePadaros, std::list<sfaira*> availableSfaira);
 		void ResetWaveIterator();
-		int GetCurrentWaveEnemies();
-		bool levelCleared;
-		std::vector<Vector2> spawnList;
+		int currentWave;
+		std::deque<Vector2> spawnList;
 		std::list<wave> waveList;
 	private:
 		std::list<wave>::iterator waveIterator;

@@ -5,7 +5,6 @@ namespace gamespace
 
 	waveManager::waveManager()
 	{
-		levelCleared = false;
 	}
 
 
@@ -16,7 +15,7 @@ namespace gamespace
 
 	void waveManager::SpawnNextWave(std::list<padaros*> availablePadaros, std::list<sfaira*> availableSfaira)
 	{
-		if (!levelCleared)
+		if (currentWave < waveList.size())
 		{
 			std::list<padaros*>::iterator padarosCounter = availablePadaros.begin();
 			std::list<sfaira*>::iterator sfairaCounter = availableSfaira.begin();
@@ -29,34 +28,21 @@ namespace gamespace
 				case padarosType:
 					(*padarosCounter)->Activate(spawnList[enemySpawnIndex]);
 					padarosCounter++;
-					std::printf("spawned Padaros");
 					break;
 				case sfairaType:
 					(*sfairaCounter)->Activate(spawnList[enemySpawnIndex]);
 					sfairaCounter++;
-					std::printf("spawned Sfeira");
 					break;
 				}
 			}
-
-			if (waveIterator == waveList.end());
-			{
-				levelCleared = true;
-			}
-
+			currentWave++;
 			waveIterator++;
 		}
 	}
 
-	void waveManager::ResetWaveIterator() 
+	void waveManager::ResetWaveIterator()
 	{
 		waveIterator = waveList.begin();
+		currentWave = 0;
 	}
-
-	int waveManager::GetCurrentWaveEnemies() 
-	{
-		return waveIterator->enemyList.size();
-	}
-
-
 }

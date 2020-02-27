@@ -103,12 +103,15 @@ namespace gamespace
 		//wave Settings
 
 		wave wave0;
-		wave0.enemyList.push_back({ padarosType, 1 });
-		wave0.enemyList.push_back({ padarosType, 2 });
+		wave0.enemyList.push_back({ padarosType, 0 });
 		wave0.enemyList.push_back({ padarosType, 3 });
-		wave0.enemyList.push_back({ sfairaType, 4 });
+		waveManagerInstance->waveList.push_back(wave0);
 
-		waveManagerInstance->waveList.push_front(wave0);
+		wave wave1;
+		wave1.enemyList.push_back({ padarosType, 1 });
+		wave1.enemyList.push_back({ sfairaType, 2 });
+		waveManagerInstance->waveList.push_back(wave1);
+
 		waveManagerInstance->ResetWaveIterator();
 		liveEnemies = 0;
 	}
@@ -217,7 +220,7 @@ namespace gamespace
 			UpdateMusicStream(gameMusic);
 
 		//update waves
-		if (liveEnemies <= 0 && !waveManagerInstance->levelCleared)
+		if (liveEnemies <= 0 && waveManagerInstance->currentWave< waveManagerInstance->waveList.size())
 		{
 			waveTimer += GetFrameTime();
 			if (waveTimer > timeBetweenWaves)
@@ -229,7 +232,7 @@ namespace gamespace
 		}
 
 		//endgame
-		if ((liveEnemies <= 0 && waveManagerInstance->levelCleared) || !player->active) 
+		if (liveEnemies <= 0 && waveManagerInstance->currentWave >= waveManagerInstance->waveList.size() || !player->active)
 		{
 			exitNumber = 1;
 			active = false;
