@@ -25,6 +25,7 @@ namespace flowspace {
 		SetTargetFPS(60);
 		gamespace::screen* gameScreenInstance = new gamespace::gameScreen;
 		activeScreen = gameScreenInstance;
+		screenList.push_back(activeScreen);
 		activeScreen->Init();
 		GameLoop();
 	}
@@ -39,12 +40,22 @@ namespace flowspace {
 	{
 		while (!WindowShouldClose())
 		{
-			// Update
-			activeScreen->Update();
-			// Draw
-			BeginDrawing();
-			activeScreen->Draw();
-			EndDrawing();
+			while (activeScreen->active)
+			{
+				// Update
+				activeScreen->Update();
+				// Draw
+				BeginDrawing();
+				activeScreen->Draw();
+				EndDrawing();
+			}
+
+			if (!activeScreen->active) 
+			{
+				activeScreen->Destroy();
+				activeScreen = screenList[activeScreen->exitNumber];
+				activeScreen->Init();
+			}
 		}
 		activeScreen->Destroy();
 		EndGame();

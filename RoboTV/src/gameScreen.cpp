@@ -8,7 +8,7 @@ namespace gamespace
 {
 	gameScreen::gameScreen()
 	{
-
+		exitNumber = 0;
 	}
 
 
@@ -19,6 +19,7 @@ namespace gamespace
 
 	void gameScreen::Init()
 	{
+		active = true;
 		waveManagerInstance = new waveManager();
 
 		elapsedScreenTime = 0.f;

@@ -19,6 +19,7 @@ namespace gamespace
 		virtual void Update() = 0;
 		virtual void Draw() = 0;
 		virtual void Destroy() = 0;
+		int exitNumber;
 	protected:
 		float elapsedScreenTime;
 		std::list<gameObject*> gameObjectList;

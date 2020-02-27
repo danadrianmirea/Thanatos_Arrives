@@ -2,6 +2,7 @@
 #define FLOWMANAGER_H
 
 #include "screen.h"
+#include <vector>
 
 namespace flowspace
 {
@@ -16,6 +17,7 @@ namespace flowspace
 
 	private:
 		void GameLoop();
+		std::vector<gamespace::screen*>screenList;
 		gamespace::screen* activeScreen;
 	};
 }
