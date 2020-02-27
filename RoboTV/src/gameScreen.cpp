@@ -51,7 +51,10 @@ namespace gamespace
 			enemyLayer.push_front(testSfaira);
 		}
 
-		liveEnemies = 0;
+		for (std::list<enemy*>::iterator it = enemyLayer.begin(); it != enemyLayer.end(); it++)
+		{
+			(*it)->active = false;
+		}
 
 		//wall settings
 
@@ -107,7 +110,7 @@ namespace gamespace
 
 		waveManagerInstance->waveList.push_front(wave0);
 		waveManagerInstance->ResetWaveIterator();
-
+		liveEnemies = 0;
 	}
 
 	void gameScreen::Update()
@@ -250,6 +253,9 @@ namespace gamespace
 	void gameScreen::Destroy() 
 	{
 		gameObjectList.erase(gameObjectList.begin(), gameObjectList.end());
+		availablePadaros.erase(availablePadaros.begin(), availablePadaros.end());
+		availableSfaira.erase(availableSfaira.begin(), availableSfaira.end());
 		wallLayer.erase(wallLayer.begin(), wallLayer.end());
+		delete waveManagerInstance;
 	}
 }
