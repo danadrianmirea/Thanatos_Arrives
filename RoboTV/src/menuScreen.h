@@ -23,6 +23,7 @@ namespace gamespace
 		const float buttonOffset = 100.f;
 		cursor* gameCursor;
 		std::list<button*> buttonList;
+		buttonOptions currentOption;
 	};
 }
 #endif

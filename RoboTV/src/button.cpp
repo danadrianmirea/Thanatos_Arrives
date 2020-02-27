@@ -6,11 +6,12 @@ namespace gamespace
 	{
 	}
 
-	button::button(float xPosition, float yPosition, std::string text, int xOffset)
+	button::button(float xPosition, float yPosition, std::string text, int xOffset, buttonOptions option)
 		:sprite(xPosition, yPosition, 320.f, 80.f, "../res/assets/big_button.png", 32, 8)
 	{
 		textXOffset = xOffset;
 		showText = text;
+		currentOption = option;
 	}
 
 

@@ -41,7 +41,7 @@ namespace flowspace {
 
 	void flowManager::GameLoop()
 	{
-		while (!WindowShouldClose())
+		while (activeScreen->exitNumber != -1)
 		{
 			while (activeScreen->active)
 			{
@@ -58,9 +58,17 @@ namespace flowspace {
 
 			if (!activeScreen->active)
 			{
-				activeScreen->Destroy();
-				activeScreen = screenList[activeScreen->exitNumber];
-				activeScreen->Init();
+				if (activeScreen->exitNumber == -1)
+				{
+					activeScreen->Destroy();
+					//CloseWindow();
+				}
+				else
+				{
+					activeScreen->Destroy();
+					activeScreen = screenList[activeScreen->exitNumber];
+					activeScreen->Init();
+				}
 			}
 		}
 		activeScreen->Destroy();
