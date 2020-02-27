@@ -24,9 +24,13 @@ namespace gamespace
 		buttonList.push_front(testButton);
 		gameObjectList.push_front(testButton);
 
+		HideCursor();
+
 	}
 	void menuScreen::Update() 
 	{
+		gameCursor->UpdateCursor(GetMousePosition().x, GetMousePosition().y);
+
 		for (std::list<gameObject*>::iterator it = gameObjectList.begin(); it != gameObjectList.end(); it++)
 		{
 			if ((*it)->active)

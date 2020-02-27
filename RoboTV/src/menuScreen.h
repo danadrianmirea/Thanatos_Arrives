@@ -20,6 +20,7 @@ namespace gamespace
 		void Draw();
 		void Destroy();
 	protected:
+		const float buttonOffset = 40.f;
 		cursor* gameCursor;
 		std::list<button*> buttonList;
 	};

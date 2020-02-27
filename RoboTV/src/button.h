@@ -15,6 +15,8 @@ namespace gamespace
 		void Draw();
 
 	private:
+		const int textXOffset = -60;
+		const int textYOffset = -20;
 		std::string showText;
 	};
 }
